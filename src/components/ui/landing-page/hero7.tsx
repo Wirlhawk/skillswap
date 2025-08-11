@@ -23,7 +23,7 @@ interface Hero7Props {
 
 const Hero7 = ({
     heading = "Connect, Collaborate, and Grow with Student Freelancers",
-    description = "Discover top student talent for your projects. Connect, collaborate, and achieve more together on our platform. Whether you need help with design, development, writing, or any other skill, our community of student freelancers is ready to support your goals.",
+    description = "Discover top student talent for your projects. Connect, collaborate, and achieve more together on our platform. our community of student freelancers is ready to support your goals.",
     button = {
         text: "Broswe Thousands of Services",
         url: "https://www.shadcnblocks.com",
@@ -56,7 +56,7 @@ const Hero7 = ({
     },
 }: Hero7Props) => {
     return (
-        <section className="py-32 px-6">
+        <section className="py-32 px-6 min-h-screen flex">
             <div className="container text-center mx-auto">
                 <div className="mx-auto flex max-w-5xl flex-col gap-6">
                     <h1 className="text-4xl font-extrabold lg:text-6xl">

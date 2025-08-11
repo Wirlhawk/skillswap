@@ -60,7 +60,7 @@ const initialNotifications = [
         unread: false,
     },
     {
-        id: 6,
+        id: 7,
         user: "Miky Derya",
         action: "mentioned you in",
         target: "Origin UI open graph image",
@@ -68,7 +68,7 @@ const initialNotifications = [
         unread: false,
     },
     {
-        id: 6,
+        id: 8,
         user: "Miky Derya",
         action: "mentioned you in",
         target: "Origin UI open graph image",
