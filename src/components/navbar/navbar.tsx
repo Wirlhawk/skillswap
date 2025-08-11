@@ -30,8 +30,8 @@ export default function Navbar() {
     const id = useId();
 
     return (
-        <header className="border-b px-4 ">
-            <div className="flex h-16 items-center justify-between gap-4 max-w-7xl mx-auto">
+        <header className="border-b">
+            <div className="flex h-16 items-center justify-between gap-4 max-w-7xl mx-auto px-4">
                 {/* Left side */}
                 <div className="flex flex-1 items-center gap-2">
                     {/* Mobile menu trigger */}
@@ -124,7 +124,7 @@ export default function Navbar() {
                     </div>
                 </div>
                 {/* Right side */}
-                <div className="flex flex-1 items-center justify-end gap-2">
+                <div className="flex flex-1 items-center justify-end gap-3">
                     {/* Notification */}
                     <NotificationMenu />
                     {/* User menu */}
@@ -132,9 +132,9 @@ export default function Navbar() {
                 </div>
             </div>
             {/* Bottom navigation */}
-            <div className="border-t py-2 max-md:hidden">
+            <div className="border-t py-2 max-md:hidden bg-card px-4">
                 {/* Navigation menu */}
-                <div className="max-w-7xl mx-auto">
+                <div className="max-w-7xl mx-auto px-4">
                     <NavigationMenu>
                         <NavigationMenuList className="gap-2">
                             {navigationLinks.map((link, index) => (

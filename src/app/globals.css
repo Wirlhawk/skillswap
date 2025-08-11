@@ -195,8 +195,4 @@ body {
     @apply bg-background text-foreground;
     letter-spacing: var(--tracking-normal);
   }
-
-  input {
-    @apply border border-black;
-  }
 }
