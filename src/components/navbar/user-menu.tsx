@@ -1,3 +1,4 @@
+"use client";
 import {
     BoltIcon,
     BookOpenIcon,
@@ -18,8 +19,15 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { authClient } from "@/lib/auth-client";
 
-export default function UserMenu() {
+export default function UserMenu({
+    username,
+    name,
+}: {
+    username: string;
+    name: string;
+}) {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -39,11 +47,14 @@ export default function UserMenu() {
             <DropdownMenuContent className="max-w-64" align="end">
                 <DropdownMenuLabel className="flex min-w-0 flex-col">
                     <span className="text-foreground truncate text-sm font-medium">
-                        Keith Kennedy
+                        {name}
                     </span>
-                    <span className="text-muted-foreground truncate text-xs font-normal">
-                        k.kennedy@originui.com
+                    <span className="text-muted-foreground truncate text-xs font-semibold">
+                        @{username}
                     </span>
+                    {/* <span className="text-muted-foreground truncate text-xs font-normal">
+                        {email}
+                    </span> */}
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
@@ -92,7 +103,9 @@ export default function UserMenu() {
                     </DropdownMenuItem>
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>
+                <DropdownMenuItem
+                    onClick={async () => await authClient.signOut()}
+                >
                     <LogOutIcon
                         size={16}
                         className="opacity-60"
