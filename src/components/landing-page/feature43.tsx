@@ -64,9 +64,9 @@ const Feature43 = ({
         <section className="py-32 px-6">
             <div className="container mx-auto max-w-7xl">
                 <div className="mb-10 md:mb-20">
-                    <h2 className="mb-2 text-center text-3xl font-black lg:text-5xl">
+                    <h1 className="mb-2 text-center text-3xl font-black lg:text-5xl">
                         {heading}
-                    </h2>
+                    </h1>
                 </div>
                 <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
                     {reasons.map((reason, i) => (
