@@ -17,6 +17,9 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from "@/components/ui/popover";
+import { authClient } from "@/lib/auth-client";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 
 // Navigation links array to be used in both desktop and mobile menus
 const navigationLinks = [
@@ -26,8 +29,12 @@ const navigationLinks = [
     { href: "/about", label: "Chat" },
 ];
 
-export default function Navbar() {
+export default async function Navbar() {
     const id = useId();
+    const session = await auth.api.getSession({
+        headers: await headers(),
+    });
+    console.log(session);
 
     return (
         <header className="border-b px-4">
@@ -125,10 +132,19 @@ export default function Navbar() {
                 </div>
                 {/* Right side */}
                 <div className="flex flex-1 items-center justify-end gap-3">
-                    {/* Notification */}
-                    <NotificationMenu />
-                    {/* User menu */}
-                    <UserMenu />
+                    {session ? (
+                        <>
+                            <NotificationMenu />
+                            <UserMenu
+                                username={session.user.username ?? ""}
+                                name={session.user.name ?? ""}
+                            />
+                        </>
+                    ) : (
+                        <Button asChild variant="secondary" size="sm">
+                            <a href="/login">Try For Free</a>
+                        </Button>
+                    )}
                 </div>
             </div>
             {/* Bottom navigation */}
