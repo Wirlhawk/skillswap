@@ -1,5 +1,4 @@
-import { Footer7 } from "@/components/ui/landing-page/footer7";
-import Navbar from "@/components/navbar/navbar";
+import { Toaster } from "@/components/ui/sonner";
 import type { Metadata } from "next";
 import { Lexend } from "next/font/google";
 import "./globals.css";
@@ -21,8 +20,9 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body className={`${lexend.variable} antialiased `}>
+            <body className={`${lexend.className} antialiased`}>
                 {children}
+                <Toaster />
             </body>
         </html>
     );

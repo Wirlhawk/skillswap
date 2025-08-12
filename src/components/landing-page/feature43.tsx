@@ -6,7 +6,7 @@ import {
     SquareKanban,
     WandSparkles,
 } from "lucide-react";
-import { Card, CardContent, CardHeader } from "../card";
+import { Card, CardContent, CardHeader } from "../ui/card";
 
 interface Reason {
     title: string;
@@ -61,8 +61,8 @@ const Feature43 = ({
     ],
 }: Feature43Props) => {
     return (
-        <section className="py-32">
-            <div className="container">
+        <section className="py-32 px-6">
+            <div className="container mx-auto max-w-7xl">
                 <div className="mb-10 md:mb-20">
                     <h2 className="mb-2 text-center text-3xl font-black lg:text-5xl">
                         {heading}
@@ -71,15 +71,15 @@ const Feature43 = ({
                 <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
                     {reasons.map((reason, i) => (
                         <Card key={i} className="gap-2">
-                            <CardHeader className="flex items-center gap-3">
-                                <div className="mb-5 flex size-12 items-center justify-center rounded-full bg-accent border shadow-2xs">
-                                    {reason.icon}
-                                </div>
-                                <h3 className="mb-2 text-xl font-bold">
-                                    {reason.title}
-                                </h3>
-                            </CardHeader>
                             <CardContent key={i} className="flex flex-col">
+                                <div>
+                                    <div className="mb-5 flex size-12 items-center justify-center rounded-full bg-primary border shadow-2xs">
+                                        {reason.icon}
+                                    </div>
+                                    <h3 className="mb-2 text-2xl font-bold">
+                                        {reason.title}
+                                    </h3>
+                                </div>
                                 <p className="text-muted-foreground">
                                     {reason.description}
                                 </p>

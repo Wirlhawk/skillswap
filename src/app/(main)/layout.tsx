@@ -1,4 +1,4 @@
-import { Footer7 } from "@/components/ui/landing-page/footer7";
+import { Footer7 } from "@/components/landing-page/footer7";
 import Navbar from "@/components/navbar/navbar";
 import React from "react";
 
