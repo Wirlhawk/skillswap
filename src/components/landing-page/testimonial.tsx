@@ -82,7 +82,7 @@ export default function TestimonialSection() {
                     {testimonials.map((testimonial) => (
                         <Card
                             key={testimonial.id}
-                            className="bg-white border-4 border-black rounded-2xl hover:shadow-lg transition-all duration-300 min-h-[400px] flex flex-col"
+                            className="bg-white  border-black rounded-2xl hover:shadow-lg transition-all duration-300 min-h-[400px] flex flex-col"
                         >
                             <CardContent className="p-8 flex flex-col h-full">
                                 <div className="flex items-center justify-between mb-6">
