@@ -26,11 +26,11 @@ const Hero7 = ({
     description = "Discover top student talent for your projects. Connect, collaborate, and achieve more together on our platform. our community of student freelancers is ready to support your goals.",
     button = {
         text: "Broswe Thousands of Services",
-        url: "https://www.shadcnblocks.com",
+        url: "/home",
     },
     reviews = {
         count: 200,
-        rating: 5.0,
+        rating: 4.9,
         avatars: [
             {
                 src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/avatar-1.webp",

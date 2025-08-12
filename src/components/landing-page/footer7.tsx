@@ -1,5 +1,6 @@
 import React from "react";
 import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
+import TermsDialog from "../about/terms-dialog";
 
 interface Footer7Props {
     logo?: {
@@ -38,7 +39,7 @@ const defaultSections = [
     {
         title: "Company",
         links: [
-            { name: "About", href: "#" },
+            { name: "About", href: "about" },
             { name: "Team", href: "#" },
             { name: "Blog", href: "#" },
             { name: "Careers", href: "#" },
@@ -62,10 +63,10 @@ const defaultSocialLinks = [
     { icon: <FaLinkedin className="size-5" />, href: "#", label: "LinkedIn" },
 ];
 
-const defaultLegalLinks = [
-    { name: "Terms and Conditions", href: "#" },
-    { name: "Privacy Policy", href: "#" },
-];
+// const defaultLegalLinks = [
+//     { name: "Terms and Conditions", href: "" },
+//     { name: "Privacy Policy", href: "#" },
+// ];
 
 const Footer7 = ({
     logo = {
@@ -78,7 +79,6 @@ const Footer7 = ({
     description = "A collection of components for your startup business or side project.",
     socialLinks = defaultSocialLinks,
     copyright = "© 2024 Shadcnblocks.com. All rights reserved.",
-    legalLinks = defaultLegalLinks,
 }: Footer7Props) => {
     return (
         <section className="py-32 bg-muted border-t px-6">
@@ -143,13 +143,19 @@ const Footer7 = ({
                 </div>
                 <div className="text-muted-foreground mt-8 flex flex-col justify-between gap-4 border-t py-8 text-xs font-medium md:flex-row md:items-center md:text-left">
                     <p className="order-2 lg:order-1">{copyright}</p>
-                    <ul className="order-1 flex flex-col gap-2 md:order-2 md:flex-row">
+                    {/* <ul className="order-1 flex flex-col gap-2 md:order-2 md:flex-row">
                         {legalLinks.map((link, idx) => (
                             <li key={idx} className="hover:text-primary">
                                 <a href={link.href}> {link.name}</a>
                             </li>
                         ))}
-                    </ul>
+                        <li></li>
+                    </ul> */}
+                    
+                    <div className="order-1 flex flex-col gap-2 md:order-2 md:flex-row">
+                        <TermsDialog/>
+
+                    </div>
                 </div>
             </div>
         </section>
