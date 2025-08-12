@@ -1,14 +1,18 @@
 import {
+    boolean,
+    pgEnum,
     pgTable,
     text,
-    timestamp,
-    boolean,
-    integer,
+    timestamp
 } from "drizzle-orm/pg-core";
+
+export const userRole = pgEnum("user_role", [
+    "STUDENT", "BUYER", "TEACHER"])
 
 export const user = pgTable("user", {
     id: text("id").primaryKey(),
     name: text("name").notNull(),
+    role: userRole("role").notNull().default("BUYER"),
     email: text("email").notNull().unique(),
     emailVerified: boolean("email_verified")
         .$defaultFn(() => false)

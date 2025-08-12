@@ -10,13 +10,13 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { PasswordInput } from "@/components/ui/password-input";
-import { registerFormSchema } from "@/types/auth";
+import { registerFormSchema } from "@/types/user";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 import { AuthCardWrapper } from "./auth-card-wrapper";
-import { signUp } from "@/server/auth";
+import { signUp } from "@/server/user";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import FormButton from "../ui/form-button";
