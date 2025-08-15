@@ -28,6 +28,6 @@
         "**/*.tsx",
         ".next/types/**/*.ts",
         "src/lib/auth-client,ts"
-    ],
+, "majors-seed.sq;"    ],
     "exclude": ["node_modules"]
 }

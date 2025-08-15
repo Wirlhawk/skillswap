@@ -1,5 +1,4 @@
 "use client";
-import { Button } from "@/components/ui/button";
 import {
     Form,
     FormControl,
@@ -10,16 +9,16 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { PasswordInput } from "@/components/ui/password-input";
+import { signUp } from "@/server/user";
 import { registerFormSchema } from "@/types/user";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
-import { AuthCardWrapper } from "./auth-card-wrapper";
-import { signUp } from "@/server/user";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
 import FormButton from "../ui/form-button";
+import { AuthCardWrapper } from "./auth-card-wrapper";
 
 export default function MyForm() {
     const [message, setMessage] = useState<string | null>(null);
@@ -134,7 +133,7 @@ export default function MyForm() {
                                 <FormLabel>Password</FormLabel>
                                 <FormControl>
                                     <PasswordInput
-                                        placeholder="Placeholder"
+                                        placeholder="******"
                                         {...field}
                                     />
                                 </FormControl>

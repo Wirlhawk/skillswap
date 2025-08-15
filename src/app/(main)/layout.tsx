@@ -1,4 +1,4 @@
-import { Footer7 } from "@/components/landing-page/footer7";
+import { Footer } from "@/components/landing-page/footer";
 import Navbar from "@/components/navbar/navbar";
 import React from "react";
 
@@ -7,7 +7,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
         <div>
             <Navbar />
             {children}
-            <Footer7 />
+            <Footer />
         </div>
     );
 };

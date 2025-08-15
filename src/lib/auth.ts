@@ -1,9 +1,9 @@
 import { db } from "@/db/drizzle";
+import * as schema from "@/db/schema";
 import { betterAuth } from "better-auth";
-import { nextCookies } from "better-auth/next-js";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
-import { admin, username } from "better-auth/plugins"
-import * as schema from "@/db/schema";  // Import where you define user, session, etc.
+import { nextCookies } from "better-auth/next-js";
+import { username } from "better-auth/plugins";
 
 
 export const auth = betterAuth({
@@ -16,6 +16,9 @@ export const auth = betterAuth({
             verification: schema.verification,
         },
     }),
+    emailAndPassword: {
+        enabled: true,
+    },
     user: {
         additionalFields: {
             role: {
@@ -23,10 +26,27 @@ export const auth = betterAuth({
                 required: false,
                 input: false,
             },
+            bio: {
+                type: "string",
+                required: false,
+                input: false,
+            },
+            school: {
+                type: "string",
+                required: false,
+                input: false,
+            },
+            major_id: {
+                type: "string",
+                required: false,
+                input: false,
+            },
+            skills: {
+                type: "string[]",
+                required: false,
+                input: false,
+            },
         },
-    },
-    emailAndPassword: {
-        enabled: true,
     },
     plugins: [nextCookies(), username()]
 });

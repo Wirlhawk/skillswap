@@ -14,12 +14,12 @@ interface Reason {
     icon: React.ReactNode;
 }
 
-interface Feature43Props {
+interface FeaturesProps {
     heading?: string;
     reasons?: Reason[];
 }
 
-const Feature43 = ({
+const Features = ({
     heading = "Why Work With Us?",
     reasons = [
         {
@@ -59,7 +59,7 @@ const Feature43 = ({
             icon: <BatteryCharging className="size-6" />,
         },
     ],
-}: Feature43Props) => {
+}: FeaturesProps) => {
     return (
         <section className="py-32 px-6">
             <div className="container mx-auto max-w-7xl">
@@ -92,4 +92,4 @@ const Feature43 = ({
     );
 };
 
-export { Feature43 };
+export { Features };

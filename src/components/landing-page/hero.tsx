@@ -2,9 +2,10 @@ import { MoveRight, Star } from "lucide-react";
 import React from "react";
 
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import { APP_CONSTANTS } from "@/lib/constants";
 import { Button } from "@/components/ui/button";
 
-interface Hero7Props {
+interface HeroProps {
     heading?: string;
     description?: string;
     button?: {
@@ -21,12 +22,12 @@ interface Hero7Props {
     };
 }
 
-const Hero7 = ({
+const Hero = ({
     heading = "Connect, Collaborate, and Grow with Student Freelancers",
     description = "Discover top student talent for your projects. Connect, collaborate, and achieve more together on our platform. our community of student freelancers is ready to support your goals.",
     button = {
         text: "Broswe Thousands of Services",
-        url: "/home",
+        url: "/register",
     },
     reviews = {
         count: 200,
@@ -54,7 +55,7 @@ const Hero7 = ({
             },
         ],
     },
-}: Hero7Props) => {
+}: HeroProps) => {
     return (
         <section className="py-32 px-6 min-h-screen flex">
             <div className="container text-center mx-auto">
@@ -74,7 +75,10 @@ const Hero7 = ({
                 <div className="mx-auto mt-10 flex w-fit flex-col items-center gap-4 sm:flex-row">
                     <span className="mx-4 inline-flex items-center -space-x-4">
                         {reviews.avatars.map((avatar, index) => (
-                            <Avatar key={index} className="size-14 border">
+                            <Avatar
+                                key={index}
+                                className={`size-${APP_CONSTANTS.HERO_AVATAR_SIZE} border`}
+                            >
                                 <AvatarImage
                                     src={avatar.src}
                                     alt={avatar.alt}
@@ -104,4 +108,4 @@ const Hero7 = ({
     );
 };
 
-export { Hero7 };
+export { Hero };

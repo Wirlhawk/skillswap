@@ -1,10 +1,10 @@
-import { Footer7 } from "@/components/landing-page/footer7";
+import { Footer } from "@/components/landing-page/footer";
 
 const LandingLayout = ({ children }: { children: React.ReactNode }) => {
     return (
         <div>
             {children}
-            <Footer7 />
+            <Footer />
         </div>
     );
 };
