@@ -37,7 +37,7 @@ export default function EditProfileForm({
 
     async function onSubmit(values: z.infer<typeof editProfileFormSchema>) {
         setIsLoading(true);
-        // Ensure name and bio are always strings
+        
         const res = await editProfile(
             values.name ?? "",
             values.bio ?? "",

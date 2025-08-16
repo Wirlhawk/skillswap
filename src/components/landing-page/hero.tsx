@@ -4,6 +4,7 @@ import React from "react";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { APP_CONSTANTS } from "@/lib/constants";
 import { Button } from "@/components/ui/button";
+import { TextEffect } from "../ui/text-effect";
 
 interface HeroProps {
     heading?: string;
@@ -60,12 +61,26 @@ const Hero = ({
         <section className="py-32 px-6 min-h-screen flex">
             <div className="container text-center mx-auto">
                 <div className="mx-auto flex max-w-5xl flex-col gap-6">
-                    <h1 className="text-4xl font-extrabold lg:text-6xl">
+                    {/* <h1 className="text-4xl font-extrabold lg:text-6xl"> */}
+                    <TextEffect
+                        per="word"
+                        as="h1"
+                        preset="slide"
+                        speedReveal={0.7}
+                        className="text-4xl font-extrabold lg:text-6xl"
+                    >
                         {heading}
-                    </h1>
-                    <p className="text-muted-foreground text-balance lg:text-lg max-w-sm:hidden">
+                    </TextEffect>
+                    {/* </h1> */}
+                    <TextEffect
+                        per="word"
+                        preset="fade"
+                        delay={0.1}
+                        speedReveal={1.5}
+                        className="text-muted-foreground text-balance lg:text-lg max-w-sm:hidden"
+                    >
                         {description}
-                    </p>
+                    </TextEffect>
                 </div>
                 <Button asChild size="lg" className="mt-10 px-5">
                     <a href={button.url}>

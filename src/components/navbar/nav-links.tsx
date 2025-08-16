@@ -60,7 +60,7 @@ export const MobileNavLinks = () => {
         <Popover>
             <PopoverTrigger asChild>
                 <Button
-                    className={`group size-${APP_CONSTANTS.NAV_AVATAR_SIZE} md:hidden`}
+                    className={`group size-8 md:hidden`}
                     variant="ghost"
                     size="icon"
                 >

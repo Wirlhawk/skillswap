@@ -47,7 +47,6 @@ export default function ProfileInfoCard({
     );
 
     const handleProfilePictureUpdate = (newImageBlob: Blob) => {
-        // Create a preview URL for the new blob
         const newImageUrl = URL.createObjectURL(newImageBlob);
         setCurrentProfilePicture(newImageUrl);
         setIsDialogOpen(false);

@@ -8,20 +8,6 @@ import { revalidatePath } from "next/cache";
 import { headers } from "next/headers";
 import { put } from "@vercel/blob";
 
-interface ProfileData {
-    id: string;
-    name: string;
-    role: string;
-    school: string | null;
-    bio: string | null;
-    major: string | null;
-    skills: string[] | null;
-    email: string;
-    image: string | null;
-    username: string | null;
-    createdAt: Date;
-}
-
 export const signIn = async (email: string, password: string) => {
     try {
         const res = await auth.api.signInEmail({
