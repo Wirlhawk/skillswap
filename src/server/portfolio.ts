@@ -64,7 +64,6 @@ export const createPortfolio = async (
     }
 };
 
-
 export const getPortfolio = async (username: string) => {
     try {
         // Get user by username
@@ -102,3 +101,44 @@ export const getPortfolio = async (username: string) => {
         return { success: false, error: message };
     }
 };
+
+export const deletePortfolio = async (portfolioId: string) => {
+    try {
+        const session = await auth.api.getSession({
+            headers: await headers(),
+        });
+
+        if (!session?.user.id) {
+            throw new Error("User not authenticated");
+        }
+
+        const portfolioResult = await db
+            .select({ user_id: portfolio.user_id })
+            .from(portfolio)
+            .where(eq(portfolio.id, portfolioId))
+            .limit(1);
+
+        if (!portfolioResult || portfolioResult.length === 0) {
+            return { success: false, error: "Portfolio not found" };
+        }
+
+        if (portfolioResult[0].user_id !== session.user.id) {
+            return { success: false, error: "Unauthorized: You do not own this portfolio" };
+        }
+
+        const result = await db
+            .delete(portfolio)
+            .where(eq(portfolio.id, portfolioId))
+            .returning();
+
+        revalidatePath("/profile/" + session.user.username);
+
+        return { success: true };
+    } catch (err: unknown) {
+        const message =
+            (err as any)?.data?.error ||
+            (err as any)?.message ||
+            "Failed to delete portfolio";
+        return { success: false, error: message };
+    }
+}

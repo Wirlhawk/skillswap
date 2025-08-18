@@ -53,13 +53,12 @@ export const TagsInput = React.forwardRef<HTMLDivElement, TagsInputProps>(
     ) => {
         const [activeIndex, setActiveIndex] = React.useState(-1);
         const [inputValue, setInputValue] = React.useState("");
-        const [disableInput, setDisableInput] = React.useState(false);
-        const [disableButton, setDisableButton] = React.useState(false);
-        const [isValueSelected, setIsValueSelected] = React.useState(false);
-        const [selectedValue, setSelectedValue] = React.useState("");
 
         const parseMinItems = minItems ?? 0;
         const parseMaxItems = maxItems ?? Infinity;
+        // derive disabled states to avoid effect-driven extra renders
+        const disableButton = !(value.length - 1 >= parseMinItems);
+        const disableInput = !(value.length + 1 <= parseMaxItems);
 
         const onValueChangeHandler = React.useCallback(
             (val: string) => {
@@ -104,38 +103,7 @@ export const TagsInput = React.forwardRef<HTMLDivElement, TagsInputProps>(
             [value]
         );
 
-        const handleSelect = React.useCallback(
-            (e: React.SyntheticEvent<HTMLInputElement>) => {
-                e.preventDefault();
-                const target = e.currentTarget;
-                const selection = target.value.substring(
-                    target.selectionStart ?? 0,
-                    target.selectionEnd ?? 0
-                );
-
-                setSelectedValue(selection);
-                setIsValueSelected(selection === inputValue);
-            },
-            [inputValue]
-        );
-
-        // ? suggest : a refactor rather then using a useEffect
-
-        React.useEffect(() => {
-            const VerifyDisable = () => {
-                if (value.length - 1 >= parseMinItems) {
-                    setDisableButton(false);
-                } else {
-                    setDisableButton(true);
-                }
-                if (value.length + 1 <= parseMaxItems) {
-                    setDisableInput(false);
-                } else {
-                    setDisableInput(true);
-                }
-            };
-            VerifyDisable();
-        }, [value]);
+        // removed selection tracking and effect as they caused extra renders while typing
 
         // ? check: Under build , default option support
         // * support : for the uncontrolled && controlled ui
@@ -146,7 +114,7 @@ export const TagsInput = React.forwardRef<HTMLDivElement, TagsInputProps>(
     }, []); */
 
         const handleKeyDown = React.useCallback(
-            async (e: React.KeyboardEvent<HTMLInputElement>) => {
+            (e: React.KeyboardEvent<HTMLInputElement>) => {
                 e.stopPropagation();
 
                 const moveNext = () => {
@@ -220,10 +188,11 @@ export const TagsInput = React.forwardRef<HTMLDivElement, TagsInputProps>(
                                 moveCurrent();
                             } else {
                                 if (target.selectionStart === 0) {
-                                    if (
-                                        selectedValue === inputValue ||
-                                        isValueSelected
-                                    ) {
+                                    const isAllSelected =
+                                        (target.selectionStart ?? 0) === 0 &&
+                                        (target.selectionEnd ?? 0) ===
+                                            target.value.length;
+                                    if (isAllSelected) {
                                         RemoveValue(value[value.length - 1]);
                                     }
                                 }
@@ -321,7 +290,6 @@ export const TagsInput = React.forwardRef<HTMLDivElement, TagsInputProps>(
                         onKeyDown={handleKeyDown}
                         onPaste={handlePaste}
                         value={inputValue}
-                        onSelect={handleSelect}
                         onChange={activeIndex === -1 ? handleChange : undefined}
                         placeholder={placeholder}
                         onClick={() => setActiveIndex(-1)}

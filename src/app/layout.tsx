@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     title: "SkillSwap: A Freelance Platform for Students",
     description: "A Freelance Platform for Students",
     icons: {
-        icon: "/assets/skillswap.png",
+        icon: "/assets/skillswap-bg.png",
     },
 };
 

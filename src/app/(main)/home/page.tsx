@@ -1,9 +1,8 @@
-import React from 'react'
+import PageInset from "@/components/shared/page-inset";
+import React from "react";
 
 const HomePage = () => {
-  return (
-    <div className='h-[300vh]'>HomePage</div>
-  )
-}
+    return <PageInset>Home Page</PageInset>;
+};
 
-export default HomePage
+export default HomePage;
