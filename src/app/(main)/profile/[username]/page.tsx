@@ -1,8 +1,14 @@
 import { ProfileInfoCard } from "@/components/profile";
+import TabsSeparatedDemo from "@/components/tabs-03";
 import { auth } from "@/lib/auth";
 import { getProfile } from "@/server/user";
+import { getPortfolio } from "@/server/portfolio";
+import { Metadata } from "next";
 import { headers } from "next/headers";
 import { notFound, redirect } from "next/navigation";
+import { PortfolioShowcase } from "@/components/portfolio/portfolio-showcase";
+import PageInset from "@/components/shared/page-inset";
+
 
 interface PageProps {
     params: {
@@ -13,9 +19,10 @@ interface PageProps {
 export default async function ProfilePage({ params }: PageProps) {
     const { username } = await params;
 
-    const [session, profileResult] = await Promise.all([
+    const [session, profileResult, portfolioResult] = await Promise.all([
         auth.api.getSession({ headers: await headers() }),
         getProfile(username),
+        getPortfolio(username),
     ]);
 
     if (!session?.user) {
@@ -30,8 +37,8 @@ export default async function ProfilePage({ params }: PageProps) {
     const isOwnProfile = session.user.username === username;
 
     return (
-        <section className="min-h-screen py-10 px-6">
-            <div className="grid grid-cols-1 md:grid-cols-3 max-w-7xl mx-auto gap-6">
+        <PageInset>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
                 <ProfileInfoCard
                     user={{
                         username: profile.username || "",
@@ -44,8 +51,18 @@ export default async function ProfilePage({ params }: PageProps) {
                     major={profile.major || ""}
                     isEditable={isOwnProfile}
                 />
-                <div className="col-span-1 md:col-span-2"></div>
+                <div className="col-span-1 md:col-span-2 space-y-3">
+                    <TabsSeparatedDemo />
+                    <PortfolioShowcase
+                        portfolios={
+                            portfolioResult.success && portfolioResult.data
+                                ? portfolioResult.data
+                                : []
+                        }
+                        isOwnProfile={isOwnProfile}
+                    />
+                </div>
             </div>
-        </section>
+        </PageInset>
     );
 }

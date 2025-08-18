@@ -14,7 +14,7 @@ import { BottomNavLinks, MobileNavLinks } from "./nav-links";
 export default async function Navbar() {
     const id = useId();
     const session = await auth.api.getSession({
-        headers: await headers(),
+        headers: await headers(),   
     });
 
     return (
@@ -25,7 +25,7 @@ export default async function Navbar() {
                     {/* Mobile menu trigger */}
                     <MobileNavLinks />
                     {/* Logo */}
-                    <div className="flex items-center">
+                    <div className="items-center flex">
                         <a
                             href="#"
                             className="text-primary hover:text-primary/90"
@@ -75,6 +75,7 @@ export default async function Navbar() {
             </div>
             {/* Bottom navigation */}
             <BottomNavLinks />
+            
         </header>
     );
 }

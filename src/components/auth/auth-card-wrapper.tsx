@@ -36,7 +36,13 @@ export function AuthCardWrapper({
         >
             <Card>
                 <CardHeader className="my-2 flex-row flex items-center gap-3">
-                    <Box className="size-10" />
+                    {/* <Box className="size-10" /> */}
+                    <img
+                        src="/assets/skillswap.png"
+                        alt="SkillSwap logo"
+                        className="w-14"
+                    />
+
                     <div className="">
                         <CardTitle className="text-xl font-bold">
                             {title}
@@ -46,9 +52,7 @@ export function AuthCardWrapper({
                         </CardDescription>
                     </div>
                 </CardHeader>
-                <CardContent>
-                    {children}
-                </CardContent>
+                <CardContent>{children}</CardContent>
 
                 <CardFooter>
                     <div className="mt-2 text-center text-sm mx-auto">

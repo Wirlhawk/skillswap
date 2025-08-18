@@ -15,5 +15,5 @@ export const registerFormSchema = z.object({
 export const editProfileFormSchema = z.object({
     name: z.string().min(1).max(50),
     bio: z.string().max(150).optional(),
-    skills: z.array(z.string().max(30)),
+    skills: z.array(z.string().max(30)).max(10),
 });

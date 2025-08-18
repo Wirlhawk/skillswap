@@ -3,7 +3,8 @@ import {
     pgEnum,
     pgTable,
     text,
-    timestamp
+    timestamp,
+    uuid
 } from "drizzle-orm/pg-core";
 
 export const userRole = pgEnum("user_role", [
@@ -76,8 +77,28 @@ export const verification = pgTable("verification", {
     updatedAt: timestamp("updated_at").$defaultFn(() => new Date()),
 });
 
-export const major = pgTable("majors", {
+export const major = pgTable("major", {
     id: text("id").primaryKey(),
     name: text("name").notNull(),
     alias: text("alias").notNull(),
 });
+
+export const category = pgTable('category', {
+    id: uuid("id").defaultRandom().primaryKey(),
+    name: text("name").notNull(),
+    slug: text("slug").notNull().unique(),
+})
+
+export const portfolio = pgTable('portfolio', {
+    id: uuid("id").defaultRandom().primaryKey(),
+    user_id: text("user_id")
+        .references(() => user.id, { onDelete: "set null" }),
+    title: text("title").notNull(),
+    description: text("description").notNull(),
+    images: text("image").array(),
+    tags: text("tag").array(),
+    createdAt: timestamp("created_at")
+        .$defaultFn(() => new Date())
+        .notNull(),
+});
+

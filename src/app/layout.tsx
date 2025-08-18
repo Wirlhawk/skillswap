@@ -9,8 +9,11 @@ const lexend = Lexend({
 });
 
 export const metadata: Metadata = {
-    title: "SkillSwap",
-    description: "A freelance platform for students",
+    title: "SkillSwap: A Freelance Platform for Students",
+    description: "A Freelance Platform for Students",
+    icons: {
+        icon: "/assets/skillswap-bg.png",
+    },
 };
 
 export default function RootLayout({

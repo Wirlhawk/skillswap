@@ -1,11 +1,11 @@
 "use client";
 
-import About from "@/components/portfolio/about";
-import Contact from "@/components/portfolio/contact";
-import Hero from "@/components/portfolio/hero";
-import Portfolio from "@/components/portfolio/portfolio";
-import ProfileWorks from "@/components/portfolio/profile-works";
-import Services from "@/components/portfolio/server";
+import About from "@/components/ex-portfolio/about";
+import Contact from "@/components/ex-portfolio/contact";
+import Hero from "@/components/ex-portfolio/hero";
+import Portfolio from "@/components/ex-portfolio/portfolio";
+import ProfileWorks from "@/components/ex-portfolio/profile-works";
+import Services from "@/components/ex-portfolio/server";
 
 export default function Home() {
     return (
