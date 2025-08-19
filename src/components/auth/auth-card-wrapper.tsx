@@ -7,8 +7,6 @@ import {
     CardTitle,
 } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { Box } from "lucide-react";
-import { FormMessage } from "../ui/form";
 
 export function AuthCardWrapper({
     title,

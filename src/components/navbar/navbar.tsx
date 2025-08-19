@@ -6,15 +6,14 @@ import { Input } from "@/components/ui/input";
 import { auth } from "@/lib/auth";
 import { SearchIcon } from "lucide-react";
 import { headers } from "next/headers";
-import { useId } from "react";
+
 import { BottomNavLinks, MobileNavLinks } from "./nav-links";
 
 // Navigation links array to be used in both desktop and mobile menus
 
 export default async function Navbar() {
-    const id = useId();
     const session = await auth.api.getSession({
-        headers: await headers(),   
+        headers: await headers(),
     });
 
     return (
@@ -39,7 +38,6 @@ export default async function Navbar() {
                     {/* Search form */}
                     <div className="relative mx-auto w-full max-w-xs">
                         <Input
-                            id={id}
                             className="peer h-8 ps-8 pe-10"
                             placeholder="Search..."
                             type="search"
@@ -75,7 +73,6 @@ export default async function Navbar() {
             </div>
             {/* Bottom navigation */}
             <BottomNavLinks />
-            
         </header>
     );
 }

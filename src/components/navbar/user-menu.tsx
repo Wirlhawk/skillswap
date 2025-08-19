@@ -31,12 +31,7 @@ interface UserMenuProps {
     image: string;
 }
 
-export default function UserMenu({
-    username,
-    name,
-    email,
-    image,
-}: UserMenuProps) {
+export default function UserMenu({ username, name, image }: UserMenuProps) {
     const router = useRouter();
 
     const handleLogout = async () => {

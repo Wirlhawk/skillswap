@@ -56,8 +56,7 @@ export const createPortfolio = async (
         return { success: true, data: newPortfolio[0] };
     } catch (err: unknown) {
         const message =
-            (err as any)?.data?.error ||
-            (err as any)?.message ||
+            (err as Error)?.message ||
             "Failed to create portfolio";
 
         return { success: false, error: message };
@@ -95,8 +94,7 @@ export const getPortfolio = async (username: string) => {
         return { success: true, data: portfolios };
     } catch (err: unknown) {
         const message =
-            (err as any)?.data?.error ||
-            (err as any)?.message ||
+            (err as Error)?.message ||
             "Failed to fetch portfolio";
         return { success: false, error: message };
     }
@@ -126,7 +124,7 @@ export const deletePortfolio = async (portfolioId: string) => {
             return { success: false, error: "Unauthorized: You do not own this portfolio" };
         }
 
-        const result = await db
+        await db
             .delete(portfolio)
             .where(eq(portfolio.id, portfolioId))
             .returning();
@@ -136,8 +134,7 @@ export const deletePortfolio = async (portfolioId: string) => {
         return { success: true };
     } catch (err: unknown) {
         const message =
-            (err as any)?.data?.error ||
-            (err as any)?.message ||
+            (err as Error)?.message ||
             "Failed to delete portfolio";
         return { success: false, error: message };
     }

@@ -9,7 +9,6 @@ import {
 import { usePathname } from "next/navigation";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Button } from "../ui/button";
-import { APP_CONSTANTS } from "@/lib/constants";
 
 const links = [
     { href: "/home", label: "Home" },

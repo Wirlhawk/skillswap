@@ -15,7 +15,6 @@ interface FileUploadFieldProps {
 }
 
 export function FileUploadField({
-    value = [],
     onChange,
     maxFiles = 6,
     maxSizeMB = 5,
