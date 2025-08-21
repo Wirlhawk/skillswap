@@ -76,6 +76,7 @@ const Hero7 = ({
                         {reviews.avatars.map((avatar, index) => (
                             <Avatar key={index} className="size-14 border">
                                 <AvatarImage
+                                
                                     src={avatar.src}
                                     alt={avatar.alt}
                                 />
