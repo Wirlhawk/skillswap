@@ -95,6 +95,7 @@ const Hero = ({
                                 className={`size-${APP_CONSTANTS.HERO_AVATAR_SIZE} border`}
                             >
                                 <AvatarImage
+                                
                                     src={avatar.src}
                                     alt={avatar.alt}
                                 />
