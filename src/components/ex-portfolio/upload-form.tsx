@@ -12,8 +12,18 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Upload, X, ImageIcon, Video } from "lucide-react"
 
 interface UploadFormProps {
-  onSubmit: (work: any) => void
+  onSubmit: (work: UploadWork) => void
   onClose: () => void
+}
+
+interface UploadWork {
+  id: number
+  title: string
+  description: string
+  category: string
+  tags: string
+  files: File[]
+  createdAt: string
 }
 
 export default function UploadForm({ onSubmit, onClose }: UploadFormProps) {

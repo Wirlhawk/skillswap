@@ -2,7 +2,7 @@ import React from "react";
 import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
 import TermsDialog from "../about/terms-dialog";
 
-interface Footer7Props {
+interface FooterProps {
     logo?: {
         url: string;
         src: string;
@@ -68,7 +68,7 @@ const defaultSocialLinks = [
 //     { name: "Privacy Policy", href: "#" },
 // ];
 
-const Footer7 = ({
+const Footer = ({
     logo = {
         url: "https://www.shadcnblocks.com",
         src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/logos/shadcnblockscom-icon.svg",
@@ -76,10 +76,10 @@ const Footer7 = ({
         title: "Shadcnblocks.com",
     },
     sections = defaultSections,
-    description = "A collection of components for your startup business or side project.",
+    description = "A Freelance platform for students to grow.",
     socialLinks = defaultSocialLinks,
-    copyright = "© 2024 Shadcnblocks.com. All rights reserved.",
-}: Footer7Props) => {
+    copyright = "© 2025 Skillswap.com. All rights reserved.",
+}: FooterProps) => {
     return (
         <section className="py-32 bg-muted border-t px-6">
             <div className="container max-w-7xl mx-auto">
@@ -151,10 +151,9 @@ const Footer7 = ({
                         ))}
                         <li></li>
                     </ul> */}
-                    
-                    <div className="order-1 flex flex-col gap-2 md:order-2 md:flex-row">
-                        <TermsDialog/>
 
+                    <div className="order-1 flex flex-col gap-2 md:order-2 md:flex-row">
+                        <TermsDialog />
                     </div>
                 </div>
             </div>
@@ -162,4 +161,4 @@ const Footer7 = ({
     );
 };
 
-export { Footer7 };
+export { Footer };

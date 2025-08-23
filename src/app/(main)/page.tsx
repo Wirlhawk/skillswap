@@ -1,12 +1,13 @@
-import { Feature43 } from "@/components/landing-page/feature43";
-import { Hero7 } from "@/components/landing-page/hero7";
+import { Features } from "@/components/landing-page/features";
+import { Footer } from "@/components/landing-page/footer";
+import { Hero } from "@/components/landing-page/hero";
 import TestimonialSection from "@/components/landing-page/testimonial";
 
 export default function Home() {
     return (
         <div className="">
-            <Hero7 />
-            <Feature43 />
+            <Hero />
+            <Features />
             <TestimonialSection />
         </div>
     );

@@ -1,4 +1,4 @@
-import ProfileEditForm from "@/components/user-profile/form-edit-user";
+import ProfileEditForm from "@/components/profile/form-edit-user";
 
 export default function Home() {
   return (

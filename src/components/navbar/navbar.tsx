@@ -1,40 +1,21 @@
-import { useId } from "react";
-import { SearchIcon } from "lucide-react";
-
 import Logo from "@/components/navbar/logo";
 import NotificationMenu from "@/components/navbar/notification-menu";
 import UserMenu from "@/components/navbar/user-menu";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import {
-    NavigationMenu,
-    NavigationMenuItem,
-    NavigationMenuLink,
-    NavigationMenuList,
-} from "@/components/ui/navigation-menu";
-import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-} from "@/components/ui/popover";
-import { authClient } from "@/lib/auth-client";
 import { auth } from "@/lib/auth";
+import { SearchIcon } from "lucide-react";
 import { headers } from "next/headers";
+import { useId } from "react";
+import { BottomNavLinks, MobileNavLinks } from "./nav-links";
 
 // Navigation links array to be used in both desktop and mobile menus
-const navigationLinks = [
-    { href: "/", label: "Home", active: true },
-    { href: "/features", label: "Categories" },
-    { href: "/label", label: "Dashboard" },
-    { href: "/about", label: "Chat" },
-];
 
 export default async function Navbar() {
     const id = useId();
     const session = await auth.api.getSession({
-        headers: await headers(),
+        headers: await headers(),   
     });
-    console.log(session);
 
     return (
         <header className="border-b px-4">
@@ -42,66 +23,9 @@ export default async function Navbar() {
                 {/* Left side */}
                 <div className="flex flex-1 items-center gap-2">
                     {/* Mobile menu trigger */}
-                    <Popover>
-                        <PopoverTrigger asChild>
-                            <Button
-                                className="group size-8 md:hidden"
-                                variant="ghost"
-                                size="icon"
-                            >
-                                <svg
-                                    className="pointer-events-none"
-                                    width={16}
-                                    height={16}
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    strokeWidth="2"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <path
-                                        d="M4 12L20 12"
-                                        className="origin-center -translate-y-[7px] transition-all duration-300 ease-[cubic-bezier(.5,.85,.25,1.1)] group-aria-expanded:translate-x-0 group-aria-expanded:translate-y-0 group-aria-expanded:rotate-[315deg]"
-                                    />
-                                    <path
-                                        d="M4 12H20"
-                                        className="origin-center transition-all duration-300 ease-[cubic-bezier(.5,.85,.25,1.8)] group-aria-expanded:rotate-45"
-                                    />
-                                    <path
-                                        d="M4 12H20"
-                                        className="origin-center translate-y-[7px] transition-all duration-300 ease-[cubic-bezier(.5,.85,.25,1.1)] group-aria-expanded:translate-y-0 group-aria-expanded:rotate-[135deg]"
-                                    />
-                                </svg>
-                            </Button>
-                        </PopoverTrigger>
-                        <PopoverContent
-                            align="start"
-                            className="w-36 p-1 md:hidden"
-                        >
-                            <NavigationMenu className="max-w-none *:w-full">
-                                <NavigationMenuList className="flex-col items-start gap-0 md:gap-2">
-                                    {navigationLinks.map((link, index) => (
-                                        <NavigationMenuItem
-                                            key={index}
-                                            className="w-full"
-                                        >
-                                            <NavigationMenuLink
-                                                href={link.href}
-                                                className="py-1.5"
-                                                active={link.active}
-                                            >
-                                                {link.label}
-                                            </NavigationMenuLink>
-                                        </NavigationMenuItem>
-                                    ))}
-                                </NavigationMenuList>
-                            </NavigationMenu>
-                        </PopoverContent>
-                    </Popover>
+                    <MobileNavLinks />
                     {/* Logo */}
-                    <div className="flex items-center">
+                    <div className="items-center flex">
                         <a
                             href="#"
                             className="text-primary hover:text-primary/90"
@@ -138,6 +62,8 @@ export default async function Navbar() {
                             <UserMenu
                                 username={session.user.username ?? ""}
                                 name={session.user.name ?? ""}
+                                email={session.user.email ?? ""}
+                                image={session.user.image ?? ""}
                             />
                         </>
                     ) : (
@@ -148,26 +74,8 @@ export default async function Navbar() {
                 </div>
             </div>
             {/* Bottom navigation */}
-            <div className="border-t py-2 max-md:hidden">
-                {/* Navigation menu */}
-                <div className="max-w-7xl mx-auto ">
-                    <NavigationMenu>
-                        <NavigationMenuList className="gap-2">
-                            {navigationLinks.map((link, index) => (
-                                <NavigationMenuItem key={index}>
-                                    <NavigationMenuLink
-                                        active={link.active}
-                                        href={link.href}
-                                        className="text-muted-foreground hover:text-primary py-1.5 font-medium"
-                                    >
-                                        {link.label}
-                                    </NavigationMenuLink>
-                                </NavigationMenuItem>
-                            ))}
-                        </NavigationMenuList>
-                    </NavigationMenu>
-                </div>
-            </div>
+            <BottomNavLinks />
+            
         </header>
     );
 }

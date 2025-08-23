@@ -1,24 +1,37 @@
 import {
+    boolean,
+    pgEnum,
     pgTable,
     text,
     timestamp,
-    boolean,
-    integer,
+    uuid
 } from "drizzle-orm/pg-core";
+
+export const userRole = pgEnum("user_role", [
+    "STUDENT",
+    "BUYER",
+    "TEACHER"
+]);
 
 export const user = pgTable("user", {
     id: text("id").primaryKey(),
     name: text("name").notNull(),
+    role: userRole("role").notNull().default("BUYER"),
+    school: text("school"),
+    bio: text("bio"),
+    major_id: text("major_id")
+        .references(() => major.id, { onDelete: "set null" }),
+    skills: text("skills").array(),
     email: text("email").notNull().unique(),
     emailVerified: boolean("email_verified")
         .$defaultFn(() => false)
         .notNull(),
     image: text("image"),
     createdAt: timestamp("created_at")
-        .$defaultFn(() => /* @__PURE__ */ new Date())
+        .$defaultFn(() => new Date())
         .notNull(),
     updatedAt: timestamp("updated_at")
-        .$defaultFn(() => /* @__PURE__ */ new Date())
+        .$defaultFn(() => new Date())
         .notNull(),
     username: text("username").unique(),
     displayUsername: text("display_username"),
@@ -60,10 +73,32 @@ export const verification = pgTable("verification", {
     identifier: text("identifier").notNull(),
     value: text("value").notNull(),
     expiresAt: timestamp("expires_at").notNull(),
-    createdAt: timestamp("created_at").$defaultFn(
-        () => /* @__PURE__ */ new Date(),
-    ),
-    updatedAt: timestamp("updated_at").$defaultFn(
-        () => /* @__PURE__ */ new Date(),
-    ),
+    createdAt: timestamp("created_at").$defaultFn(() => new Date()),
+    updatedAt: timestamp("updated_at").$defaultFn(() => new Date()),
 });
+
+export const major = pgTable("major", {
+    id: text("id").primaryKey(),
+    name: text("name").notNull(),
+    alias: text("alias").notNull(),
+});
+
+export const category = pgTable('category', {
+    id: uuid("id").defaultRandom().primaryKey(),
+    name: text("name").notNull(),
+    slug: text("slug").notNull().unique(),
+})
+
+export const portfolio = pgTable('portfolio', {
+    id: uuid("id").defaultRandom().primaryKey(),
+    user_id: text("user_id")
+        .references(() => user.id, { onDelete: "set null" }),
+    title: text("title").notNull(),
+    description: text("description").notNull(),
+    images: text("image").array(),
+    tags: text("tag").array(),
+    createdAt: timestamp("created_at")
+        .$defaultFn(() => new Date())
+        .notNull(),
+});
+

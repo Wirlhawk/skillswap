@@ -7,5 +7,3 @@ export default function PageInset({ children }: { children: React.ReactNode }) {
         </section>
     );
 }
-
-
