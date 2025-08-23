@@ -17,7 +17,8 @@ export const signIn = async (email: string, password: string) => {
         return { success: true, data: res };
     } catch (err: unknown) {
         const message =
-            (err as Error)?.message ||
+            (err as any)?.data?.error ||
+            (err as any)?.message ||
             "Invalid email or password";
 
         return { success: false, error: message };
@@ -38,7 +39,8 @@ export const signUp = async (
         return { success: true, data: res };
     } catch (err: unknown) {
         const message =
-            (err as Error)?.message ||
+            (err as any)?.data?.error ||
+            (err as any)?.message ||
             "An unexpected error occurred";
 
         return { success: false, error: message };
@@ -61,7 +63,7 @@ export const getProfile = async (username: string) => {
                 createdAt: user.createdAt,
             })
             .from(user)
-            .leftJoin(major, eq(user.major_id, major.id))
+            .leftJoin(major, eq(user.majorId, major.id))
             .where(eq(user.username, username))
             .limit(1);
 
@@ -72,7 +74,8 @@ export const getProfile = async (username: string) => {
         return { success: true, data: profile[0] };
     } catch (err: unknown) {
         const message =
-            (err as Error)?.message ||
+            (err as any)?.data?.error ||
+            (err as any)?.message ||
             "Failed to fetch profile";
 
         return { success: false, error: message };
@@ -103,7 +106,8 @@ export const editProfile = async (
         return { success: true, data: updatedUser[0] };
     } catch (err: unknown) {
         const message =
-            (err as Error)?.message ||
+            (err as any)?.data?.error ||
+            (err as any)?.message ||
             "Failed to update profile";
 
         return { success: false, error: message };
@@ -144,7 +148,8 @@ export const updateProfileImage = async (formData: FormData) => {
         return { success: true, data: updatedUser[0] };
     } catch (err: unknown) {
         const message =
-            (err as Error)?.message ||
+            (err as any)?.data?.error ||
+            (err as any)?.message ||
             "Failed to update profile image";
 
         return { success: false, error: message };

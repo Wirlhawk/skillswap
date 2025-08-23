@@ -1,5 +1,4 @@
 "use server";
-
 import { db } from "@/db/drizzle";
 import { portfolio, user } from "@/db/schema";
 import { auth } from "@/lib/auth";
@@ -47,7 +46,7 @@ export const createPortfolio = async (
                 description,
                 tags,
                 images: uploadedImages,
-                user_id: session.user.id
+                userId: session.user.id
             })
             .returning();
 
@@ -89,7 +88,7 @@ export const getPortfolio = async (username: string) => {
                 createdAt: portfolio.createdAt,
             })
             .from(portfolio)
-            .where(eq(portfolio.user_id, userId));
+            .where(eq(portfolio.userId, userId));
 
         return { success: true, data: portfolios };
     } catch (err: unknown) {
@@ -111,7 +110,7 @@ export const deletePortfolio = async (portfolioId: string) => {
         }
 
         const portfolioResult = await db
-            .select({ user_id: portfolio.user_id })
+            .select({ user_id: portfolio.userId })
             .from(portfolio)
             .where(eq(portfolio.id, portfolioId))
             .limit(1);

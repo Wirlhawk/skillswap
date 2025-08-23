@@ -17,7 +17,7 @@ interface PortfolioCardProps {
 
 export function PortfolioCard({ portfolio, children }: PortfolioCardProps) {
     return (
-        <Card className="cursor-pointer hover:bg-accent transition-all p-4 pb-6 gap-2">
+        <Card className="cursor-pointer hover:bg-muted transition-all p-4 pb-6 gap-2">
             <CardHeader className="p-0">
                 <img
                     src={portfolio.images?.[0] || "/placeholder.svg"}
