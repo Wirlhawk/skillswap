@@ -73,7 +73,7 @@ export default function MediaPreview({
             photography: "bg-green-100 text-green-800",
             "motion-graphics": "bg-indigo-100 text-indigo-800",
         };
-        return colors[category] || "bg-gray-100 text-gray-800";
+        return colors[category] || "bg-background text-gray-800";
     };
 
     const categories = [
@@ -93,7 +93,7 @@ export default function MediaPreview({
                 </DialogTitle>
 
                 {/* Image Section */}
-                <div className="flex-1 relative bg-gray-100">
+                <div className="flex-1 relative bg-background">
                     <img
                         // src={mockImages[currentImageIndex]}
                         src="https://0xctge55estdjuk2.public.blob.vercel-storage.com/hKLeq1aHGXNxAVWBuo6cMKw6Vucn8jA1-1755328084908-0-Screenshot%202025-06-26%20223020.png"
@@ -107,7 +107,7 @@ export default function MediaPreview({
                             <Button
                                 variant="secondary"
                                 size="sm"
-                                className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white"
+                                className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-background"
                                 onClick={prevImage}
                             >
                                 <ChevronLeft className="w-4 h-4" />
@@ -115,7 +115,7 @@ export default function MediaPreview({
                             <Button
                                 variant="secondary"
                                 size="sm"
-                                className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white"
+                                className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-background"
                                 onClick={nextImage}
                             >
                                 <ChevronRight className="w-4 h-4" />
@@ -125,7 +125,7 @@ export default function MediaPreview({
 
                     {/* Image Counter */}
                     {mockImages.length > 1 && (
-                        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black/50 text-white px-3 py-1 rounded-full text-sm">
+                        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black/50 text-background px-3 py-1 rounded-full text-sm">
                             {currentImageIndex + 1} / {mockImages.length}
                         </div>
                     )}
@@ -134,7 +134,7 @@ export default function MediaPreview({
                     <Button
                         variant="secondary"
                         size="sm"
-                        className="absolute top-4 right-4 bg-white/80 hover:bg-white"
+                        className="absolute top-4 right-4 bg-background"
                         onClick={onClose}
                     >
                         <X className="w-4 h-4" />
