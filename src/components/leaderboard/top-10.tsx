@@ -154,7 +154,7 @@ const getBadgeColor = (badge: string) => {
 export default function LeaderboardPage() {
     return (
         <div>
-            <section className="bg-muted py-16">
+            <section className="bg-background py-16">
                 <div className="max-w-4xl mx-auto px-4 text-center">
                     <div className="flex items-center justify-center gap-2 mb-4">
                         <Trophy className="h-8 w-8 text-yellow-500" />
