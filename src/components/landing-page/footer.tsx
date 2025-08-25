@@ -39,8 +39,8 @@ const defaultSections = [
     {
         title: "Company",
         links: [
-            { name: "About", href: "about" },
-            { name: "Team", href: "#" },
+            { name: "About", href: "" },
+            { name: "Team", href: "about" },
             { name: "Blog", href: "#" },
             { name: "Careers", href: "#" },
         ],
@@ -51,7 +51,7 @@ const defaultSections = [
             { name: "Help", href: "#" },
             { name: "Sales", href: "#" },
             { name: "Advertise", href: "#" },
-            { name: "Privacy", href: "#" },
+            { name: "Privacy", href: "star-riview" },
         ],
     },
 ];

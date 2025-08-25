@@ -196,7 +196,7 @@ export default function UploadForm({ onSubmit, onClose }: UploadFormProps) {
                 <Label>File yang dipilih:</Label>
                 <div className="space-y-2">
                   {formData.files.map((file, index) => (
-                    <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                    <div key={index} className="flex items-center justify-between p-3 bg-background rounded-lg">
                       <div className="flex items-center gap-3">
                         {getFileIcon(file)}
                         <div>

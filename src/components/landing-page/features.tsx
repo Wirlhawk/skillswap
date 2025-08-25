@@ -62,7 +62,7 @@ const Features = ({
 }: FeaturesProps) => {
     return (
         <section className="py-32 px-6">
-            <div className="container mx-auto max-w-7xl">
+            <div className="container mx-auto max-w-7xl ">
                 <div className="mb-10 md:mb-20">
                     <h1 className="mb-2 text-center text-3xl font-black lg:text-5xl">
                         {heading}
@@ -70,7 +70,7 @@ const Features = ({
                 </div>
                 <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
                     {reasons.map((reason, i) => (
-                        <Card key={i} className="gap-2">
+                        <Card key={i} className="gap-2 bg-background">
                             <CardContent key={i} className="flex flex-col">
                                 <div>
                                     <div className="mb-5 flex size-12 items-center justify-center rounded-full bg-primary border shadow-2xs">

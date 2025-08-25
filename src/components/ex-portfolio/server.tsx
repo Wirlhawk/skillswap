@@ -59,7 +59,7 @@ export default function Services() {
           {services.map((service, index) => (
             <Card
               key={index}
-              className="group border-0 bg-white/80 backdrop-blur-sm hover:bg-white transition-all duration-300 hover:shadow-xl hover:shadow-emerald-100/50 hover:-translate-y-2"
+              className="group border-0 bg-background backdrop-blur-sm hover:bg-white transition-all duration-300 hover:shadow-xl hover:shadow-emerald-100/50 hover:-translate-y-2"
             >
               <CardContent className="p-8 relative overflow-hidden">
                 <div

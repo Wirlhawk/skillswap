@@ -8,7 +8,7 @@ export default function Contact() {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl font-serif font-bold text-gray-900 mb-4">Let's Start Your Project</h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-chart-5 max-w-2xl mx-auto">
             Ready to transform your brand? Get in touch and let's discuss how we can bring your vision to life
           </p>
         </div>
@@ -20,36 +20,36 @@ export default function Contact() {
                 <form className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                      <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
                         Full Name
                       </label>
                       <input
                         type="text"
                         id="name"
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors"
+                        className="w-full px-4 py-3 border border-background rounded-lg "
                         placeholder="John Doe"
                       />
                     </div>
                     <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                      <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
                         Email Address
                       </label>
                       <input
                         type="email"
                         id="email"
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors"
+                        className="w-full px-4 py-3 border border-background rounded-lg "
                         placeholder="john@example.com"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor="subject" className="block text-sm font-medium text-foreground mb-2">
                       Project Type
                     </label>
                     <select
                       id="subject"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors"
+                      className="w-full px-4 py-3 border border-background rounded-lg "
                     >
                       <option>Web Design</option>
                       <option>Brand Identity</option>
@@ -60,18 +60,18 @@ export default function Contact() {
                   </div>
 
                   <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
                       Project Details
                     </label>
                     <textarea
                       id="message"
                       rows={6}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors resize-none"
+                      className="w-full px-4 py-3 border border-background rounded-lg  resize-none"
                       placeholder="Tell us about your project, timeline, and budget..."
                     ></textarea>
                   </div>
 
-                  <Button size="lg" className="w-full bg-emerald-600 hover:bg-emerald-700">
+                  <Button size="lg" className="w-full bg-primary hover:bg-ring">
                     <Send className="h-5 w-5 mr-2" />
                     Send Message
                   </Button>
@@ -84,7 +84,7 @@ export default function Contact() {
             <Card className="border-0 shadow-lg">
               <CardContent className="p-6">
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center flex-shrink-0">
+                  <div className="w-12 h-12 bg-ring rounded-full flex items-center justify-center flex-shrink-0">
                     <Mail className="h-6 w-6 text-emerald-600" />
                   </div>
                   <div>
@@ -99,7 +99,7 @@ export default function Contact() {
             <Card className="border-0 shadow-lg">
               <CardContent className="p-6">
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center flex-shrink-0">
+                  <div className="w-12 h-12 bg-ring rounded-full flex items-center justify-center flex-shrink-0">
                     <Phone className="h-6 w-6 text-emerald-600" />
                   </div>
                   <div>
@@ -114,7 +114,7 @@ export default function Contact() {
             <Card className="border-0 shadow-lg">
               <CardContent className="p-6">
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center flex-shrink-0">
+                  <div className="w-12 h-12 bg-ring rounded-full flex items-center justify-center flex-shrink-0">
                     <MapPin className="h-6 w-6 text-emerald-600" />
                   </div>
                   <div>

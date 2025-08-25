@@ -14,8 +14,8 @@ import { APP_CONSTANTS } from "@/lib/constants";
 const links = [
     { href: "/home", label: "Home" },
     { href: "/features", label: "Categories" },
-    { href: "/label", label: "Dashboard" },
-    { href: "/about", label: "Chat" },
+    { href: "/teacher-dashboard", label: "Dashboard" },
+    { href: "/chatui", label: "Chat" },
 ];
 
 export const BottomNavLinks = () => {
@@ -36,7 +36,7 @@ export const BottomNavLinks = () => {
                                 <NavigationMenuLink
                                     active={link.active}
                                     href={link.href}
-                                    className="text-muted-foreground hover:text-primary py-1.5 font-medium"
+                                    className="text-muted-foreground hover:text-foreground hover:bg-primary py-1.5 font-medium"
                                 >
                                     {link.label}
                                 </NavigationMenuLink>

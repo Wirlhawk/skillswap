@@ -107,7 +107,7 @@ const Hero = ({
                             {[...Array(5)].map((_, index) => (
                                 <Star
                                     key={index}
-                                    className="size-5 fill-yellow-400 text-yellow-400"
+                                    className="size-5 fill-chart-2 text-foreground"
                                 />
                             ))}
                             <span className="mr-1 font-semibold">

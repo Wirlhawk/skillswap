@@ -83,26 +83,26 @@ export default function TestimonialSection() {
                     {testimonials.map((testimonial) => (
                         <Card
                             key={testimonial.id}
-                            className="bg-white border-black rounded-2xl hover:shadow-lg transition-all duration-300 min-h-[400px] flex flex-col"
+                            className="bg-background border-foreground rounded-2xl hover:shadow-lg transition-all duration-300 min-h-[400px] flex flex-col"
                         >
                             <CardContent className="p-8 flex flex-col h-full">
                                 <div className="flex items-center justify-between mb-6">
-                                    <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center border">
-                                        <Quote className="w-6 h-6 text-purple-600" />
+                                    <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center border shadow-2xs">
+                                        <Quote className="w-6 h-6 rounded-full text-foreground " />
                                     </div>
                                     <div className="flex items-center">
                                         {[...Array(testimonial.rating)].map(
                                             (_, i) => (
                                                 <Star
                                                     key={i}
-                                                    className="w-4 h-4 text-yellow-400 fill-current"
+                                                    className="w-4 h-4 text-foreground fill-chart-2 "
                                                 />
                                             )
                                         )}
                                     </div>
                                 </div>
 
-                                <blockquote className="text-gray-700 mb-6 leading-relaxed flex-grow text-base">
+                                <blockquote className="text-secondary mb-6 leading-relaxed flex-grow text-base">
                                     "{testimonial.testimonial}"
                                 </blockquote>
 

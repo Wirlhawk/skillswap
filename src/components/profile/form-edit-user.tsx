@@ -95,13 +95,13 @@ export default function ProfileEditForm() {
 
     return (
         <div className="max-w-6xl mx-auto space-y-8">
-            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 p-8 text-center">
-                <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/5 to-teal-500/5"></div>
+            <div className="relative overflow-hidden rounded-2xl bg-background p-8 text-center">
+                <div className="absolute inset-0 bg-primary"></div>
                 <div className="relative space-y-4">
-                    <h1 className="text-5xl font-bold bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent">
+                    <h1 className="text-5xl font-bold bg-secondary bg-clip-text text-transparent">
                         Edit Your Profile
                     </h1>
-                    <p className="text-slate-600 text-xl max-w-2xl mx-auto leading-relaxed">
+                    <p className="text-muted-foreground text-xl max-w-2xl mx-auto leading-relaxed">
                         Showcase your talents and connect with amazing
                         opportunities in our community of{" "}
                         {APP_CONSTANTS.COMMUNITY_SIZE} students
@@ -111,10 +111,10 @@ export default function ProfileEditForm() {
 
             <div className="grid lg:grid-cols-3 gap-8">
                 <div className="lg:col-span-1 space-y-6">
-                    <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-xl shadow-slate-200/50">
+                    <Card className="bg-background backdrop-blur-sm border-0 shadow-xl shadow-slate-200/50">
                         <CardHeader className="pb-4">
                             <CardTitle className="text-slate-800 flex items-center gap-2 text-lg">
-                                <Camera className="h-5 w-5 text-emerald-500" />
+                                <Camera className="h-5 w-5 text-primary" />
                                 Profile Photo
                             </CardTitle>
                         </CardHeader>
@@ -122,7 +122,7 @@ export default function ProfileEditForm() {
                             <div className="flex flex-col items-center space-y-6">
                                 <div className="relative group">
                                     <Avatar
-                                        className={`h-${APP_CONSTANTS.EDIT_AVATAR_SIZE} w-${APP_CONSTANTS.EDIT_AVATAR_SIZE} border-4 border-white shadow-xl shadow-slate-200/50 transition-transform group-hover:scale-105`}
+                                        className={`h-${APP_CONSTANTS.EDIT_AVATAR_SIZE} w-${APP_CONSTANTS.EDIT_AVATAR_SIZE} border-4 border-card shadow-xl shadow-slate-200/50 transition-transform group-hover:scale-105`}
                                     >
                                         <AvatarImage
                                             src={
@@ -132,7 +132,7 @@ export default function ProfileEditForm() {
                                             alt="Profile"
                                             className="object-cover"
                                         />
-                                        <AvatarFallback className="text-2xl bg-gradient-to-br from-emerald-100 to-teal-100 text-emerald-700 font-semibold">
+                                        <AvatarFallback className="text-2xl bg-primary hover:bg-primary text-ring font-semibold">
                                             {profile.name
                                                 .split(" ")
                                                 .map((n) => n[0])
@@ -140,7 +140,7 @@ export default function ProfileEditForm() {
                                         </AvatarFallback>
                                     </Avatar>
                                     <div className="absolute inset-0 bg-black/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                                        <Upload className="h-8 w-8 text-white" />
+                                        <Upload className="h-8 w-8 text-card" />
                                     </div>
                                 </div>
 
@@ -149,7 +149,7 @@ export default function ProfileEditForm() {
                                         htmlFor="photo-upload"
                                         className="cursor-pointer"
                                     >
-                                        <div className="flex items-center justify-center w-full h-12 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                                        <div className="flex items-center justify-center w-full h-12 bg-primary hover:bg-ring text-foreground rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
                                             <Camera className="h-4 w-4 mr-2" />
                                             Upload New Photo
                                         </div>
@@ -202,7 +202,7 @@ export default function ProfileEditForm() {
                 </div>
 
                 <div className="lg:col-span-2 space-y-6">
-                    <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-xl shadow-slate-200/50">
+                    <Card className="bg-background backdrop-blur-sm border-0 shadow-xl shadow-slate-200/50">
                         <CardHeader className="pb-6">
                             <CardTitle className="text-slate-800 flex items-center gap-2 text-xl">
                                 <User className="h-6 w-6 text-emerald-500" />
@@ -363,7 +363,7 @@ export default function ProfileEditForm() {
                                         <Badge
                                             key={index}
                                             variant="secondary"
-                                            className="bg-emerald-100 text-emerald-700 hover:bg-emerald-200 px-3 py-1 text-sm font-medium rounded-full"
+                                            className="bg-primary text-secondary hover:bg-ring px-3 py-1 text-sm font-medium rounded-full"
                                         >
                                             {skill}
                                             <button
@@ -392,7 +392,7 @@ export default function ProfileEditForm() {
                                     <Button
                                         onClick={addSkill}
                                         variant="outline"
-                                        className="border-emerald-200 text-emerald-600 hover:bg-emerald-50 h-12 px-6 rounded-xl bg-transparent"
+                                        className="border-primary text-secondary hover:bg-ring h-12 px-6 rounded-xl bg-transparent"
                                     >
                                         Add
                                     </Button>
@@ -420,13 +420,13 @@ export default function ProfileEditForm() {
                             <div className="flex gap-4 pt-6 border-t border-slate-100">
                                 <Button
                                     onClick={handleSave}
-                                    className="bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white px-8 h-12 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200"
+                                    className="bg-primary hover:bg-accent text-secondary px-8 h-12 rounded-xl transition-all duration-200"
                                 >
                                     Save Changes
                                 </Button>
                                 <Button
                                     variant="outline"
-                                    className="border-slate-200 text-slate-700 hover:bg-slate-50 bg-white h-12 px-8 rounded-xl"
+                                    className="bg-card hover:bg-chart-2 text-secondary px-8 h-12 rounded-xl transition-all duration-200"
                                 >
                                     Cancel
                                 </Button>

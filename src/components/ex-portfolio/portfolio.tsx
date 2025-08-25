@@ -54,8 +54,8 @@ export default function Portfolio() {
     <section id="portfolio" className="py-20 px-4 sm:px-6 lg:px-8 bg-background">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-serif font-bold text-gray-900 mb-4">Featured Work</h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground mb-4">Featured Work</h2>
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Explore our latest projects and see how we transform ideas into stunning visual experiences
           </p>
         </div>
@@ -72,7 +72,7 @@ export default function Portfolio() {
                   alt={project.title}
                   className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
                 />
-                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4">
+                <div className="absolute inset-0 bg-foreground opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4">
                   <Button size="sm" variant="secondary" className="bg-background/90 hover:bg-background">
                     <Eye className="h-4 w-4 mr-2" />
                     View
@@ -85,19 +85,19 @@ export default function Portfolio() {
               </div>
               <CardContent className="p-6">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm font-medium text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full">
+                  <span className="text-sm font-medium text-primary bg-card px-3 py-1 rounded-full">
                     {project.category}
                   </span>
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">{project.title}</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">{project.description}</p>
+                <h3 className="text-xl font-semibold text-foreground mb-2">{project.title}</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">{project.description}</p>
               </CardContent>
             </Card>
           ))}
         </div>
 
         <div className="text-center mt-12">
-          <Button variant="outline" size="lg" className="px-8 py-3 bg-transparent">
+          <Button variant="outline" size="lg" className="px-8 py-3 bg-primary bg-hover:text-primary hover:bg-foreground hover:border-foreground border-2">
             View All Projects
           </Button>
         </div>

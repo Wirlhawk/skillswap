@@ -1,4 +1,4 @@
-"use client";
+    "use client";
 
 import {
     BookOpenIcon,
@@ -67,7 +67,7 @@ export default function UserMenu({
                     </span>
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuGroup>
+                <DropdownMenuGroup className="">
                     <Link href={`/profile/${username}`}>
                         <DropdownMenuItem>
                             <User

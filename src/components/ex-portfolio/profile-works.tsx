@@ -96,7 +96,7 @@ export default function ProfileWorks() {
             photography: "bg-green-100 text-green-800",
             "motion-graphics": "bg-indigo-100 text-indigo-800",
         };
-        return colors[category] || "bg-gray-100 text-gray-800";
+        return colors[category] || "bg-background text-gray-800";
     };
 
     return (
@@ -104,11 +104,11 @@ export default function ProfileWorks() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-12">
                     <h2 className="text-4xl font-bold mb-4">
-                        <span className="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
+                        <span className="bg-primary bg-clip-text text-transparent">
                             Portfolio Karya
                         </span>
                     </h2>
-                    <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                    <p className="text-xl text-foreground max-w-3xl mx-auto">
                         Koleksi karya terbaik yang telah saya buat untuk
                         berbagai klien dan proyek personal
                     </p>
@@ -129,7 +129,7 @@ export default function ProfileWorks() {
                                 onClick={() => setFilter(category.value)}
                                 className={
                                     filter === category.value
-                                        ? "bg-gradient-to-r from-emerald-600 to-teal-600"
+                                        ? "bg-primary"
                                         : ""
                                 }
                             >
@@ -139,7 +139,7 @@ export default function ProfileWorks() {
                     </div>
                     <Button
                         onClick={() => setShowUploadForm(true)}
-                        className="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700"
+                        className="bg-primary hover:bg-ring"
                     >
                         <Plus className="w-4 h-4 mr-2" />
                         Tambah Karya
@@ -153,7 +153,7 @@ export default function ProfileWorks() {
                             key={work.id}
                             className="group hover:shadow-xl transition-all duration-300 overflow-hidden"
                         >
-                            <div className="aspect-video bg-gradient-to-br from-emerald-100 to-teal-100 relative overflow-hidden">
+                            <div className="aspect-video bg-background relative overflow-hidden">
                                 <img
                                     src={`/abstract-geometric-shapes.png?height=300&width=400&query=${work.title}`}
                                     alt={work.title}
@@ -202,10 +202,10 @@ export default function ProfileWorks() {
                                     </div>
                                 </div>
 
-                                <h3 className="text-xl font-bold mb-2 group-hover:text-emerald-600 transition-colors">
+                                <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">
                                     {work.title}
                                 </h3>
-                                <p className="text-gray-600 mb-4 line-clamp-2">
+                                <p className="text-foreground mb-4 line-clamp-2">
                                     {work.description}
                                 </p>
 
@@ -247,18 +247,18 @@ export default function ProfileWorks() {
 
                 {filteredWorks.length === 0 && (
                     <div className="text-center py-12">
-                        <div className="w-24 h-24 mx-auto mb-4 bg-gray-100 rounded-full flex items-center justify-center">
+                        <div className="w-24 h-24 mx-auto mb-4 bg-background rounded-full flex items-center justify-center">
                             <Plus className="w-12 h-12 text-gray-400" />
                         </div>
                         <h3 className="text-xl font-semibold mb-2">
                             Belum ada karya
                         </h3>
-                        <p className="text-gray-600 mb-4">
+                        <p className="text-foreground mb-4">
                             Mulai tambahkan karya pertama Anda
                         </p>
                         <Button
                             onClick={() => setShowUploadForm(true)}
-                            className="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700"
+                            className="bg-primary hover:from-ring"
                         >
                             <Plus className="w-4 h-4 mr-2" />
                             Tambah Karya

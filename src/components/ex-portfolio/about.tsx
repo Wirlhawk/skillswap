@@ -58,7 +58,7 @@ export default function About() {
                 <stat.icon className="h-8 w-8 text-primary" />
               </div>
               <div className="text-3xl font-bold text-foreground mb-2">{stat.number}</div>
-              <div className="text-gray-600">{stat.label}</div>
+              <div className="text-foreground">{stat.label}</div>
             </div>
           ))}
         </div>
