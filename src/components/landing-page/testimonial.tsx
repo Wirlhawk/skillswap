@@ -101,7 +101,7 @@ export default function TestimonialSection() {
                                         )}
                                     </div>
                                 </div>
-
+                                            
                                 <blockquote className="text-gray-700 mb-6 leading-relaxed flex-grow text-base">
                                     "{testimonial.testimonial}"
                                 </blockquote>

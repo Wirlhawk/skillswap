@@ -47,7 +47,7 @@ export default function CreatePortfolioForm() {
         );
 
         if (!res.success) {
-            setMessage(res.error);
+            setMessage(res.error || "");
             setIsLoading(false);
             return;
         }

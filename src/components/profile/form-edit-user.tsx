@@ -17,7 +17,6 @@ import {
     MapPin,
     Briefcase,
     GraduationCap,
-    Star,
     Upload,
     X,
 } from "lucide-react";

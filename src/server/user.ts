@@ -63,7 +63,7 @@ export const getProfile = async (username: string) => {
                 createdAt: user.createdAt,
             })
             .from(user)
-            .leftJoin(major, eq(user.major_id, major.id))
+            .leftJoin(major, eq(user.majorId, major.id))
             .where(eq(user.username, username))
             .limit(1);
 

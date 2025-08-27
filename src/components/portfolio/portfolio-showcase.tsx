@@ -1,5 +1,4 @@
 import { PortfolioPreviewDialog } from "./portfolio-preview-dialog";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import {
@@ -10,7 +9,7 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog";
 import CreatePortfolioForm from "./create-portfolio-form";
-import { Badge } from "../ui/badge";
+import { PortfolioCard } from "./portfolio-card";
 
 interface Portfolio {
     id: string;
@@ -35,7 +34,13 @@ export function PortfolioShowcase({
     return (
         <div className="space-y-6">
             <div className="flex justify-between item-center">
-                <h1 className="font-bold text-2xl">Portfolio Showcase</h1>
+                <div>
+                    <h1 className="font-bold text-2xl">Portfolio Showcase</h1>
+                    <p className="text-muted-foreground">
+                        Explore projects and works in this portfolio.
+                    </p>
+                </div>
+
                 {isOwnProfile && (
                     <Dialog>
                         <DialogTrigger asChild>
@@ -68,37 +73,7 @@ export function PortfolioShowcase({
                     {portfolios.map((portfolio) => (
                         <PortfolioPreviewDialog
                             key={portfolio.id}
-                            trigger={
-                                <Card className="cursor-pointer hover:outline-primary transition-all p-4 pb-6 gap-2">
-                                    <CardHeader className="p-0">
-                                        <img
-                                            src={
-                                                portfolio.images?.[0] ||
-                                                "/placeholder.svg"
-                                            }
-                                            alt={portfolio.title}
-                                            className="w-full h-48 object-cover rounded-md mb-4 border"
-                                        />
-                                    </CardHeader>
-                                    <CardContent className="p-0 px-2">
-                                        <h3 className="font-bold mb-2">
-                                            {portfolio.title}
-                                        </h3>
-                                        <p className="text-sm text-muted-foreground line-clamp-2">
-                                            {portfolio.description}
-                                        </p>
-
-                                        <span className="flex flex-wrap gap-1 mt-5">
-                                            {portfolio.tags &&
-                                                portfolio.tags.map((tag) => (
-                                                    <Badge key={tag}>
-                                                        {tag}
-                                                    </Badge>
-                                                ))}
-                                        </span>
-                                    </CardContent>
-                                </Card>
-                            }
+                            trigger={<PortfolioCard portfolio={portfolio} />}
                             portfolio={{
                                 id: portfolio.id,
                                 title: portfolio.title,

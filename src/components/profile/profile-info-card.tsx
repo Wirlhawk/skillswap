@@ -53,7 +53,7 @@ export default function ProfileInfoCard({
     };
 
     return (
-        <Card className="col-span-1 py-8 h-fit gap-2">
+        <Card className="col-span-1 py-8 h-fit gap-2 ">
             <CardHeader>
                 <div className="flex items-center gap-3">
                     <div className="relative">

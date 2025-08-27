@@ -2,6 +2,7 @@ import { Toaster } from "@/components/ui/sonner";
 import type { Metadata } from "next";
 import { Lexend } from "next/font/google";
 import "./globals.css";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 const lexend = Lexend({
     variable: "--font-lexend",
@@ -24,8 +25,8 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={`${lexend.className} antialiased`}>
-                {children}
-                <Toaster />
+                <NuqsAdapter>{children}</NuqsAdapter>
+                <Toaster className="text-primary"/>
             </body>
         </html>
     );

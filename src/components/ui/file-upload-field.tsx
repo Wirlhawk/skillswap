@@ -15,7 +15,6 @@ interface FileUploadFieldProps {
 }
 
 export function FileUploadField({
-    value = [],
     onChange,
     maxFiles = 6,
     maxSizeMB = 5,
@@ -123,7 +122,7 @@ export function FileUploadField({
                         <Button
                             type="button"
                             variant="outline"
-                            className="mt-4 bg-transparent"
+                            className="mt-4 bg-card"
                             onClick={openFileDialog}
                         >
                             <UploadIcon

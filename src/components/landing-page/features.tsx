@@ -6,7 +6,7 @@ import {
     SquareKanban,
     WandSparkles,
 } from "lucide-react";
-import { Card, CardContent, CardHeader } from "../ui/card";
+import { Card, CardContent } from "../ui/card";
 
 interface Reason {
     title: string;

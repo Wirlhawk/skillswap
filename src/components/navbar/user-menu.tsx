@@ -29,13 +29,14 @@ interface UserMenuProps {
     name: string;
     email: string;
     image: string;
+    role: string;
 }
 
 export default function UserMenu({
     username,
     name,
-    email,
     image,
+    role,
 }: UserMenuProps) {
     const router = useRouter();
 
@@ -64,6 +65,9 @@ export default function UserMenu({
                     </span>
                     <span className="text-foreground truncate text-xs font-medium">
                         @{username}
+                    </span>
+                    <span className="text-foreground truncate text-xs font-medium">
+                        {role}
                     </span>
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />

@@ -1,5 +1,4 @@
 "use server";
-
 import { db } from "@/db/drizzle";
 import { portfolio, user } from "@/db/schema";
 import { auth } from "@/lib/auth";
@@ -47,7 +46,7 @@ export const createPortfolio = async (
                 description,
                 tags,
                 images: uploadedImages,
-                user_id: session.user.id
+                userId: session.user.id
             })
             .returning();
 
@@ -56,8 +55,7 @@ export const createPortfolio = async (
         return { success: true, data: newPortfolio[0] };
     } catch (err: unknown) {
         const message =
-            (err as any)?.data?.error ||
-            (err as any)?.message ||
+            (err as Error)?.message ||
             "Failed to create portfolio";
 
         return { success: false, error: message };
@@ -90,13 +88,12 @@ export const getPortfolio = async (username: string) => {
                 createdAt: portfolio.createdAt,
             })
             .from(portfolio)
-            .where(eq(portfolio.user_id, userId));
+            .where(eq(portfolio.userId, userId));
 
         return { success: true, data: portfolios };
     } catch (err: unknown) {
         const message =
-            (err as any)?.data?.error ||
-            (err as any)?.message ||
+            (err as Error)?.message ||
             "Failed to fetch portfolio";
         return { success: false, error: message };
     }
@@ -113,7 +110,7 @@ export const deletePortfolio = async (portfolioId: string) => {
         }
 
         const portfolioResult = await db
-            .select({ user_id: portfolio.user_id })
+            .select({ user_id: portfolio.userId })
             .from(portfolio)
             .where(eq(portfolio.id, portfolioId))
             .limit(1);
@@ -126,7 +123,7 @@ export const deletePortfolio = async (portfolioId: string) => {
             return { success: false, error: "Unauthorized: You do not own this portfolio" };
         }
 
-        const result = await db
+        await db
             .delete(portfolio)
             .where(eq(portfolio.id, portfolioId))
             .returning();
@@ -136,8 +133,7 @@ export const deletePortfolio = async (portfolioId: string) => {
         return { success: true };
     } catch (err: unknown) {
         const message =
-            (err as any)?.data?.error ||
-            (err as any)?.message ||
+            (err as Error)?.message ||
             "Failed to delete portfolio";
         return { success: false, error: message };
     }

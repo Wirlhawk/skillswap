@@ -1,14 +1,12 @@
+import { PortfolioShowcase } from "@/components/portfolio/portfolio-showcase";
 import { ProfileInfoCard } from "@/components/profile";
-import TabsSeparatedDemo from "@/components/tabs-03";
+import PageInset from "@/components/shared/page-inset";
+import { ModularTabs } from "@/components/tabs-03";
 import { auth } from "@/lib/auth";
-import { getProfile } from "@/server/user";
 import { getPortfolio } from "@/server/portfolio";
-import { Metadata } from "next";
+import { getProfile } from "@/server/user";
 import { headers } from "next/headers";
 import { notFound, redirect } from "next/navigation";
-import { PortfolioShowcase } from "@/components/portfolio/portfolio-showcase";
-import PageInset from "@/components/shared/page-inset";
-
 
 interface PageProps {
     params: {
@@ -52,14 +50,26 @@ export default async function ProfilePage({ params }: PageProps) {
                     isEditable={isOwnProfile}
                 />
                 <div className="col-span-1 md:col-span-2 space-y-3">
-                    <TabsSeparatedDemo />
-                    <PortfolioShowcase
-                        portfolios={
-                            portfolioResult.success && portfolioResult.data
-                                ? portfolioResult.data
-                                : []
-                        }
-                        isOwnProfile={isOwnProfile}
+                    <ModularTabs
+                        tabs={[
+                            {
+                                name: "Portfolio",
+                                value: "portfolio",
+                                content: (
+                                    <PortfolioShowcase
+                                        portfolios={
+                                            portfolioResult.success &&
+                                            portfolioResult.data
+                                                ? portfolioResult.data
+                                                : []
+                                        }
+                                        isOwnProfile={isOwnProfile}
+                                    />
+                                ),
+                            },
+                        ]}
+                        defaultValue="portfolio"
+                        className="w-full"
                     />
                 </div>
             </div>
