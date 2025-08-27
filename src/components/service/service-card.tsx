@@ -24,6 +24,7 @@ const service = {
 };
 
 interface ServiceCardProps {
+    serviceId: string;
     title: string;
     description: string;
     category: string;
@@ -40,6 +41,7 @@ interface ServiceCardProps {
 }
 
 export default function ServiceCard({
+    serviceId,
     title,
     description,
     category,
@@ -51,7 +53,7 @@ export default function ServiceCard({
     price,
 }: ServiceCardProps) {
     return (
-        <Link href="/service/">
+        <Link href={`/service/${serviceId}`} >
             <Card className="p-4 pb-6 gap-2 h-full hover:bg-muted">
                 <CardHeader className="p-0 h-fit">
                     <img

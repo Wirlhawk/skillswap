@@ -9,3 +9,4 @@ export * from './category';
 export * from './service';
 export * from './order';
 export * from './portfolio';
+export * from './review';

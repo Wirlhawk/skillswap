@@ -1,4 +1,4 @@
-import { MoveRight, Star } from "lucide-react";
+import { MoveRight, Search, Star } from "lucide-react";
 import React from "react";
 
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
@@ -82,11 +82,31 @@ const Hero = ({
                         {description}
                     </TextEffect>
                 </div>
-                <Button asChild size="lg" className="mt-10 px-5">
-                    <a href={button.url}>
-                        {button.text} <MoveRight />
-                    </a>
-                </Button>
+                <div className="mt-10 flex flex-col items-center gap-4">
+                    <div className="w-full max-w-md flex gap-2">
+                        <form 
+                            action="/home" 
+                            className="w-full flex gap-2"
+                            method="get"
+                        >
+                            <input 
+                                type="text" 
+                                name="q" 
+                                placeholder="Search for services..." 
+                                className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                            />
+                            <Button type="submit" size="sm">
+                                <Search className="h-4 w-4 mr-2" />
+                                Search
+                            </Button>
+                        </form>
+                    </div>
+                    <Button asChild size="lg" className="px-5">
+                        <a href={button.url}>
+                            {button.text} <MoveRight />
+                        </a>
+                    </Button>
+                </div>
                 <div className="mx-auto mt-10 flex w-fit flex-col items-center gap-4 sm:flex-row">
                     <span className="mx-4 inline-flex items-center -space-x-4">
                         {reviews.avatars.map((avatar, index) => (

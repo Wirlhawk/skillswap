@@ -26,7 +26,7 @@ export default function RootLayout({
         <html lang="en">
             <body className={`${lexend.className} antialiased`}>
                 <NuqsAdapter>{children}</NuqsAdapter>
-                <Toaster />
+                <Toaster className="text-primary"/>
             </body>
         </html>
     );

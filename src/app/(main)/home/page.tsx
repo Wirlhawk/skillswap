@@ -10,6 +10,7 @@ type SP = {
     category?: string;
     min?: string;
     max?: string;
+    q?: string;
 };
 
 export default async function page({
@@ -18,31 +19,52 @@ export default async function page({
     searchParams: Promise<SP>;
 }) {
     const sp = await searchParams;
-    const services = await getAllService({ categorySlug: sp.category });
-    const categories = await getCategories();
+    const [services, categories] = await Promise.all([
+        getAllService({
+            categorySlug: sp.category,
+            searchQuery: sp.q,
+            minPrice: sp.min ? parseInt(sp.min) : undefined,
+            maxPrice: sp.max ? parseInt(sp.max) : undefined,
+        }),
+        getCategories(),
+    ]);
+
+    console.log("services", services);
 
     return (
         <PageInset>
-            <Header>All Categories</Header>
             <FilterBars categories={categories.data || []} />
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-5">
-                {services.data!.map((service) => (
-                    <ServiceCard
-                        key={service.id}
-                        title={service.title}
-                        description={service.description}
-                        images={service.images || []}
-                        category={service.category || ""}
-                        price={service.price}
-                        tags={service.tags || []}
-                        user={{
-                            username: service.user.username || "",
-                            major: service.user.major || "",
-                            image: service.user.image || "",
-                        }}
-                    />
-                ))}
+                {!services.success ? (
+                    <div className="col-span-full text-center py-8">
+                        <p className="text-gray-500">Error: {services.error}</p>
+                    </div>
+                ) : services.data?.length === 0 ? (
+                    <div className="col-span-full text-center py-8">
+                        <p className="text-gray-500">No services found</p>
+                    </div>
+                ) : (
+                    services.data?.map((service) => (
+                        <ServiceCard
+                            key={service.id}
+                            serviceId={service.id}
+                            title={service.title}
+                            description={service.description}
+                            images={service.images ?? []}
+                            category={service.category ?? ""}
+                            price={service.price}
+                            tags={service.tags ?? []}
+                            rating={service.rating}
+                            totalOrder={service.totalReviews}
+                            user={{
+                                username: service.user?.username ?? "",
+                                major: service.user?.major ?? "",
+                                image: service.user?.image ?? "",
+                            }}
+                        />
+                    ))
+                )}
             </div>
         </PageInset>
     );

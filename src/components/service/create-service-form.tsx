@@ -47,6 +47,7 @@ import { createService } from "@/server/service";
 import FormButton from "../ui/form-button";
 import { createServiceSchema } from "@/types/service";
 import MoneyInput from "../ui/money-input";
+import { useRouter } from "next/navigation";
 
 export default function CreateServiceForm({
     categories,
@@ -59,6 +60,7 @@ export default function CreateServiceForm({
 }) {
     const [message, setMessage] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(false);
+    const router = useRouter()
 
     const form = useForm<z.infer<typeof createServiceSchema>>({
         resolver: zodResolver(createServiceSchema),
@@ -111,10 +113,7 @@ export default function CreateServiceForm({
         }
 
         toast.success("Service Successfully Created!");
-
-        // TODOs : redirect to detail page of service/:id
-        // router.push(`/service/${res.data.id}`)
-
+        router.push(`/service/${res.data!.id}`)
         setIsLoading(false);
     }
 
@@ -336,28 +335,6 @@ export default function CreateServiceForm({
                                 name="price"
                                 placeholder="Rp 0.00"
                             />
-                            {/* <FormField
-                                control={form.control}
-                                name="price"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Price (Rp) *</FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                onKeyPress={(e) => {
-                                                    if (!/[0-9]/.test(e.key)) {
-                                                        e.preventDefault();
-                                                    }
-                                                }}
-                                                type="number"
-                                                placeholder="35000"
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            /> */}
 
                             <FormField
                                 control={form.control}
