@@ -12,10 +12,13 @@ export const createService = async ({
     title,
     description,
     longDescription,
-
     categoryId,
     price,
-    duration,
+    deliveryTime,
+    revisions,
+    packageName,
+    packageDescription,
+    features,
     tags,
     images,
 }: {
@@ -24,7 +27,11 @@ export const createService = async ({
     longDescription: string;
     categoryId: string;
     price: number;
-    duration: number;
+    deliveryTime: string;
+    revisions: string;
+    packageName: string;
+    packageDescription: string;
+    features: string[];
     tags: string[];
     images: {
         file: File;
@@ -62,11 +69,15 @@ export const createService = async ({
                 longDescription,
                 categoryId,
                 price,
-                duration,
+                deliveryTime,
+                revisions,
+                packageName,
+                packageDescription,
+                features,
                 tags,
                 images: uploadedImages,
-                userId: session.user.id
-            })
+                userId: session.user.id,
+            } satisfies typeof service.$inferInsert)
             .returning();
 
 
@@ -89,7 +100,8 @@ export const getAllService = async ({ categorySlug }: { categorySlug?: string })
                 description: service.description,
                 category: category.name,
                 price: service.price,
-                duration: service.duration,
+                deliveryTime: service.deliveryTime,
+                revisions: service.revisions,
                 tags: service.tags,
                 images: service.images,
                 user: {
@@ -109,7 +121,6 @@ export const getAllService = async ({ categorySlug }: { categorySlug?: string })
         }
 
         const services = await query;
-
 
         return { success: true, data: services };
     } catch (err: unknown) {

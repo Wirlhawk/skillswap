@@ -12,9 +12,13 @@ export const service = pgTable("service", {
         .references(() => user.id, { onDelete: "set null" }),
     categoryId: uuid("category_id")
         .references(() => category.id, { onDelete: "set null" }),
+    deliveryTime: text("delivery_time").notNull(),
+    revisions: text("revisions").notNull(),
+    packageName: text("package_name").notNull(),
+    packageDescription: text("package_description").notNull(),
+    features: text("features").array().default([]),
     tags: text("tags").array().default([]),
     images: text("images").array().default([]),
-    duration: integer("duration").notNull(),
     createdAt: timestamp("created_at")
         .$defaultFn(() => new Date())
         .notNull(),

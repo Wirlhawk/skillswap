@@ -1,4 +1,4 @@
-import CreateServiceForm from "@/components/service/create-service-form";
+import CreateServiceForm2 from "@/components/service/create-service-form";
 import PageInset from "@/components/shared/page-inset";
 import { Header } from "@/components/ui/header";
 import { getCategories } from "@/server/category";
@@ -10,7 +10,7 @@ const page = async () => {
     return (
         <PageInset>
             <Header>New Service</Header>
-            <CreateServiceForm categories={categories.data || []} />
+            <CreateServiceForm2 categories={categories.data || []} />
         </PageInset>
     );
 };
