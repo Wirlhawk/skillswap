@@ -1,9 +1,9 @@
 "use server";
 
 import { db } from "@/db/drizzle";
-import { user, major } from "@/db/schema";
+import { user, major, order, review } from "@/db/schema";
 import { auth } from "@/lib/auth";
-import { eq } from "drizzle-orm";
+import { eq, and, gte, desc, sql, count } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { headers } from "next/headers";
 import { put } from "@vercel/blob";
@@ -21,6 +21,79 @@ export const signIn = async (email: string, password: string) => {
             (err as any)?.message ||
             "Invalid email or password";
 
+        return { success: false, error: message };
+    }
+}
+
+export const getRisingStars = async (limit: number = 5) => {
+    try {
+        // Get the start of current month
+        const currentDate = new Date();
+        const startOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+
+        // Query to get users with most completed orders this month
+        const risingStarsQuery = await db
+            .select({
+                id: user.id,
+                name: user.name,
+                image: user.image,
+                majorName: major.name,
+                completedOrders: count(order.id),
+            })
+            .from(user)
+            .leftJoin(order, eq(order.sellerId, user.id))
+            .leftJoin(major, eq(user.majorId, major.id))
+            .where(
+                and(
+                    eq(order.status, "Done"),
+                    gte(order.updatedAt, startOfMonth)
+                )
+            )
+            .groupBy(user.id, user.name, user.image, major.name)
+            .orderBy(desc(count(order.id)))
+            .limit(limit);
+
+        // Get ratings for these users
+        const userIds = risingStarsQuery.map(star => star.id);
+        
+        if (userIds.length === 0) {
+            return { success: true, data: [] };
+        }
+
+        // Get average ratings for each user
+        const ratingsQuery = await db
+            .select({
+                sellerId: order.sellerId,
+                averageRating: sql<number>`COALESCE(AVG(${review.rating}), 0)`,
+            })
+            .from(review)
+            .leftJoin(order, eq(review.orderId, order.id))
+            .where(sql`${order.sellerId} IN (${sql.join(userIds.map(id => sql`${id}`), sql`, `)})`)
+            .groupBy(order.sellerId);
+
+        // Create a map of user ratings
+        const ratingsMap = new Map<string, number>();
+        ratingsQuery.forEach(rating => {
+            if (rating.sellerId) {
+                ratingsMap.set(rating.sellerId, Number(rating.averageRating) || 0);
+            }
+        });
+
+        // Combine the data
+        const risingStars = risingStarsQuery.map(star => ({
+            id: star.id,
+            name: star.name || "Unknown User",
+            avatar: star.image || "/placeholder.svg?height=60&width=60",
+            rating: ratingsMap.get(star.id) || 0,
+            completedOrders: Number(star.completedOrders) || 0,
+            majors: star.majorName || "Not specified",
+        }));
+
+        return { success: true, data: risingStars };
+    } catch (err: unknown) {
+        const message =
+            (err as Error)?.message ||
+            "Failed to fetch rising stars";
         return { success: false, error: message };
     }
 };

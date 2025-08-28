@@ -15,12 +15,14 @@ import { Header } from "./ui/header";
 
 export default function FilterBars({
     categories,
+    searchParams,
 }: {
     categories: {
         id: string;
         name: string;
         slug: string;
     }[];
+    searchParams?: string;
 }) {
     const router = useRouter();
 
@@ -69,8 +71,11 @@ export default function FilterBars({
 
     return (
         <div className="flex items-center justify-between gap-6">
-            <Header>All Categories</Header>
-
+            <Header>
+                {category
+                    ? `Search results for "${categories.find((c) => c.slug === category)?.name || category}"${searchParams ? ` (${searchParams} results)` : ''}`
+                    : `All Categories${searchParams ? ` (${searchParams} results)` : ''}`}
+            </Header>
             <div className="flex items-center gap-4">
                 <Select
                     value={category || "All"}

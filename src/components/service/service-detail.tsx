@@ -85,6 +85,7 @@ interface OrderDetails {
 
 interface ServiceDetailClientProps {
     serviceData: ServiceData;
+    currentUserId: string;
 }
 
 // Image Gallery Component
@@ -423,6 +424,7 @@ function ServicePackage({
     onShowCheckoutChange,
     serviceId,
     sellerId,
+    currentUserId,
 }: {
     servicePackage: Package;
     showCheckout: boolean;
@@ -430,8 +432,11 @@ function ServicePackage({
     onOrderDetailsChange: (details: OrderDetails) => void;
     onShowCheckoutChange: (show: boolean) => void;
     serviceId: string;
+    currentUserId: string;
     sellerId: string;
 }) {
+    const isSeller = currentUserId === sellerId;
+
     return (
         <Card>
             <CardHeader>
@@ -480,27 +485,33 @@ function ServicePackage({
                                 {servicePackage.price}
                             </span>
                         </div>
-                        <Button
-                            className="w-full font-semibold py-3 text-lg"
-                            onClick={() => onShowCheckoutChange(true)}
-                        >
-                            Continue ({servicePackage.price})
-                        </Button>
-                        <p className="text-xs text-muted-foreground text-center mt-2">
-                            You won't be charged until you review and confirm
-                            your order
-                        </p>
+                        {!isSeller && (
+                            <>
+                                <Button
+                                    className="w-full font-semibold py-3 text-lg"
+                                    onClick={() => onShowCheckoutChange(true)}
+                                >
+                                    Continue ({servicePackage.price})
+                                </Button>
+                                <p className="text-xs text-muted-foreground text-center mt-2">
+                                    You won't be charged until you review and
+                                    confirm your order
+                                </p>
+                            </>
+                        )}
                     </div>
                 ) : (
                     <>
-                        <Separator className="my-6" />
-                        <OrderForm
-                            servicePrice={servicePackage.price}
-                            serviceId={serviceId}
-                            sellerId={sellerId}
-                            onBack={() => onShowCheckoutChange(false)}
-                            onSuccess={() => onShowCheckoutChange(false)}
-                        />
+                        <>
+                            <Separator className="my-6" />
+                            <OrderForm
+                                servicePrice={servicePackage.price}
+                                serviceId={serviceId}
+                                sellerId={sellerId}
+                                onBack={() => onShowCheckoutChange(false)}
+                                onSuccess={() => onShowCheckoutChange(false)}
+                            />
+                        </>
                     </>
                 )}
             </CardContent>
@@ -511,6 +522,7 @@ function ServicePackage({
 // Main Component
 export default function ServiceDetail({
     serviceData,
+    currentUserId,
 }: ServiceDetailClientProps) {
     const [selectedImageIndex, setSelectedImageIndex] = useState(0);
     const [showCheckout, setShowCheckout] = useState(false);
@@ -557,6 +569,7 @@ export default function ServiceDetail({
                             onShowCheckoutChange={handleShowCheckoutChange}
                             serviceId={serviceData.id}
                             sellerId={serviceData.seller.id}
+                            currentUserId={currentUserId}
                         />
                     </div>
                 </div>

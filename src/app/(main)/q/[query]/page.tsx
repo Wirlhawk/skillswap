@@ -1,10 +1,8 @@
 import FilterBars from "@/components/filter-bars";
-import { RisingStarsLeaderboard } from "@/components/leaderboard/rising-star-leaderboard";
 import ServiceCard from "@/components/service/service-card";
 import PageInset from "@/components/shared/page-inset";
 import { getCategories } from "@/server/category";
 import { getAllService } from "@/server/service";
-import React from "react";
 
 type SP = {
     category?: string;
@@ -14,28 +12,28 @@ type SP = {
 };
 
 export default async function page({
+    params,
     searchParams,
 }: {
+    params: { query: string };
     searchParams: Promise<SP>;
 }) {
     const sp = await searchParams;
     const [services, categories] = await Promise.all([
         getAllService({
             categorySlug: sp.category,
-            searchQuery: sp.q,
+            searchQuery: params.query,
             minPrice: sp.min ? parseInt(sp.min) : undefined,
             maxPrice: sp.max ? parseInt(sp.max) : undefined,
         }),
         getCategories(),
     ]);
 
+    console.log("services", services);
 
     return (
         <PageInset>
-            <RisingStarsLeaderboard/>
-
-
-            <FilterBars categories={categories.data || []} />
+            <FilterBars categories={categories.data || []} searchParams={params.query} />
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-5">
                 {!services.success ? (
