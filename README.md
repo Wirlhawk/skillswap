@@ -1,36 +1,80 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌟 SkillSwap
 
-## Getting Started
+**SkillSwap** adalah platform freelance khusus untuk siswa **SMA/SMK** yang ingin mengembangkan keterampilan mereka dengan mengambil pekerjaan (freelance project). Website ini membantu pelajar untuk belajar, bekerja, dan mengasah kemampuan mereka di bidang nyata.
 
-First, run the development server:
+🌐 **Demo Website**: [skillswap-chi-two.vercel.app](https://skillswap-chi-two.vercel.app)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🎯 Tujuan Proyek
+1. **Meningkatkan pengalaman kerja pelajar**  
+   Memberikan kesempatan siswa SMA/SMK untuk merasakan dunia kerja melalui freelance project.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+2. **Membangun portofolio sejak dini**  
+   Membantu siswa mengumpulkan pengalaman dan karya nyata yang bisa digunakan untuk karir di masa depan.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. **Menghubungkan siswa dengan guru dan klien**  
+   Guru dapat memantau order melalui admin dashboard, sementara siswa dapat mengambil pekerjaan yang sesuai dengan keterampilannya.
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 🛠️ Teknologi yang Dipakai
+- [Next.js](https://nextjs.org/) → Framework React untuk pengembangan web modern.  
+- [Tailwind CSS](https://tailwindcss.com/) → Styling cepat dan fleksibel dengan utility-first CSS.  
+- [Supabase](https://supabase.com/) → Backend as a Service untuk autentikasi & database.  
+- [Vercel](https://vercel.com/) → Platform hosting untuk deployment aplikasi Next.js.  
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🚀 Fitur Utama
+- **Home**  
+  Menampilkan banyak order pekerjaan yang tersedia untuk diambil.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Orders**  
+  Menampilkan daftar order yang sudah diambil oleh siswa.
 
-## Deploy on Vercel
+- **Profile**  
+  Menampilkan statistik siswa: total order, total pelanggan, ulasan, service, revenue, dan rata-rata nilai order.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Admin Dashboard (untuk guru)**  
+  Guru dapat memantau aktivitas siswa dan order yang berjalan.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 📦 Instalasi & Menjalankan Project
+1. Clone repository
+   ```bash
+   git clone https://github.com/username/SkillSwap.git
+
+2. Masuk ke folder project
+    ```
+    cd SkillSwap
+3. Install dependencies
+    ```
+    npm install 
+
+4. Jalankan program
+    ```bash
+    npm run dev
+5. buka di localhost
+    ``` 
+    http://localhost:3000
+
+
+## 📖 Cara Penggunaan
+
+Login terlebih dahulu.
+
+Masuk ke Home untuk melihat daftar pekerjaan.
+
+Ambil pekerjaan, lalu cek di menu Orders.
+
+Buka menu Profile untuk melihat statistik order dan data lainnya.
+
+Guru dapat memantau aktivitas melalui Admin Dashboard.
+
+## 🤝 Kontribusi
+
+Kontribusi sangat terbuka! Silakan fork repo ini, kembangkan fitur baru, lalu ajukan pull request.
+
+## 📄 Lisensi
+
+Proyek ini menggunakan lisensi MIT – bebas digunakan, dimodifikasi, dan dikembangkan.
