@@ -6,9 +6,14 @@ import { auth } from "@/lib/auth";
 import { revalidatePath } from "next/cache";
 import { eq } from "drizzle-orm";
 import { headers } from "next/headers";
+import { uploadImage } from "@/server/image";
 
 export async function submitSellerVerification(data: {
-    studentIdImage: File;
+    studentIdImage: {
+        file: File;
+        id: string;
+        preview: string;
+    };
     majorId: string;
     schoolName: string;
 }) {
@@ -19,7 +24,6 @@ export async function submitSellerVerification(data: {
             throw new Error("You must be logged in to submit verification");
         }
 
-        // Check if user already has a pending or approved verification
         const existingVerification = await db
             .select()
             .from(sellerVerification)
@@ -38,7 +42,7 @@ export async function submitSellerVerification(data: {
 
         // TODO: Upload image to cloud storage (e.g., AWS S3, Cloudinary)
         // For now, we'll store a placeholder URL
-        const imageUrl = `placeholder-${Date.now()}`;
+        const imageUrl = await uploadImage({ image: data.studentIdImage.file })
 
         // Create verification record
         await db.insert(sellerVerification).values({
@@ -50,17 +54,16 @@ export async function submitSellerVerification(data: {
             status: "PENDING",
         });
 
-        // Update user role to STUDENT when they apply for verification
-        await db
-            .update(user)
-            .set({ role: "STUDENT" })
-            .where(eq(user.id, session.user.id));
+        // Only change role to STUDENT when admin approves the verification
+        // await db
+        //     .update(user)
+        //     .set({ role: "STUDENT" })
+        //     .where(eq(user.id, session.user.id));
 
-        revalidatePath("/profile");
         return { success: true };
-    } catch (error) {
+    } catch (error: any) {
         console.error("Error submitting verification:", error);
-        throw error;
+        return { success: false, message: error.message || "An unknown error occurred" };
     }
 }
 
@@ -156,11 +159,11 @@ export async function updateVerificationStatus(
             })
             .where(eq(sellerVerification.id, verificationId));
 
-        // If approved, update user role to TEACHER
+        // If approved, update user role to STUDENT
         if (status === "APPROVED") {
             await db
                 .update(user)
-                .set({ role: "TEACHER" })
+                .set({ role: "STUDENT" })
                 .where(eq(user.id, verification.userId));
         }
 

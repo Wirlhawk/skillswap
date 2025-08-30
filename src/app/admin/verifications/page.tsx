@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import { headers } from "next/headers";
 import PageInset from "@/components/shared/page-inset";
 
-export default async function AdminDashboardPage() {
+export default async function AdminVerificationsPage() {
     const session = await auth.api.getSession({ headers: await headers() });
 
     // Check if user is logged in and has TEACHER role
@@ -18,12 +18,12 @@ export default async function AdminDashboardPage() {
 
     return (
         <div className="min-h-screen bg-background">
-            {/* Welcome Header */}
+            {/* Page Header */}
             <div className="mb-8">
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                     <div>
                         <h1 className="text-3xl font-bold text-foreground">
-                            Admin Dashboard 👨‍🏫
+                            Seller Verification Requests
                         </h1>
                         <p className="text-muted-foreground mt-2">
                             Review and manage student verification requests

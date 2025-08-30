@@ -9,12 +9,23 @@ export async function middleware(request: NextRequest) {
 		const { data: session, error } = await betterFetch<Session>("/api/auth/get-session", {
 			baseURL: request.nextUrl.origin,
 			headers: {
-				cookie: request.headers.get("cookie") || "", 
+				cookie: request.headers.get("cookie") || "",
 			},
 		});
 
+		const url = request.nextUrl.pathname;
+
 		if (!session || error) {
 			return NextResponse.redirect(new URL("/login", request.url));
+		}
+
+
+		if (url.startsWith('/seller/') && session!.user.role !== 'STUDENT') {
+			return NextResponse.redirect(new URL('/home', request.url));
+		}
+
+		if (url.startsWith('/admin/') && session!.user.role !== 'TEACHER') {
+			return NextResponse.redirect(new URL('/home', request.url));
 		}
 
 		return NextResponse.next();

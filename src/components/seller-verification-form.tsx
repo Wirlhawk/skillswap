@@ -1,16 +1,5 @@
 "use client";
 
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select";
 import {
     Card,
     CardContent,
@@ -18,8 +7,32 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card";
-import { Upload, FileImage, CheckCircle } from "lucide-react";
+import {
+    Form,
+    FormControl,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select";
+import { submitSellerVerification } from "@/lib/actions/seller-verification";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { CheckCircle } from "lucide-react";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+import { z } from "zod";
+import { FileUploadField } from "./ui/file-upload-field";
+import FormButton from "./ui/form-button";
+import { SingleFileUploadField } from "./ui/single-file-upload-field";
 
 interface Major {
     id: string;
@@ -29,81 +42,111 @@ interface Major {
 
 interface SellerVerificationFormProps {
     majors: Major[];
-    onSubmit: (data: {
-        studentIdImage: File;
-        majorId: string;
-        schoolName: string;
-    }) => Promise<void>;
 }
+
+// Define Zod schema for form validation
+const formSchema = z.object({
+    majorId: z.string({
+        message: "Please select your major",
+    }),
+    schoolName: z
+        .string({
+            message: "Please enter your school name",
+        })
+        .min(10, {
+            message: "School name must be at least 10 characters",
+        })
+        .trim(),
+    studentIdImage: z
+        .array(
+            z.instanceof(File, {
+                message: "Please upload your student ID image",
+            })
+        )
+        .max(1, {
+            message: "Only one student ID image can be uploaded",
+        }),
+    // We'll handle file validation separately since Zod doesn't handle File objects directly
+});
+
+// Define the type for our form values
+type FormValues = z.infer<typeof formSchema>;
 
 export function SellerVerificationForm({
     majors,
-    onSubmit,
 }: SellerVerificationFormProps) {
-    const [studentIdImage, setStudentIdImage] = useState<File | null>(null);
-    const [majorId, setMajorId] = useState<string>("");
-    const [schoolName, setSchoolName] = useState<string>("");
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [imagePreview, setImagePreview] = useState<string>("");
+    const [message, setMessage] = useState<string | null>(null);
+    const [isLoading, setIsLoading] = useState(false);
 
-    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0];
-        if (file) {
-            if (file.type.startsWith("image/")) {
-                setStudentIdImage(file);
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    setImagePreview(e.target?.result as string);
-                };
-                reader.readAsDataURL(file);
-            } else {
-                toast.error("Please select an image file");
-            }
-        }
-    };
+    // Initialize react-hook-form with Zod validation
+    const form = useForm<FormValues>({
+        resolver: zodResolver(formSchema),
+        defaultValues: {
+            majorId: "",
+            schoolName: "",
+        },
+    });
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
+    async function onSubmit(values: z.infer<typeof formSchema>) {
+        setIsLoading(true);
+        setMessage(null);
+        const res = await submitSellerVerification({
+            studentIdImage: {
+                file: values.studentIdImage[0],
+                id: "student-id-image",
+                preview: URL.createObjectURL(values.studentIdImage[0])
+            },
+            majorId: values.majorId,
+            schoolName: values.schoolName,
+        });
 
-        if (!studentIdImage) {
-            toast.error("Please upload your student ID image");
+        if (!res.success) {
+            setMessage(res.message);
+            setIsLoading(false);
+            toast.error("Failed to submit verification request");
+
             return;
         }
 
-        if (!majorId) {
-            toast.error("Please select your major");
-            return;
-        }
+        toast.success("Verification request submitted successfully!");
+        setIsLoading(false);
+    }
 
-        if (!schoolName.trim()) {
-            toast.error("Please enter your school name");
-            return;
-        }
+    // const onSubmit = async (values: FormValues) => {
+    //     // Validate file upload separately since Zod doesn't handle it
+    //     if (!studentIdImage) {
+    //         toast.error("Please upload your student ID image");
+    //         return;
+    //     }
 
-        setIsSubmitting(true);
+    //     setIsSubmitting(true);
 
-        try {
-            await onSubmit({
-                studentIdImage,
-                majorId,
-                schoolName: schoolName.trim(),
-            });
+    //     try {
+    //         // Submit the form data
+    //         const result = await submitSellerVerification({
+    //             studentIdImage,
+    //             majorId: values.majorId,
+    //             schoolName: values.schoolName.trim(),
+    //         });
 
-            toast.success("Verification request submitted successfully!");
-
-            // Reset form
-            setStudentIdImage(null);
-            setMajorId("");
-            setSchoolName("");
-            setImagePreview("");
-        } catch (error) {
-            toast.error(
-                "Failed to submit verification request. Please try again."
-            );
-        } finally {
-            setIsSubmitting(false);
-        }
-    };
+    //         if (result.success) {
+    //             toast.success(
+    //                 "Verification request submitted successfully! We'll review your application shortly."
+    //             );
+    //             // Reset form
+    //             setStudentIdImage(null);
+    //             setImagePreview(null);
+    //             form.reset();
+    //         } else {
+    //             toast.error( "Failed to submit verification request");
+    //         }
+    //     } catch (error) {
+    //         console.error("Error submitting verification:", error);
+    //         toast.error("An unexpected error occurred. Please try again.");
+    //     } finally {
+    //         setIsSubmitting(false);
+    //     }
+    // };
 
     return (
         <Card className="w-full max-w-2xl mx-auto">
@@ -118,102 +161,91 @@ export function SellerVerificationForm({
                 </CardDescription>
             </CardHeader>
             <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-6">
-                    {/* Student ID Image Upload */}
-                    <div className="space-y-2">
-                        <Label htmlFor="studentIdImage">
-                            Student ID Image *
-                        </Label>
-                        <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-blue-400 transition-colors">
-                            <input
-                                id="studentIdImage"
-                                type="file"
-                                accept="image/*"
-                                onChange={handleImageChange}
-                                className="hidden"
-                            />
-                            <label
-                                htmlFor="studentIdImage"
-                                className="cursor-pointer"
-                            >
-                                {imagePreview ? (
-                                    <div className="space-y-2">
-                                        <img
-                                            src={imagePreview}
-                                            alt="Student ID preview"
-                                            className="w-32 h-20 object-cover mx-auto rounded border"
-                                        />
-                                        <p className="text-sm text-gray-600">
-                                            Click to change image
-                                        </p>
-                                    </div>
-                                ) : (
-                                    <div className="space-y-2">
-                                        <Upload className="h-12 w-12 text-gray-400 mx-auto" />
-                                        <p className="text-sm text-gray-600">
-                                            Click to upload your student ID
-                                            image
-                                        </p>
-                                        <p className="text-xs text-gray-500">
-                                            Supports: JPG, PNG, GIF (Max 5MB)
-                                        </p>
-                                    </div>
-                                )}
-                            </label>
-                        </div>
-                    </div>
-
-                    {/* Major Selection */}
-                    <div className="space-y-2">
-                        <Label htmlFor="major">Major *</Label>
-                        <Select value={majorId} onValueChange={setMajorId}>
-                            <SelectTrigger>
-                                <SelectValue placeholder="Select your major" />
-                            </SelectTrigger>
-                            <SelectContent>
-                                {majors.map((major) => (
-                                    <SelectItem key={major.id} value={major.id}>
-                                        {major.name}
-                                    </SelectItem>
-                                ))}
-                            </SelectContent>
-                        </Select>
-                    </div>
-
-                    {/* School Name */}
-                    <div className="space-y-2">
-                        <Label htmlFor="schoolName">School Name *</Label>
-                        <Input
-                            id="schoolName"
-                            type="text"
-                            placeholder="Enter your school name"
-                            value={schoolName}
-                            onChange={(e) => setSchoolName(e.target.value)}
-                            className="w-full"
-                        />
-                    </div>
-
-                    {/* Submit Button */}
-                    <Button
-                        type="submit"
-                        disabled={
-                            isSubmitting ||
-                            !studentIdImage ||
-                            !majorId ||
-                            !schoolName.trim()
-                        }
-                        className="w-full"
+                <Form {...form}>
+                    <form
+                        onSubmit={form.handleSubmit(onSubmit)}
+                        className="space-y-6"
                     >
-                        {isSubmitting
-                            ? "Submitting..."
-                            : "Submit Verification Request"}
-                    </Button>
+                        <FormField
+                            control={form.control}
+                            name="studentIdImage"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Student ID Image</FormLabel>
+                                    <FormControl>
+                                        <SingleFileUploadField
+                                            value={field.value}
+                                            onChange={field.onChange}
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
 
-                    <p className="text-xs text-muted-foreground text-center">
-                        Please ensure your student ID is clearly visible and legible.
-                        We&apos;ll review your application within 24-48 hours.
-                    </p>
-                </form>
+                        {/* Major Selection */}
+                        <FormField
+                            control={form.control}
+                            name="majorId"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Major *</FormLabel>
+                                    <Select
+                                        onValueChange={field.onChange}
+                                        defaultValue={field.value}
+                                    >
+                                        <FormControl>
+                                            <SelectTrigger>
+                                                <SelectValue placeholder="Select your major" />
+                                            </SelectTrigger>
+                                        </FormControl>
+                                        <SelectContent>
+                                            {majors.map((major) => (
+                                                <SelectItem
+                                                    key={major.id}
+                                                    value={major.id}
+                                                >
+                                                    {major.name}
+                                                </SelectItem>
+                                            ))}
+                                        </SelectContent>
+                                    </Select>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+
+                        {/* School Name */}
+                        <FormField
+                            control={form.control}
+                            name="schoolName"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>School Name *</FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            placeholder="Enter your school name"
+                                            {...field}
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+
+                        {/* Submit Button */}
+                        <FormButton
+                            pending={isLoading}
+                            title="Submit Verification Request"
+                        />
+
+                        <p className="text-xs text-muted-foreground text-center">
+                            Please ensure your student ID is clearly visible and
+                            legible. We&apos;ll review your application within
+                            24-48 hours.
+                        </p>
+                    </form>
+                </Form>
             </CardContent>
         </Card>
     );
