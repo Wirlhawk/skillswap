@@ -21,7 +21,6 @@ const AdminLayout = async ({ children }: { children: React.ReactNode }) => {
     return (
         <MainLayout>
             <PageInset>
-                <AdminNav />
                 {children}
             </PageInset>
         </MainLayout>

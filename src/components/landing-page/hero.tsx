@@ -27,32 +27,32 @@ const Hero = ({
     heading = "Connect, Collaborate, and Grow with Student Freelancers",
     description = "Discover top student talent for your projects. Connect, collaborate, and achieve more together on our platform. our community of student freelancers is ready to support your goals.",
     button = {
-        text: "Browse Thousands of Services",
+        text: "Explore Thousands of Services",
         url: "/home",
     },
     reviews = {
-        count: 200,
-        rating: 4.9,
+        count: 500,
+        rating: 4.8,
         avatars: [
             {
                 src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/avatar-1.webp",
-                alt: "Avatar 1",
+                alt: "SkillSwap User 1",
             },
             {
                 src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/avatar-2.webp",
-                alt: "Avatar 2",
+                alt: "SkillSwap User 2",
             },
             {
                 src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/avatar-3.webp",
-                alt: "Avatar 3",
+                alt: "SkillSwap User 3",
             },
             {
                 src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/avatar-4.webp",
-                alt: "Avatar 4",
+                alt: "SkillSwap User 4",
             },
             {
                 src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/avatar-5.webp",
-                alt: "Avatar 5",
+                alt: "SkillSwap User 5",
             },
         ],
     },
@@ -92,12 +92,12 @@ const Hero = ({
                             <input 
                                 type="text" 
                                 name="q" 
-                                placeholder="Search for services..." 
+                                placeholder="Cari layanan..." 
                                 className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                             />
                             <Button type="submit" size="sm">
                                 <Search className="h-4 w-4 mr-2" />
-                                Search
+                                Cari
                             </Button>
                         </form>
                     </div> */}
@@ -115,7 +115,6 @@ const Hero = ({
                                 className={`size-${APP_CONSTANTS.HERO_AVATAR_SIZE} border`}
                             >
                                 <AvatarImage
-                                
                                     src={avatar.src}
                                     alt={avatar.alt}
                                 />
@@ -135,7 +134,7 @@ const Hero = ({
                             </span>
                         </div>
                         <p className="text-muted-foreground text-left font-medium">
-                            more than {reviews.count}+ students has joined
+                            Lebih dari {reviews.count}+ pelajar telah bergabung
                         </p>
                     </div>
                 </div>

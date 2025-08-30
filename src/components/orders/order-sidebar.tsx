@@ -61,14 +61,14 @@ export function OrderSidebar({
                         </div>
                     )}
 
-                    <Button
+                    {/* <Button
                         className="w-full mt-4 bg-transparent"
                         variant="outline"
                         onClick={onContactFreelancer}
                     >
                         <MessageCircle className="h-4 w-4 mr-2" />
                         Contact Freelancer
-                    </Button>
+                    </Button> */}
                 </CardContent>
             </Card>
 

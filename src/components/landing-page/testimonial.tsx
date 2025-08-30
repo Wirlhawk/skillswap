@@ -7,63 +7,63 @@ export default function TestimonialSection() {
     const testimonials = [
         {
             id: 1,
-            name: "Sarah Johnson",
-            role: "Product Manager",
-            company: "TechCorp",
-            image: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/avatar-1.webp",
+            name: "John Smith",
+            role: "Small Business Owner",
+            company: "Smith Digital",
+            image: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/avatar-2.webp",
             rating: 5,
             testimonial:
-                "This platform has completely transformed how we manage our projects. The intuitive interface and powerful features have increased our team's productivity by 40%. The customer support is exceptional and they truly understand our business needs. I can't imagine working without this tool anymore.",
+                "SkillSwap helped my business get professional website design at an affordable price. I'm very impressed with the quality of work and professionalism of the students who worked on my project. They were very responsive and understood my small business needs."
         },
         {
             id: 2,
-            name: "Michael Rodriguez",
-            role: "Startup Founder",
-            company: "InnovateLab",
-            image: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/avatar-1.webp",
+            name: "Sarah Chen",
+            role: "Content Creator",
+            company: "SC Media",
+            image: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/avatar-3.webp",
             rating: 5,
             testimonial:
-                "As a startup, we needed something reliable and scalable. This solution delivered beyond our expectations and helped us secure our Series A funding. The implementation was smooth and the ROI was immediate. Our investors were impressed with the efficiency gains we achieved.",
+                "As a content creator, I needed fast and quality video editing help. Through SkillSwap, I found talented students who consistently deliver outstanding results. This collaboration has been beneficial for both parties.",
         },
         {
             id: 3,
-            name: "Emma Thompson",
-            role: "Creative Director",
-            company: "DesignStudio",
-            image: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/avatar-1.webp",
+            name: "Michael Wong",
+            role: "IT Teacher",
+            company: "Tech High School",
+            image: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/avatar-4.webp",
             rating: 5,
             testimonial:
-                "The design flexibility and collaboration tools are outstanding. Our creative process has never been smoother, and client satisfaction has skyrocketed. The platform adapts to our workflow perfectly and has become an essential part of our creative arsenal. Highly recommended for any creative team.",
+                "As a teacher, I'm delighted to see my students' growth on SkillSwap. This platform gives them opportunities to apply what they learn in class to real projects. I've seen significant improvements in their skills and confidence."
         },
         {
             id: 4,
-            name: "David Chen",
-            role: "Operations Manager",
-            company: "LogiFlow",
-            image: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/avatar-1.webp",
+            name: "Emma Thompson",
+            role: "High School Student",
+            company: "Central High School",
+            image: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/avatar-5.webp",
             rating: 5,
             testimonial:
-                "Implementation was seamless and the support team is incredible. We've streamlined our operations and reduced costs by 25% in just three months. The automation features have freed up our team to focus on strategic initiatives rather than repetitive tasks.",
+                "SkillSwap has transformed how I view education. I can earn pocket money with my graphic design skills while building an impressive portfolio for college applications. This experience is invaluable for my future.",
         },
         {
             id: 5,
-            name: "Lisa Anderson",
-            role: "Marketing Lead",
-            company: "GrowthCo",
-            image: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/avatar-1.webp",
+            name: "David Park",
+            role: "Startup Founder",
+            company: "EduTech Solutions",
+            image: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/avatar-6.webp",
             rating: 5,
             testimonial:
-                "The analytics and reporting features give us insights we never had before. Our marketing campaigns are now data-driven and significantly more effective. The real-time dashboards help us make quick decisions and optimize our strategies on the fly.",
+                "As a startup with limited budget, SkillSwap is the perfect solution for our website development needs. We get high-quality results at reasonable costs, while supporting practical education for students.",
         },
         {
             id: 6,
-            name: "James Wilson",
-            role: "CTO",
-            company: "DevSolutions",
+            name: "Lisa Garcia",
+            role: "Vocational Student",
+            company: "Technical Institute",
             image: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/avatar-1.webp",
             rating: 5,
             testimonial:
-                "Security and performance are top-notch. Our development team loves the API integration, and we've reduced deployment time by 60%. The platform scales beautifully with our growing needs and the documentation is comprehensive and well-maintained.",
+                "Thanks to SkillSwap, I've been able to develop my programming skills through real projects. Client feedback has helped me improve my work quality. More importantly, I now have a strong portfolio for job applications after graduation.",
         },
     ];
 
@@ -72,11 +72,10 @@ export default function TestimonialSection() {
             <div className="max-w-7xl mx-auto">
                 <div className="text-center mb-16">
                     <h1 className="mb-2 text-center text-3xl font-black lg:text-5xl">
-                        What our client says
+                        What Our Users Say
                     </h1>
                     <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                        Real testimonials from industry leaders who trust our
-                        platform
+                        Real testimonials from students, teachers, and clients who have used SkillSwap
                     </p>
                 </div>
 
@@ -116,7 +115,7 @@ export default function TestimonialSection() {
                                         alt={testimonial.name}
                                         width={48}
                                         height={48}
-                                        className={`size-${APP_CONSTANTS.HERO_AVATAR_SIZE} rounded-full object-cover mr-4 border-2`}
+                                        className="size-12 rounded-full object-cover mr-4 border-2 border-purple-100"
                                     />
                                     <div>
                                         <div className="font-bold text-foreground text-lg">
@@ -125,7 +124,7 @@ export default function TestimonialSection() {
                                         <div className="text-sm text-muted-foreground font-medium">
                                             {testimonial.role}
                                         </div>
-                                        <div className="text-sm">
+                                        <div className="text-sm text-purple-600">
                                             {testimonial.company}
                                         </div>
                                     </div>

@@ -15,27 +15,27 @@ interface TeamProps {
 }
 
 const Team = ({
-    heading = "Team",
-    description = "Our diverse team of experts brings together decades of experience in design, engineering, and product development.",
+    heading = "Tim Pengembang",
+    description = "Tim kami terdiri dari pengembang berbakat yang berdedikasi untuk menciptakan platform terbaik bagi pelajar Indonesia.",
     members = [
         {
             id: "member-1",
-            name: "Riyadh Irham Diando",
-            role: "Nigga",
+            name: "Budi Pratama",
+            role: "Lead Developer",
             avatar: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/avatar-2.webp",
         },
 
         {
             id: "member-2",
-            name: "Rayyy Sigma",
-            role: "Lead Engineer",
+            name: "Rina Wijaya",
+            role: "UI/UX Designer",
             avatar: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/avatar-4.webp",
         },
 
         {
             id: "member-3",
-            name: "Mhmdiamd",
-            role: "UX Designer",
+            name: "Ahmad Fauzi",
+            role: "Backend Engineer",
             avatar: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/avatar-6.webp",
         },
     ],

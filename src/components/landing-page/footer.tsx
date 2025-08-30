@@ -28,30 +28,30 @@ interface FooterProps {
 
 const defaultSections = [
     {
-        title: "Product",
+        title: "Layanan",
         links: [
-            { name: "Overview", href: "#" },
-            { name: "Pricing", href: "#" },
-            { name: "Marketplace", href: "#" },
-            { name: "Features", href: "#" },
+            { name: "Jelajahi Layanan", href: "/services" },
+            { name: "Kategori", href: "/categories" },
+            { name: "Penjual Teratas", href: "/top-sellers" },
+            { name: "Cara Kerja", href: "/how-it-works" },
         ],
     },
     {
-        title: "Company",
+        title: "Perusahaan",
         links: [
-            { name: "About", href: "about" },
-            { name: "Team", href: "#" },
-            { name: "Blog", href: "#" },
-            { name: "Careers", href: "#" },
+            { name: "Tentang Kami", href: "/about" },
+            { name: "Tim", href: "/about#team" },
+            { name: "Kontak", href: "/contact" },
+            { name: "Karir", href: "/careers" },
         ],
     },
     {
-        title: "Resources",
+        title: "Sumber Daya",
         links: [
-            { name: "Help", href: "#" },
-            { name: "Sales", href: "#" },
-            { name: "Advertise", href: "#" },
-            { name: "Privacy", href: "#" },
+            { name: "Pusat Bantuan", href: "/help" },
+            { name: "Panduan Pengguna", href: "/guides" },
+            { name: "FAQ", href: "/faq" },
+            { name: "Kebijakan Privasi", href: "/privacy" },
         ],
     },
 ];
@@ -76,9 +76,9 @@ const Footer = ({
         title: "Shadcnblocks.com",
     },
     sections = defaultSections,
-    description = "A Freelance platform for students to grow.",
+    description = "Platform freelance untuk pelajar mengembangkan keterampilan dan menghasilkan.",
     socialLinks = defaultSocialLinks,
-    copyright = "© 2025 Skillswap.com. All rights reserved.",
+    copyright = "© 2025 Skillswap.com. Hak Cipta Dilindungi.",
 }: FooterProps) => {
     return (
         <section className="py-32 bg-muted border-t px-6">
@@ -121,7 +121,7 @@ const Footer = ({
                             ))}
                         </ul>
                     </div>
-                    <div className="grid w-full gap-6 md:grid-cols-3 lg:gap-20">
+                    {/* <div className="grid w-full gap-6 md:grid-cols-3 lg:gap-20">
                         {sections.map((section, sectionIdx) => (
                             <div key={sectionIdx}>
                                 <h3 className="mb-4 font-bold">
@@ -139,7 +139,7 @@ const Footer = ({
                                 </ul>
                             </div>
                         ))}
-                    </div>
+                    </div> */}
                 </div>
                 <div className="text-muted-foreground mt-8 flex flex-col justify-between gap-4 border-t py-8 text-xs font-medium md:flex-row md:items-center md:text-left">
                     <p className="order-2 lg:order-1">{copyright}</p>

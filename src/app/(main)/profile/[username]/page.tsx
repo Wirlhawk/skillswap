@@ -35,16 +35,12 @@ export default async function ProfilePage({ params }: PageProps) {
         getPortfolio(username),
     ]);
 
-    if (!session?.user) {
-        redirect("/login");
-    }
-
     if (!profileResult.data) {
         notFound();
     }
 
     const profile = profileResult.data;
-    const isOwnProfile = session.user.username === username;
+    const isOwnProfile = session?.user?.username === username;
     // Check if user is a seller (STUDENT or TEACHER role)
     const isSeller = profile.role === "STUDENT" || profile.role === "TEACHER";
 
@@ -53,12 +49,12 @@ export default async function ProfilePage({ params }: PageProps) {
     let sellerReviews = null;
     let sellerStats = null;
 
-    if (isSeller && session.user.id) {
+    if (isSeller && profile.id) {
         try {
             [sellerServices, sellerReviews, sellerStats] = await Promise.all([
-                getSellerServices(session.user.id, { page: 1, pageSize: 10 }),
-                getSellerReviews(session.user.id, 10, 0),
-                getSellerStats(session.user.id),
+                getSellerServices(profile.id, { page: 1, pageSize: 10 }),
+                getSellerReviews(profile.id, 10, 0),
+                getSellerStats(profile.id),
             ]);
         } catch (error) {
             console.error("Failed to fetch seller data:", error);
@@ -100,7 +96,8 @@ export default async function ProfilePage({ params }: PageProps) {
                                             <div className="grid grid-cols-2 gap-4">
                                                 <div className="text-center p-3 rounded-lg bg-primary/5">
                                                     <p className="text-2xl font-bold text-primary">
-                                                        {sellerStats.totalOrders || 0}
+                                                        {sellerStats.totalOrders ||
+                                                            0}
                                                     </p>
                                                     <p className="text-sm text-muted-foreground">
                                                         Total Orders
@@ -109,7 +106,8 @@ export default async function ProfilePage({ params }: PageProps) {
 
                                                 <div className="text-center p-3 rounded-lg bg-green-500/5">
                                                     <p className="text-2xl font-bold text-green-600">
-                                                        {sellerStats.newCustomers || 0}
+                                                        {sellerStats.newCustomers ||
+                                                            0}
                                                     </p>
                                                     <p className="text-sm text-muted-foreground">
                                                         New Customers
@@ -118,7 +116,8 @@ export default async function ProfilePage({ params }: PageProps) {
 
                                                 <div className="text-center p-3 rounded-lg bg-orange-500/5">
                                                     <p className="text-2xl font-bold text-orange-600">
-                                                        {sellerServices?.services
+                                                        {sellerServices
+                                                            ?.services
                                                             ?.length || 0}
                                                     </p>
                                                     <p className="text-sm text-muted-foreground">
@@ -131,8 +130,13 @@ export default async function ProfilePage({ params }: PageProps) {
                                                         {sellerReviews &&
                                                         sellerReviews.success &&
                                                         sellerReviews.stats &&
-                                                        typeof sellerReviews.stats.totalReviews === "number"
-                                                            ? sellerReviews.stats.totalReviews
+                                                        typeof sellerReviews
+                                                            .stats
+                                                            .totalReviews ===
+                                                            "number"
+                                                            ? sellerReviews
+                                                                  .stats
+                                                                  .totalReviews
                                                             : 0}
                                                     </p>
                                                     <p className="text-sm text-muted-foreground">
@@ -145,7 +149,7 @@ export default async function ProfilePage({ params }: PageProps) {
                                             {isOwnProfile && (
                                                 <div className="grid grid-cols-2 gap-4 pt-2 border-t">
                                                     <div className="text-center p-3 rounded-lg bg-blue-500/5">
-                                                    <p className="text-2xl font-bold text-blue-600">
+                                                        <p className="text-2xl font-bold text-blue-600">
                                                             {sellerStats.totalRevenue
                                                                 ? `Rp ${sellerStats.totalRevenue.toLocaleString()}`
                                                                 : "Rp 0"}
@@ -202,7 +206,9 @@ export default async function ProfilePage({ params }: PageProps) {
                                                         ? portfolioResult.data
                                                         : []
                                                 }
-                                                isOwnProfile={isOwnProfile && isSeller}
+                                                isOwnProfile={
+                                                    isOwnProfile && isSeller
+                                                }
                                             />
                                         ),
                                     },
@@ -218,7 +224,9 @@ export default async function ProfilePage({ params }: PageProps) {
                                                         {sellerServices.services.map(
                                                             (service) => (
                                                                 <ServiceCard
-                                                                    key={service.id}
+                                                                    key={
+                                                                        service.id
+                                                                    }
                                                                     serviceId={
                                                                         service.id
                                                                     }
@@ -232,7 +240,10 @@ export default async function ProfilePage({ params }: PageProps) {
                                                                         service.images ??
                                                                         []
                                                                     }
-                                                                    category={service.categoryName || ""}
+                                                                    category={
+                                                                        service.categoryName ||
+                                                                        ""
+                                                                    }
                                                                     price={
                                                                         service.price
                                                                     }
@@ -242,9 +253,12 @@ export default async function ProfilePage({ params }: PageProps) {
                                                                     }
                                                                     user={{
                                                                         username:
-                                                                            service.username || "",
+                                                                            service.username ||
+                                                                            "",
                                                                         major: "",
-                                                                        image: service.userProfile || "",
+                                                                        image:
+                                                                            service.userProfile ||
+                                                                            "",
                                                                     }}
                                                                 />
                                                             )
@@ -266,7 +280,8 @@ export default async function ProfilePage({ params }: PageProps) {
                                                                 <Link href="/service/create">
                                                                     <Plus className="h-4 w-4 mr-2" />
                                                                     Create Your
-                                                                    First Service
+                                                                    First
+                                                                    Service
                                                                 </Link>
                                                             </Button>
                                                         )}
@@ -312,7 +327,8 @@ export default async function ProfilePage({ params }: PageProps) {
                                                                                 sellerReviews
                                                                                     .stats!
                                                                                     .averageRating
-                                                                            ) >= 4.0
+                                                                            ) >=
+                                                                            4.0
                                                                           ? "Very Good"
                                                                           : Number(
                                                                                   sellerReviews
@@ -338,13 +354,16 @@ export default async function ProfilePage({ params }: PageProps) {
                                                 <div className="space-y-4">
                                                     {sellerReviews &&
                                                     sellerReviews.success &&
-                                                    "reviews" in sellerReviews &&
-                                                    sellerReviews.reviews!.length >
-                                                        0 ? (
+                                                    "reviews" in
+                                                        sellerReviews &&
+                                                    sellerReviews.reviews!
+                                                        .length > 0 ? (
                                                         sellerReviews.reviews!.map(
                                                             (review) => (
                                                                 <Card
-                                                                    key={review.id}
+                                                                    key={
+                                                                        review.id
+                                                                    }
                                                                     className="p-4"
                                                                 >
                                                                     <div className="flex items-start gap-3">
@@ -459,7 +478,8 @@ export default async function ProfilePage({ params }: PageProps) {
                                     User Profile
                                 </h3>
                                 <p className="text-muted-foreground">
-                                    This user is not a seller and doesn't have portfolio, services, or reviews.
+                                    This user is not a seller and doesn't have
+                                    portfolio, services, or reviews.
                                 </p>
                                 {isOwnProfile && (
                                     <div className="mt-4">

@@ -20,42 +20,42 @@ interface FeaturesProps {
 }
 
 const Features = ({
-    heading = "Why Work With Us?",
+    heading = "Why Choose SkillSwap?",
     reasons = [
         {
-            title: "Quality",
+            title: "Real Portfolio",
             description:
-                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe est aliquid exercitationem, quos explicabo repellat?",
+                "Build a professional portfolio with real projects from actual clients. Showcase your best work and enhance your future career opportunities.",
             icon: <GitPullRequest className="size-6" />,
         },
         {
-            title: "Experience",
+            title: "Practical Experience",
             description:
-                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe est aliquid exercitationem, quos explicabo repellat?",
+                "Gain real work experience while still in school. Develop industry-sought skills through client projects.",
             icon: <SquareKanban className="size-6" />,
         },
         {
-            title: "Support",
+            title: "Teacher Support",
             description:
-                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe est aliquid exercitationem, quos explicabo repellat?",
+                "Get guidance from teachers who monitor your progress. Student account verification ensures platform quality and security.",
             icon: <RadioTower className="size-6" />,
         },
         {
-            title: "Innovation",
+            title: "Flexibility",
             description:
-                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe est aliquid exercitationem, quos explicabo repellat?",
+                "Work on projects according to your own schedule. Balance between school and skill development without excessive pressure.",
             icon: <WandSparkles className="size-6" />,
         },
         {
-            title: "Results",
+            title: "Additional Income",
             description:
-                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe est aliquid exercitationem, quos explicabo repellat?",
+                "Turn your skills into a source of income. Get paid for services you offer while learning financial management.",
             icon: <Layers className="size-6" />,
         },
         {
-            title: "Efficiency",
+            title: "Professional Network",
             description:
-                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe est aliquid exercitationem, quos explicabo repellat?",
+                "Build relationships with clients and fellow students. Develop valuable professional networks for your future career.",
             icon: <BatteryCharging className="size-6" />,
         },
     ],

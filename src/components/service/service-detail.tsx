@@ -21,6 +21,7 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { OrderForm } from "./order-form";
 import Image from "next/image";
+import Link from "next/link";
 
 interface Review {
     id: string;
@@ -408,11 +409,9 @@ function SellerInformation({ seller }: { seller: Seller }) {
                 )}
 
                 <div className="flex space-x-2">
-                    <Button className="flex-1">
-                        <MessageCircle className="h-4 w-4 mr-2" />
-                        Contact
+                    <Button variant="outline" asChild>
+                        <Link href={`/profile/${seller.username}`}>View Profile</Link>
                     </Button>
-                    <Button variant="outline">View Profile</Button>
                 </div>
             </CardContent>
         </Card>
