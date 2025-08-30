@@ -201,3 +201,52 @@ export const getSellerServices = async (sellerId: string, { page = 1, pageSize =
         };
     }
 };
+
+export const getClientOrders = async (clientId: string, { page = 1, pageSize = 10, sortOrder = 'desc', status }: { page?: number, pageSize?: number, sortOrder?: 'asc' | 'desc', status?: string }) => {
+    noStore();
+    try {
+        const whereConditions = [eq(order.clientId, clientId)];
+        if (status) {
+            whereConditions.push(eq(order.status, status as any));
+        }
+
+        const ordersQuery = db
+            .select({
+                id: order.id,
+                orderNumber: order.orderNumber,
+                serviceTitle: service.title,
+                sellerName: user.name,
+                totalPrice: order.totalPrice,
+                status: order.status,
+                createdAt: order.createdAt,
+            })
+            .from(order)
+            .leftJoin(service, eq(order.serviceId, service.id))
+            .leftJoin(user, eq(order.sellerId, user.id))
+            .where(and(...whereConditions))
+            .limit(pageSize)
+            .offset((page - 1) * pageSize)
+            .orderBy(order.createdAt, { direction: sortOrder === 'asc' ? 'asc' : 'desc' });
+
+        const totalOrdersQuery = db
+            .select({ total: count() })
+            .from(order)
+            .where(and(...whereConditions));
+
+        const [orders, totalOrdersResult] = await Promise.all([ordersQuery, totalOrdersQuery]);
+        
+        return {
+            orders,
+            totalPages: Math.ceil(totalOrdersResult[0].total / pageSize),
+            page,
+            pageSize
+        };
+
+    } catch (error) {
+        console.error("Failed to fetch client orders:", error);
+        return {
+            orders: [],
+            totalPages: 0
+        };
+    }
+};

@@ -13,7 +13,7 @@ interface NavLinksProps {
 const getLinks = (userRole?: string, username?: string) => {
     const baseLinks = [
         { href: "/home", label: "Home" },
-        { href: "/my-orders", label: "My Orders" },
+        { href: "/orders", label: "My Orders" },
         { href: username ? `/profile/${username}` : "/profile", label: "Profile" },
     ];
 

@@ -6,6 +6,7 @@ import { useState, useRef, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { ScrollArea } from "@/components/ui/scroll-area"
 import { MessageCircle, X, Send, Smile, Paperclip } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -218,52 +219,54 @@ export default function ChatWidget({
         </div>
 
         {/* Messages */}
-        <div className="h-80 overflow-y-auto p-4 space-y-4">
-          {messages.length === 0 ? (
-            <div className="text-center text-muted-foreground py-8">
-              <MessageCircle className="h-12 w-12 mx-auto mb-3 opacity-50" />
-              <p>Say hi — I&#39;m here to help!</p>
-            </div>
-          ) : (
-            messages.map((message) => (
-              <div key={message.id} className={cn("flex", message.isUser ? "justify-end" : "justify-start")}>
-                <div
-                  className={cn(
-                    "max-w-[60%] px-4 py-2 rounded-2xl text-sm",
-                    message.isUser
-                      ? "bg-primary text-primary-foreground rounded-br-md"
-                      : "bg-muted text-muted-foreground rounded-bl-md",
-                  )}
-                >
-                  {message.text}
-                </div>
+        <ScrollArea className="h-80 p-4">
+          <div className="space-y-4">
+            {messages.length === 0 ? (
+              <div className="text-center text-muted-foreground py-8">
+                <MessageCircle className="h-12 w-12 mx-auto mb-3 opacity-50" />
+                <p>Say hi — I&#39;m here to help!</p>
               </div>
-            ))
-          )}
+            ) : (
+              messages.map((message) => (
+                <div key={message.id} className={cn("flex", message.isUser ? "justify-end" : "justify-start")}>
+                  <div
+                    className={cn(
+                      "max-w-[60%] px-4 py-2 rounded-2xl text-sm",
+                      message.isUser
+                        ? "bg-primary text-primary-foreground rounded-br-md"
+                        : "bg-muted text-muted-foreground rounded-bl-md",
+                    )}
+                  >
+                    {message.text}
+                  </div>
+                </div>
+              ))
+            )}
 
-          {/* Typing Indicator */}
-          {isTyping && (
-            <div className="flex justify-start">
-              <div className="bg-muted text-muted-foreground px-4 py-2 rounded-2xl rounded-bl-md text-sm">
-                <div className="flex items-center gap-1">
-                  <div className="flex gap-1">
-                    <div className="w-2 h-2 bg-current rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
-                    <div
-                      className="w-2 h-2 bg-current rounded-full animate-bounce"
-                      style={{ animationDelay: "150ms" }}
-                    />
-                    <div
-                      className="w-2 h-2 bg-current rounded-full animate-bounce"
-                      style={{ animationDelay: "300ms" }}
-                    />
+            {/* Typing Indicator */}
+            {isTyping && (
+              <div className="flex justify-start">
+                <div className="bg-muted text-muted-foreground px-4 py-2 rounded-2xl rounded-bl-md text-sm">
+                  <div className="flex items-center gap-1">
+                    <div className="flex gap-1">
+                      <div className="w-2 h-2 bg-current rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
+                      <div
+                        className="w-2 h-2 bg-current rounded-full animate-bounce"
+                        style={{ animationDelay: "150ms" }}
+                      />
+                      <div
+                        className="w-2 h-2 bg-current rounded-full animate-bounce"
+                        style={{ animationDelay: "300ms" }}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          )}
+            )}
 
-          <div ref={messagesEndRef} />
-        </div>
+            <div ref={messagesEndRef} />
+          </div>
+        </ScrollArea>
 
         {/* Input Area */}
         <div className="p-4 border-t bg-muted">

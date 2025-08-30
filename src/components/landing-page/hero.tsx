@@ -27,7 +27,7 @@ const Hero = ({
     heading = "Connect, Collaborate, and Grow with Student Freelancers",
     description = "Discover top student talent for your projects. Connect, collaborate, and achieve more together on our platform. our community of student freelancers is ready to support your goals.",
     button = {
-        text: "Broswe Thousands of Services",
+        text: "Browse Thousands of Services",
         url: "/home",
     },
     reviews = {
