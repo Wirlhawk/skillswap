@@ -18,6 +18,7 @@ import { Button } from "../../../../components/ui/button";
 import { Package, Star, Users, Plus } from "lucide-react";
 import Link from "next/link";
 import ServiceCard from "../../../../components/service/service-card";
+import { user } from "@/db/schema";
 
 interface PageProps {
     params: {
@@ -213,7 +214,7 @@ export default async function ProfilePage({ params }: PageProps) {
                                                 {sellerServices &&
                                                 sellerServices.services.length >
                                                     0 ? (
-                                                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                                         {sellerServices.services.map(
                                                             (service) => (
                                                                 <ServiceCard
@@ -231,7 +232,7 @@ export default async function ProfilePage({ params }: PageProps) {
                                                                         service.images ??
                                                                         []
                                                                     }
-                                                                    category={""}
+                                                                    category={service.categoryName || ""}
                                                                     price={
                                                                         service.price
                                                                     }
@@ -241,9 +242,9 @@ export default async function ProfilePage({ params }: PageProps) {
                                                                     }
                                                                     user={{
                                                                         username:
-                                                                            "",
+                                                                            service.username || "",
                                                                         major: "",
-                                                                        image: "",
+                                                                        image: service.userProfile || "",
                                                                     }}
                                                                 />
                                                             )

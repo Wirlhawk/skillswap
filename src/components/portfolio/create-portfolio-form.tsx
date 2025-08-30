@@ -109,6 +109,9 @@ export default function CreatePortfolioForm() {
                                 />
                             </FormControl>
                             <FormMessage />
+                            <FormDescription>
+                                Press Enter to add Tags
+                            </FormDescription>
                         </FormItem>
                     )}
                 />

@@ -1,5 +1,5 @@
 import { db } from "@/db/drizzle";
-import { order, service, user } from "@/db/schema";
+import { category, order, service, user } from "@/db/schema";
 import { and, count, eq, sum, desc, gte, lte, sql } from "drizzle-orm";
 import { unstable_noStore as noStore } from "next/cache";
 
@@ -159,8 +159,24 @@ export const getSellerServices = async (sellerId: string, { page = 1, pageSize =
     noStore();
     try {
         const servicesQuery = db
-            .select()
+            .select({
+                id: service.id,
+                title: service.title,
+                description: service.description,
+                price: service.price,
+                images: service.images,
+                tags: service.tags,
+                userId: service.userId,
+                username: user.username,
+                userProfile: user.image,
+                categoryId: service.categoryId,
+                categoryName: category.name,
+                createdAt: service.createdAt,
+                updatedAt: service.updatedAt
+            })
             .from(service)
+            .leftJoin(user, eq(service.userId, user.id))
+            .leftJoin(category, eq(service.categoryId, category.id))
             .where(eq(service.userId, sellerId))
             .limit(pageSize)
             .offset((page - 1) * pageSize);

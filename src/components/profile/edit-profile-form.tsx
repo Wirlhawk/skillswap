@@ -2,6 +2,7 @@
 import {
     Form,
     FormControl,
+    FormDescription,
     FormField,
     FormItem,
     FormLabel,
@@ -107,6 +108,9 @@ export default function EditProfileForm({
                                 />
                             </FormControl>
                             <FormMessage />
+                            <FormDescription>
+                                Press Enter to add Skills
+                            </FormDescription>
                         </FormItem>
                     )}
                 />
