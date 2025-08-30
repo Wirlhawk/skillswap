@@ -37,6 +37,7 @@ export const getRisingStars = async (limit: number = 5) => {
                 id: user.id,
                 name: user.name,
                 image: user.image,
+                username: user.username,
                 majorName: major.name,
                 completedOrders: count(order.id),
             })
@@ -83,6 +84,7 @@ export const getRisingStars = async (limit: number = 5) => {
         const risingStars = risingStarsQuery.map(star => ({
             id: star.id,
             name: star.name || "Unknown User",
+            username: star.username,
             avatar: star.image || "/placeholder.svg?height=60&width=60",
             rating: ratingsMap.get(star.id) || 0,
             completedOrders: Number(star.completedOrders) || 0,

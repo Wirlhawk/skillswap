@@ -498,10 +498,8 @@ function ServicePackage({
                                     Continue ({servicePackage.price})
                                 </Button>
                                 <p className="text-xs text-muted-foreground text-center mt-2">
-                                    <p className="text-xs text-muted-foreground text-center mt-2">
-                                    You won&#39;t be charged until you review and
-                                    confirm your order
-                                </p>
+                                    You won&#39;t be charged until you review
+                                    and confirm your order
                                 </p>
                             </>
                         )}

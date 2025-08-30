@@ -2,12 +2,8 @@
 
 import {
     BookOpenIcon,
-    Layers2Icon,
     LogOutIcon,
-    PinIcon,
-    User,
-    UserPenIcon,
-    StarIcon,
+    User
 } from "lucide-react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -22,8 +18,8 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { authClient } from "@/lib/auth-client";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 interface UserMenuProps {
     username: string;
@@ -95,45 +91,6 @@ export default function UserMenu({
                             </DropdownMenuItem>
                         </Link>
                     ) : null}
-                    <Link href="/portfolio-showcase">
-                        <DropdownMenuItem>
-                            <Layers2Icon
-                                size={16}
-                                className="opacity-60"
-                                aria-hidden="true"
-                            />
-                            <span>Portfolio</span>
-                        </DropdownMenuItem>
-                    </Link>
-                    <DropdownMenuItem>
-                        <StarIcon
-                            size={16}
-                            className="opacity-60"
-                            aria-hidden="true"
-                        />
-                        <span>Skills</span>
-                    </DropdownMenuItem>
-                </DropdownMenuGroup>
-                <DropdownMenuSeparator />
-                <DropdownMenuGroup>
-                    <DropdownMenuItem>
-                        <PinIcon
-                            size={16}
-                            className="opacity-60"
-                            aria-hidden="true"
-                        />
-                        <span>Settings</span>
-                    </DropdownMenuItem>
-                    <Link href="/user/edit">
-                        <DropdownMenuItem>
-                            <UserPenIcon
-                                size={16}
-                                className="opacity-60"
-                                aria-hidden="true"
-                            />
-                            <span>Edit Profile</span>
-                        </DropdownMenuItem>
-                    </Link>
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={handleLogout}>

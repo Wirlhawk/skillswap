@@ -9,7 +9,7 @@ const page = async () => {
 
     return (
         <PageInset>
-            <Header>New Service</Header>
+            <Header className="mb-5">Create New Service</Header>
             <CreateServiceForm2 categories={categories.data || []} />
         </PageInset>
     );

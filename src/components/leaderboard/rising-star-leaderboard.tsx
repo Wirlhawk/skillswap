@@ -27,10 +27,11 @@ export async function RisingStarsLeaderboard() {
                 >
                     {risingStars!.length > 0 ? (
                         risingStars!.map((star, index) => (
-                            <Link href={`/profile/${star.id}`} key={star.id}>
-                                <Card
-                                    className="min-w-[300px] flex-shrink-0 hover:shadow-lg transition-all duration-200 cursor-pointer"
-                                >
+                            <Link
+                                href={`/profile/${star.username}`}
+                                key={star.id}
+                            >
+                                <Card className="min-w-[300px] flex-shrink-0 hover:shadow-lg transition-all duration-200 cursor-pointer">
                                     <CardContent className="p-6 py-2">
                                         <div className="flex items-center justify-between gap-10">
                                             <div className="flex items-center gap-4">
@@ -46,7 +47,9 @@ export async function RisingStarsLeaderboard() {
                                                         <AvatarFallback className="text-lg font-semibold">
                                                             {star.name
                                                                 .split(" ")
-                                                                .map((n) => n[0])
+                                                                .map(
+                                                                    (n) => n[0]
+                                                                )
                                                                 .join("")}
                                                         </AvatarFallback>
                                                     </Avatar>
@@ -64,7 +67,9 @@ export async function RisingStarsLeaderboard() {
                                                     <div className="flex items-center gap-1">
                                                         <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
                                                         <span className="text-sm font-medium">
-                                                            {star.rating.toFixed(1)}
+                                                            {star.rating.toFixed(
+                                                                1
+                                                            )}
                                                         </span>
                                                     </div>
                                                 </div>
@@ -83,8 +88,8 @@ export async function RisingStarsLeaderboard() {
                     ) : (
                         <div className="w-full text-center py-8">
                             <p className="text-muted-foreground">
-                                {risingStarsResult.success === false 
-                                    ? `Error loading rising stars: ${risingStarsResult.error}` 
+                                {risingStarsResult.success === false
+                                    ? `Error loading rising stars: ${risingStarsResult.error}`
                                     : "No rising stars this month yet. Be the first to complete an order!"}
                             </p>
                         </div>

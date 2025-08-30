@@ -28,7 +28,7 @@ const Hero = ({
     description = "Discover top student talent for your projects. Connect, collaborate, and achieve more together on our platform. our community of student freelancers is ready to support your goals.",
     button = {
         text: "Broswe Thousands of Services",
-        url: "/register",
+        url: "/home",
     },
     reviews = {
         count: 200,
@@ -83,7 +83,7 @@ const Hero = ({
                     </TextEffect>
                 </div>
                 <div className="mt-10 flex flex-col items-center gap-4">
-                    <div className="w-full max-w-md flex gap-2">
+                    {/* <div className="w-full max-w-md flex gap-2">
                         <form 
                             action="/home" 
                             className="w-full flex gap-2"
@@ -100,7 +100,7 @@ const Hero = ({
                                 Search
                             </Button>
                         </form>
-                    </div>
+                    </div> */}
                     <Button asChild size="lg" className="px-5">
                         <a href={button.url}>
                             {button.text} <MoveRight />

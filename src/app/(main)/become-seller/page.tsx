@@ -21,9 +21,7 @@ export default async function BecomeSellerPage() {
 
                 <SellerVerificationForm
                     majors={majors}
-                    onSubmit={async (data) => {
-                        await submitSellerVerification(data);
-                    }}
+                   
                 />
 
                 <div className="mt-8 text-center">

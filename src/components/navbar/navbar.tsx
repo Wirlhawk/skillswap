@@ -25,9 +25,10 @@ export default async function Navbar() {
                     {/* Mobile menu trigger */}
                     <MobileNavLinks
                         userRole={session?.user?.role || undefined}
+                        username={session?.user?.username || undefined}
                     />
                     {/* Logo */}
-                    <div className="items-center flex">
+                    <div className="items-center flex md:flex hidden">
                         <a
                             href="#"
                             className="text-primary hover:text-primary/90"
@@ -45,7 +46,7 @@ export default async function Navbar() {
                 <div className="flex flex-1 items-center justify-end gap-3">
                     {session ? (
                         <>
-                            <NotificationMenu />
+                            {/* <NotificationMenu /> */}
                             <UserMenu
                                 username={session.user.username ?? ""}
                                 name={session.user.name ?? ""}
@@ -62,7 +63,10 @@ export default async function Navbar() {
                 </div>
             </div>
             {/* Bottom navigation */}
-            <BottomNavLinks userRole={session?.user?.role || undefined} />
+            <BottomNavLinks 
+                userRole={session?.user?.role || undefined} 
+                username={session?.user?.username || undefined} 
+            />
         </header>
     );
 }

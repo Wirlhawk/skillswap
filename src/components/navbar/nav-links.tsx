@@ -7,13 +7,14 @@ import { Button } from "../ui/button";
 
 interface NavLinksProps {
     userRole?: string;
+    username?: string;
 }
 
-const getLinks = (userRole?: string) => {
+const getLinks = (userRole?: string, username?: string) => {
     const baseLinks = [
         { href: "/home", label: "Home" },
         { href: "/my-orders", label: "My Orders" },
-        { href: "/profile", label: "Profile" },
+        { href: username ? `/profile/${username}` : "/profile", label: "Profile" },
     ];
 
     // Add dashboard link for SELLER (STUDENT) or TEACHER users
@@ -28,9 +29,9 @@ const getLinks = (userRole?: string) => {
     return baseLinks;
 };
 
-export const BottomNavLinks = ({ userRole }: NavLinksProps) => {
+export const BottomNavLinks = ({ userRole, username }: NavLinksProps) => {
     const pathname = usePathname();
-    const links = getLinks(userRole);
+    const links = getLinks(userRole, username);
 
     return (
         <div className="border-t py-2 max-md:hidden">
@@ -59,9 +60,9 @@ export const BottomNavLinks = ({ userRole }: NavLinksProps) => {
     );
 };
 
-export const MobileNavLinks = ({ userRole }: NavLinksProps) => {
+export const MobileNavLinks = ({ userRole, username }: NavLinksProps) => {
     const pathname = usePathname();
-    const links = getLinks(userRole);
+    const links = getLinks(userRole, username);
 
     return (
         <Popover>

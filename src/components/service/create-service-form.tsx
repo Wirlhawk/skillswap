@@ -65,25 +65,17 @@ export default function CreateServiceForm({
     const form = useForm<z.infer<typeof createServiceSchema>>({
         resolver: zodResolver(createServiceSchema),
         defaultValues: {
-            title: "Professional Video Editing Service",
-            description:
-                "I will edit your videos with professional quality and attention to detail",
-            longDescription:
-                "<p>As an experienced video editor with over 5 years of experience, I offer comprehensive video editing services including color correction, transitions, effects, and sound mixing. I use industry-standard software like Adobe Premiere Pro and After Effects.</p>",
+            title: "",
+            description: "",
+            longDescription: "",
             categoryId: "",
-            price: 250000,
-            deliveryTime: "3 days",
-            revisions: "2",
-            packageName: "Standard Video Editing Package",
-            packageDescription:
-                "Professional video editing with basic effects and color grading",
-            features: [
-                "Color correction",
-                "Transitions",
-                "Background music",
-                "Basic effects",
-            ],
-            tags: ["video editing", "post production", "color grading"],
+            price: 0,
+            deliveryTime: "",
+            revisions: "",
+            packageName: "",
+            packageDescription: "",
+            features: [],
+            tags: [],
             images: [],
         },
     });

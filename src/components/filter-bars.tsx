@@ -70,11 +70,11 @@ export default function FilterBars({
     };
 
     return (
-        <div className="flex items-center justify-between gap-6">
+        <div className="flex sm:items-center justify-between gap-6 flex-col sm:flex-row items-start">
             <Header>
                 {category
-                    ? `Search results for "${categories.find((c) => c.slug === category)?.name || category}"${searchParams ? ` (${searchParams} results)` : ''}`
-                    : `All Categories${searchParams ? ` (${searchParams} results)` : ''}`}
+                    ? `Search results for "${categories.find((c) => c.slug === category)?.name || category}"${searchParams ? ` (${searchParams} results)` : ""}`
+                    : `All Categories${searchParams ? ` (${searchParams} results)` : ""}`}
             </Header>
             <div className="flex items-center gap-4">
                 <Select
@@ -98,7 +98,7 @@ export default function FilterBars({
                 </Select>
 
                 {/* Price Range */}
-                <div className="flex items-center gap-2">
+                {/* <div className="flex items-center gap-2">
                     <Input
                         placeholder="Min"
                         type="number"
@@ -120,7 +120,7 @@ export default function FilterBars({
                         }
                         className="w-20 h-9"
                     />
-                </div>
+                </div> */}
 
                 {/* Actions */}
                 {/* <div className="flex gap-2">
