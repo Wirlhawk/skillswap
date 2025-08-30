@@ -10,7 +10,8 @@ import {
 import {
     MilestoneActionHandlers,
     MilestoneFormData,
-    MilestoneStatus
+    MilestoneStatus,
+    ActionResult
 } from "@/types/order";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -26,7 +27,7 @@ export function useMilestoneActions({ orderId, onSuccess, onError }: UseMileston
     const [isLoading, setIsLoading] = useState(false);
 
     const handleAction = async <T>(
-        action: () => Promise<{ success: boolean; error?: string;[key: string]: any }>,
+        action: () => Promise<ActionResult<T>>,
         successMessage: string,
         errorMessage: string
     ): Promise<T | null> => {
@@ -37,7 +38,7 @@ export function useMilestoneActions({ orderId, onSuccess, onError }: UseMileston
             if (result.success) {
                 toast.success(successMessage);
                 onSuccess?.();
-                return result as T;
+                return result.data || null;
             } else {
                 const errorMsg = result.error || errorMessage;
                 toast.error(errorMsg);
@@ -71,7 +72,7 @@ export function useMilestoneActions({ orderId, onSuccess, onError }: UseMileston
         },
 
         onUpdateMilestone: async (milestoneId: string, data: Partial<MilestoneFormData>) => {
-            const updateData: any = {};
+            const updateData: UpdateMilestoneData = {};
 
             if (data.title !== undefined) updateData.title = data.title;
             if (data.description !== undefined) updateData.description = data.description;

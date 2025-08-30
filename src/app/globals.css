@@ -10,8 +10,8 @@
   --card-foreground: oklch(0.2433 0.0247 263.9506);
   --popover: oklch(1.0000 0 0);
   --popover-foreground: oklch(0.2433 0.0247 263.9506);
-  --primary: oklch(0.8271 0.1616 146.3896); 
-   --primary-foreground: oklch(0.2433 0.0247 263.9506);
+  --primary: oklch(0.8271 0.1616 146.3896);
+  --primary-foreground: oklch(0.2433 0.0247 263.9506);
   --secondary: oklch(0 0 0);
   --secondary-foreground: oklch(1.0000 0 0);
   --muted: oklch(0.9498 0.0272 297.3155);
@@ -66,7 +66,7 @@
   --card-foreground: oklch(0.9834 0.0042 236.4956);
   --popover: oklch(0.3351 0.0331 260.9120);
   --popover-foreground: oklch(0.9834 0.0042 236.4956);
-    --primary: oklch(0.8174 0.1853 145.8353);
+  --primary: oklch(0.8174 0.1853 145.8353);
   --primary-foreground: oklch(0.2433 0.0247 263.9506);
   --secondary: oklch(0.9008 0.1496 99.7140);
   --secondary-foreground: oklch(0.2433 0.0247 263.9506);
@@ -191,6 +191,7 @@ body {
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
     letter-spacing: var(--tracking-normal);
@@ -198,10 +199,29 @@ body {
 }
 
 /* TipTap base */
-.tiptap :first-child { margin-top: 0; }
-.tiptap :last-child { margin-bottom: 0; }
+.tiptap :first-child {
+  margin-top: 0;
+}
+
+.tiptap :last-child {
+  margin-bottom: 0;
+}
 
 /* Make lists actually look like lists */
-.tiptap ul { list-style: disc; padding-left: 1.5rem; margin: 0.5rem 0; }
-.tiptap ol { list-style: decimal; padding-left: 1.5rem; margin: 0.5rem 0; }
-.tiptap li > p { margin: 0; } /* remove extra spacing inside list items */
+.tiptap ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+  margin: 0.5rem 0;
+}
+
+.tiptap ol {
+  list-style: decimal;
+  padding-left: 1.5rem;
+  margin: 0.5rem 0;
+}
+
+.tiptap li>p {
+  margin: 0;
+}
+
+/* remove extra spacing inside list items */

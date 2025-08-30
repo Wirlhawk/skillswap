@@ -147,7 +147,7 @@ function transformOrderMessages(messages: OrderWithDetails['messages'], order: O
         id: message.id,
         senderId: message.senderId,
         message: message.message,
-        messageType: message.messageType as any, // Assuming this matches MessageType
+        messageType: message.messageType, // Removed 'as any'
         isInternal: message.isInternal,
         createdAt: message.createdAt,
         sender: {
@@ -165,7 +165,6 @@ function transformOrderMilestones(milestones: OrderWithDetails['milestones']): O
         title: milestone.title,
         status: milestone.status as "completed" | "in_progress" | "pending",
         estimatedDate: milestone.estimatedDate,
-        date: milestone.estimatedDate ? milestone.estimatedDate.toISOString() : new Date().toISOString(),
     }));
 }
 

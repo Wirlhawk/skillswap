@@ -1,6 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { APP_CONSTANTS } from "@/lib/constants";
 import { Star, Quote } from "lucide-react";
+import Image from "next/image";
 
 export default function TestimonialSection() {
     const testimonials = [
@@ -101,18 +102,20 @@ export default function TestimonialSection() {
                                         )}
                                     </div>
                                 </div>
-                                            
+
                                 <blockquote className="text-gray-700 mb-6 leading-relaxed flex-grow text-base">
-                                    "{testimonial.testimonial}"
+                                    &quot;{testimonial.testimonial}&quot;
                                 </blockquote>
 
                                 <div className="flex items-center mt-auto">
-                                    <img
+                                    <Image
                                         src={
                                             testimonial.image ||
                                             "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/avatar-1.webp"
                                         }
                                         alt={testimonial.name}
+                                        width={48}
+                                        height={48}
                                         className={`size-${APP_CONSTANTS.HERO_AVATAR_SIZE} rounded-full object-cover mr-4 border-2`}
                                     />
                                     <div>

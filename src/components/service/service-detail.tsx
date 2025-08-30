@@ -20,9 +20,10 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { OrderForm } from "./order-form";
+import Image from "next/image";
 
 interface Review {
-    id: number;
+    id: string;
     client: string;
     avatar: string;
     rating: number;
@@ -85,6 +86,7 @@ interface OrderDetails {
 
 interface ServiceDetailClientProps {
     serviceData: ServiceData;
+    currentUserId: string;
 }
 
 // Image Gallery Component
@@ -101,9 +103,10 @@ function ImageGallery({
         <Card className="pt-0">
             <div className="relative">
                 <div className="aspect-video bg-muted rounded-t-lg overflow-hidden border-b">
-                    <img
+                    <Image
                         src={images[selectedIndex] || "/placeholder.svg"}
                         alt="Service preview"
+                        fill
                         className="w-full h-full object-cover"
                     />
                 </div>
@@ -120,9 +123,11 @@ function ImageGallery({
                                     : "border-border hover:border-primary/50"
                             }`}
                         >
-                            <img
+                            <Image
                                 src={image || "/placeholder.svg"}
                                 alt={`Preview ${index + 1}`}
+                                width={80}
+                                height={64}
                                 className="w-full h-full object-cover"
                             />
                         </button>
@@ -423,6 +428,7 @@ function ServicePackage({
     onShowCheckoutChange,
     serviceId,
     sellerId,
+    currentUserId,
 }: {
     servicePackage: Package;
     showCheckout: boolean;
@@ -430,8 +436,11 @@ function ServicePackage({
     onOrderDetailsChange: (details: OrderDetails) => void;
     onShowCheckoutChange: (show: boolean) => void;
     serviceId: string;
+    currentUserId: string;
     sellerId: string;
 }) {
+    const isSeller = currentUserId === sellerId;
+
     return (
         <Card>
             <CardHeader>
@@ -480,27 +489,35 @@ function ServicePackage({
                                 {servicePackage.price}
                             </span>
                         </div>
-                        <Button
-                            className="w-full font-semibold py-3 text-lg"
-                            onClick={() => onShowCheckoutChange(true)}
-                        >
-                            Continue ({servicePackage.price})
-                        </Button>
-                        <p className="text-xs text-muted-foreground text-center mt-2">
-                            You won't be charged until you review and confirm
-                            your order
-                        </p>
+                        {!isSeller && (
+                            <>
+                                <Button
+                                    className="w-full font-semibold py-3 text-lg"
+                                    onClick={() => onShowCheckoutChange(true)}
+                                >
+                                    Continue ({servicePackage.price})
+                                </Button>
+                                <p className="text-xs text-muted-foreground text-center mt-2">
+                                    <p className="text-xs text-muted-foreground text-center mt-2">
+                                    You won&#39;t be charged until you review and
+                                    confirm your order
+                                </p>
+                                </p>
+                            </>
+                        )}
                     </div>
                 ) : (
                     <>
-                        <Separator className="my-6" />
-                        <OrderForm
-                            servicePrice={servicePackage.price}
-                            serviceId={serviceId}
-                            sellerId={sellerId}
-                            onBack={() => onShowCheckoutChange(false)}
-                            onSuccess={() => onShowCheckoutChange(false)}
-                        />
+                        <>
+                            <Separator className="my-6" />
+                            <OrderForm
+                                servicePrice={servicePackage.price}
+                                serviceId={serviceId}
+                                sellerId={sellerId}
+                                onBack={() => onShowCheckoutChange(false)}
+                                onSuccess={() => onShowCheckoutChange(false)}
+                            />
+                        </>
                     </>
                 )}
             </CardContent>
@@ -511,6 +528,7 @@ function ServicePackage({
 // Main Component
 export default function ServiceDetail({
     serviceData,
+    currentUserId,
 }: ServiceDetailClientProps) {
     const [selectedImageIndex, setSelectedImageIndex] = useState(0);
     const [showCheckout, setShowCheckout] = useState(false);
@@ -557,6 +575,7 @@ export default function ServiceDetail({
                             onShowCheckoutChange={handleShowCheckoutChange}
                             serviceId={serviceData.id}
                             sellerId={serviceData.seller.id}
+                            currentUserId={currentUserId}
                         />
                     </div>
                 </div>

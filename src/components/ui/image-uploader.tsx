@@ -4,6 +4,7 @@ import { AlertCircleIcon, ImageIcon, UploadIcon, XIcon } from "lucide-react";
 
 import { useFileUpload } from "@/hooks/use-file-upload";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 // Create some dummy initial files
 const initialFiles = [
@@ -104,9 +105,10 @@ export default function ImageUploader() {
                                     key={file.id}
                                     className="bg-accent relative aspect-square rounded-md"
                                 >
-                                    <img
+                                    <Image
                                         src={file.preview}
                                         alt={file.file.name}
+                                        fill
                                         className="size-full rounded-[inherit] object-cover"
                                     />
                                     <Button

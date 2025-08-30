@@ -202,10 +202,7 @@ export function PortfolioPreviewDialog({
                                                 Are you sure?
                                             </AlertDialogTitle>
                                             <AlertDialogDescription>
-                                                This action cannot be undone.
-                                                This will permanently delete
-                                                your portfolio "
-                                                {portfolio.title}".
+                                                                                                This will permanently delete your portfolio {portfolio.title}.
                                                 {deleteError && (
                                                     <div className="mt-2 text-red-600 text-sm">
                                                         {deleteError}

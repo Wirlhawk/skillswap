@@ -7,6 +7,7 @@ import {
     CardTitle,
 } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 export function AuthCardWrapper({
     title,
@@ -35,9 +36,11 @@ export function AuthCardWrapper({
             <Card>
                 <CardHeader className="my-2 flex-row flex items-center gap-3">
                     {/* <Box className="size-10" /> */}
-                    <img
+                    <Image
                         src="/assets/skillswap.png"
                         alt="SkillSwap logo"
+                        width={56}
+                        height={56}
                         className="w-14"
                     />
 

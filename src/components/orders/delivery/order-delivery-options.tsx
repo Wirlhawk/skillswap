@@ -31,7 +31,7 @@ export function OrderDeliveryOptions({
                 {markAsComplete && (
                     <div className="mt-3 p-3 bg-green-50 border border-green-200 rounded-lg">
                         <p className="text-sm text-green-800">
-                            ✓ The order will be marked as "Done" and the client
+                            ✓ The order will be marked as &quot;Done&quot; and the client
                             will be notified to review and approve your
                             delivery.
                         </p>

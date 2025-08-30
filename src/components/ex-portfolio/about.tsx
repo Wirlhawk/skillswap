@@ -1,6 +1,8 @@
 import { Award, Users, Clock, CheckCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
+
+
 export default function About() {
   const stats = [
     { icon: Users, number: "500+", label: "Happy Clients" },
@@ -18,12 +20,12 @@ export default function About() {
               Crafting Digital Experiences Since 2019
             </h2>
             <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-              We're a passionate team of designers and developers who believe that great design has the power to
+              We&apos;re a passionate team of designers and developers who believe that great design has the power to
               transform businesses. Our mission is to create visual experiences that not only look stunning but also
               drive meaningful results for our clients.
             </p>
             <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-              From startups to Fortune 500 companies, we've helped brands across industries establish their digital
+              From startups to Fortune 500 companies, we&#39;ve helped brands across industries establish their digital
               presence and connect with their audiences in meaningful ways.
             </p>
             <Button size="lg" >

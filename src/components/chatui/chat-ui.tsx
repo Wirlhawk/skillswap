@@ -85,7 +85,7 @@ export default function ChatWidget({
 
     const userMessage: Message = {
       id: Date.now().toString(),
-      text: selectedFile ? `${inputValue} [File: ${selectedFile.name}]` : inputValue,
+      text: selectedFile ? inputValue + " [File: " + selectedFile.name + "]" : inputValue,
       isUser: true,
       timestamp: new Date(),
     }
@@ -165,8 +165,8 @@ export default function ChatWidget({
             <div className="bg-primary rounded-xl p-6 border border-primary">
               <p className="text-card font-medium mb-2">Try it out!</p>
               <p className="text-card">
-                Click the chat button in the bottom-right corner to start a conversation. Try saying "hello" or asking
-                about "services" to see the AI responses.
+                Click the chat button in the bottom-right corner to start a conversation. Try saying &quot;hello&quot; or asking
+                about &quot;services&quot; to see the AI responses.
               </p>
             </div>
           </div>
@@ -222,7 +222,7 @@ export default function ChatWidget({
           {messages.length === 0 ? (
             <div className="text-center text-muted-foreground py-8">
               <MessageCircle className="h-12 w-12 mx-auto mb-3 opacity-50" />
-              <p>Say hi — I'm here to help!</p>
+              <p>Say hi — I&#39;m here to help!</p>
             </div>
           ) : (
             messages.map((message) => (

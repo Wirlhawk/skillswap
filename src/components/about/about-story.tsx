@@ -16,7 +16,7 @@ export function AboutStory() {
                         <p className="text-muted-foreground leading-relaxed">
                             SkillSwap was born from a simple observation:
                             students have incredible talents that often go
-                            unrecognized and underutilized. Whether it's graphic
+                            unrecognized and underutilized. Whether it&#39;s graphic
                             design, tutoring, coding, or creative writing, every
                             student brings unique skills to the table.
                         </p>
@@ -43,7 +43,7 @@ export function AboutStory() {
                             connections with their peers.
                         </p>
                         <p className="text-muted-foreground leading-relaxed">
-                            We're not just a marketplace – we're a community
+                            We&apos;re not just a marketplace – we&apos;re a community
                             that believes in the potential of every student and
                             the value of peer-to-peer learning and
                             collaboration.

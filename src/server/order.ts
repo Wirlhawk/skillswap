@@ -10,7 +10,8 @@ import {
     OrderWithDetails,
     UpdateOrderRequest,
     OrderStatus,
-    MessageType
+    MessageType,
+    ActionResult
 } from "@/types/order";
 import { and, desc, eq, or, sql } from "drizzle-orm";
 import { headers } from "next/headers";
@@ -173,7 +174,7 @@ export async function getOrderById(orderId: string): Promise<OrderWithDetails | 
 // Get orders with filters
 export async function getOrders(filters: OrderFilters = {}, limit = 20, offset = 0) {
     try {
-        let whereConditions = [];
+        const whereConditions = [];
 
         if (filters.status) {
             whereConditions.push(eq(order.status, filters.status));
@@ -263,7 +264,7 @@ export async function updateOrder(orderId: string, updateData: UpdateOrderReques
 // Get order statistics
 export async function getOrderStats(userId?: string): Promise<OrderStats> {
     try {
-        let whereConditions = [];
+        const whereConditions = [];
 
         if (userId) {
             whereConditions.push(
@@ -813,7 +814,7 @@ export async function saveDeliveryDraft(
 }
 
 // Upload file to storage (placeholder for file upload service)
-export async function uploadDeliveryFile(file: File): Promise<{ success: boolean; fileUrl?: string; error?: string }> {
+export async function uploadDeliveryFile(file: File): Promise<ActionResult<{ fileUrl: string }>> {
     try {
         // In a real app, this would upload to cloud storage (AWS S3, Cloudinary, etc.)
         // For now, we'll simulate the upload
@@ -825,7 +826,7 @@ export async function uploadDeliveryFile(file: File): Promise<{ success: boolean
         // Return a mock file URL
         const fileUrl = `https://example-storage.com/deliveries/${Date.now()}-${file.name}`;
 
-        return { success: true, fileUrl };
+        return { success: true, data: { fileUrl } };
     } catch (error) {
         console.error("Error uploading file:", error);
         return { success: false, error: "Failed to upload file" };

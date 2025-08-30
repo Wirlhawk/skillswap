@@ -4,6 +4,7 @@ import React from "react";
 import { Upload, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { default as Image } from "next/image";
 
 interface FileWithPreview {
     id: string;
@@ -83,9 +84,11 @@ export function ImageUpload({
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                     {images.map((image, index) => (
                         <div key={image.id} className="relative group">
-                            <img
+                            <Image
                                 src={image.preview}
                                 alt={image.file.name}
+                                width={100}
+                                height={100}
                                 className="w-full h-24 object-cover rounded-lg border"
                             />
                             <Button

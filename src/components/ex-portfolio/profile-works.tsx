@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import MediaPreview from "./media-preview";
 import UploadForm from "./upload-form";
+import { default as Image } from "next/image";
 
 interface Work {
     id: number;
@@ -154,9 +155,11 @@ export default function ProfileWorks() {
                             className="group hover:shadow-xl transition-all duration-300 overflow-hidden"
                         >
                             <div className="aspect-video bg-gradient-to-br from-emerald-100 to-teal-100 relative overflow-hidden">
-                                <img
+                                <Image
                                     src={`/abstract-geometric-shapes.png?height=300&width=400&query=${work.title}`}
                                     alt={work.title}
+                                    width={400}
+                                    height={300}
                                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 cursor-pointer"
                                     onClick={() => setSelectedWork(work)}
                                 />

@@ -1,59 +1,67 @@
 "use client";
 import React from "react";
-import {
-    NavigationMenu,
-    NavigationMenuItem,
-    NavigationMenuLink,
-    NavigationMenuList,
-} from "../ui/navigation-menu";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Button } from "../ui/button";
 
-const links = [
-    { href: "/home", label: "Home" },
-    { href: "/features", label: "Categories" },
-    { href: "/label", label: "Dashboard" },
-    { href: "/about", label: "Chat" },
-];
+interface NavLinksProps {
+    userRole?: string;
+}
 
-export const BottomNavLinks = () => {
+const getLinks = (userRole?: string) => {
+    const baseLinks = [
+        { href: "/home", label: "Home" },
+        { href: "/my-orders", label: "My Orders" },
+        { href: "/profile", label: "Profile" },
+    ];
+
+    // Add dashboard link for SELLER (STUDENT) or TEACHER users
+    if (userRole && (userRole === "STUDENT" || userRole === "TEACHER")) {
+        const dashboardLink =
+            userRole === "TEACHER"
+                ? { href: "/admin/dashboard", label: "Admin Dashboard" }
+                : { href: "/seller/dashboard", label: "Seller Dashboard" };
+        baseLinks.push(dashboardLink);
+    }
+
+    return baseLinks;
+};
+
+export const BottomNavLinks = ({ userRole }: NavLinksProps) => {
     const pathname = usePathname();
-    const navigationLinks = links.map((link) => ({
-        ...link,
-        active: pathname === link.href,
-    }));
+    const links = getLinks(userRole);
 
     return (
         <div className="border-t py-2 max-md:hidden">
             {/* Navigation menu */}
-            <div className="max-w-7xl mx-auto ">
-                <NavigationMenu>
-                    <NavigationMenuList className="gap-2">
-                        {navigationLinks.map((link, index) => (
-                            <NavigationMenuItem key={index}>
-                                <NavigationMenuLink
-                                    active={link.active}
-                                    href={link.href}
-                                    className="text-muted-foreground hover:text-primary py-1.5 font-medium"
-                                >
-                                    {link.label}
-                                </NavigationMenuLink>
-                            </NavigationMenuItem>
-                        ))}
-                    </NavigationMenuList>
-                </NavigationMenu>
+            <div className="max-w-7xl mx-auto">
+                <nav className="flex items-center gap-6">
+                    {links.map((link, index) => {
+                        const isActive = pathname === link.href;
+                        return (
+                            <Link
+                                key={index}
+                                href={link.href}
+                                className={`py-1.5 font-medium transition-colors ${
+                                    isActive
+                                        ? "text-primary"
+                                        : "text-muted-foreground hover:text-primary"
+                                }`}
+                            >
+                                {link.label}
+                            </Link>
+                        );
+                    })}
+                </nav>
             </div>
         </div>
     );
 };
 
-export const MobileNavLinks = () => {
+export const MobileNavLinks = ({ userRole }: NavLinksProps) => {
     const pathname = usePathname();
-    const navigationLinks = links.map((link) => ({
-        ...link,
-        active: pathname === link.href,
-    }));
+    const links = getLinks(userRole);
 
     return (
         <Popover>
@@ -81,7 +89,7 @@ export const MobileNavLinks = () => {
                         />
                         <path
                             d="M4 12H20"
-                            className="origin-center transition-all duration-300 ease-[cubic-bezier(.5,.85,.25,1.8)] group-aria-expanded:rotate-45"
+                            className="origin-center transition-all duration-300 ease-[cubic-bezier(.5,.85,.25,1.1)] group-aria-expanded:rotate-45"
                         />
                         <path
                             d="M4 12H20"
@@ -91,21 +99,24 @@ export const MobileNavLinks = () => {
                 </Button>
             </PopoverTrigger>
             <PopoverContent align="start" className="w-36 p-1 md:hidden">
-                <NavigationMenu className="max-w-none *:w-full">
-                    <NavigationMenuList className="flex-col items-start gap-0 md:gap-2">
-                        {navigationLinks.map((link, index) => (
-                            <NavigationMenuItem key={index} className="w-full">
-                                <NavigationMenuLink
-                                    href={link.href}
-                                    className="py-1.5"
-                                    active={link.active}
-                                >
-                                    {link.label}
-                                </NavigationMenuLink>
-                            </NavigationMenuItem>
-                        ))}
-                    </NavigationMenuList>
-                </NavigationMenu>
+                <nav className="flex flex-col gap-1">
+                    {links.map((link, index) => {
+                        const isActive = pathname === link.href;
+                        return (
+                            <Link
+                                key={index}
+                                href={link.href}
+                                className={`py-1.5 px-2 rounded-sm transition-colors ${
+                                    isActive
+                                        ? "bg-accent text-accent-foreground"
+                                        : "hover:bg-accent hover:text-accent-foreground"
+                                }`}
+                            >
+                                {link.label}
+                            </Link>
+                        );
+                    })}
+                </nav>
             </PopoverContent>
         </Popover>
     );

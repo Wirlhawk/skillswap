@@ -1,26 +1,26 @@
 "use client";
 
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Badge } from "../ui/badge";
+import { Button } from "../ui/button";
 import {
     Card,
     CardContent,
     CardFooter,
     CardHeader,
-} from "@/components/ui/card";
+} from "../ui/card";
 import {
     Dialog,
     DialogContent,
     DialogHeader,
     DialogTitle,
     DialogTrigger,
-} from "@/components/ui/dialog";
+} from "../ui/dialog";
 import { BookOpen, Calendar, Pencil, School } from "lucide-react";
 import EditProfileForm from "./edit-profile-form";
 import { EditProfilePictureForm } from "./edit-profile-picture-form";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { useState } from "react";
-import { APP_CONSTANTS } from "@/lib/constants";
+import { APP_CONSTANTS } from "../../lib/constants";
 
 interface ProfileInfoCardProps {
     user: {

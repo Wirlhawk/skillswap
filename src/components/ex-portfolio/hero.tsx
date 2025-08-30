@@ -1,5 +1,6 @@
 import { ArrowRight, Star, Users, Award, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 export default function Hero() {
     return (
@@ -77,9 +78,11 @@ export default function Hero() {
                 <div className="mt-8">
                     <div className="relative group">
                         <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 to-teal-600/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-300"></div>
-                        <img
+                        <Image
                             src="/modern-portfolio-showcase.png"
                             alt="SkillSwap portfolio showcase"
+                            width={1000}
+                            height={500}
                             className="relative w-full h-96 lg:h-[500px] object-cover rounded-2xl shadow-2xl group-hover:shadow-3xl transition-all duration-300"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent rounded-2xl"></div>

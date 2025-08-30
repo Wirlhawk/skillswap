@@ -31,7 +31,7 @@ export const createPortfolio = async (
             images.map(async (img, i) => {
                 const { url } = await put(
                     `${session.user.id}-${Date.now()}-${i}-${img.file.name}`,
-                    img.file,
+                    img.file, 
                     { access: "public" }
                 );
 
