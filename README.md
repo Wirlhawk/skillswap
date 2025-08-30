@@ -3,8 +3,24 @@
 **SkillSwap** adalah platform freelance khusus untuk siswa **SMA/SMK** yang ingin mengembangkan keterampilan mereka dengan mengambil pekerjaan (freelance project). Website ini membantu pelajar untuk belajar, bekerja, dan mengasah kemampuan mereka di bidang nyata.
 
 🌐 **Demo Website**: [skillswap-chi-two.vercel.app](https://skillswap-chi-two.vercel.app)
-
 ---
+📑 **Dokumentasi Lengkap**: [Google Docs](https://docs.google.com/document/d/1IwHq8k1y4Dd2i-x6_jsJ_rEgnD5It70jI39pivNPrKI/edit?tab=t.0)
+---
+## 🔑 Akun User Demo
+Gunakan akun berikut untuk mencoba aplikasi tanpa perlu registrasi:
+
+
+Guru (Admin)
+Email: admin@gmail.com
+Password: skillswap123
+
+Murid
+Email: murid@gmail.com
+Password: skillswap123
+
+Seller
+Email: seller@gmail.com
+Password: skillswap123
 
 ## 🎯 Tujuan Proyek
 1. **Meningkatkan pengalaman kerja pelajar**  
