@@ -20,9 +20,7 @@ const AdminLayout = async ({ children }: { children: React.ReactNode }) => {
 
     return (
         <MainLayout>
-            <PageInset>
-                {children}
-            </PageInset>
+            <PageInset>{children}</PageInset>
         </MainLayout>
     );
 };

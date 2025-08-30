@@ -1,37 +1,19 @@
-import { auth } from "@/lib/auth";
-import { redirect } from "next/navigation";
-import { headers } from "next/headers";
-import PageInset from "@/components/shared/page-inset";
+import ClientOrdersView from "@/components/client-orders/orders-view";
 
-export default async function MyOrdersPage() {
-    const session = await auth.api.getSession({ headers: await headers() });
+interface MyOrdersPageProps {
+    searchParams: {
+        page?: string;
+        status?: string;
+    };
+}
 
-    if (!session?.user?.id) {
-        redirect("/login");
-    }
+export default async function MyOrdersPage({ searchParams }: MyOrdersPageProps) {
+    // The searchParams object is a promise-like object in Next.js 14,
+    // so we need to await it to get the actual values.
+    const awaitedSearchParams = {
+        page: searchParams.page,
+        status: searchParams.status,
+    };
 
-    return (
-        <PageInset>
-            <div className="min-h-screen bg-background">
-                <div className="mb-8">
-                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                        <div>
-                            <h1 className="text-3xl font-bold text-foreground">
-                                My Orders 📦
-                            </h1>
-                            <p className="text-muted-foreground mt-2">
-                                View and manage your service orders
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div className="grid gap-6">
-                    {/* Orders content will go here */}
-                    <div className="text-center py-12 text-muted-foreground">
-                        <p>Orders functionality coming soon...</p>
-                    </div>
-                </div>
-            </div>
-        </PageInset>
-    );
+    return <ClientOrdersView searchParams={Promise.resolve(awaitedSearchParams)} />;
 }

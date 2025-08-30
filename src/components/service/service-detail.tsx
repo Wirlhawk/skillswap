@@ -408,11 +408,10 @@ function SellerInformation({ seller }: { seller: Seller }) {
                     </div>
                 )}
 
-                <div className="flex space-x-2">
-                    <Button variant="outline" asChild>
+                    <Button className="w-full" asChild>
                         <Link href={`/profile/${seller.username}`}>View Profile</Link>
                     </Button>
-                </div>
+
             </CardContent>
         </Card>
     );

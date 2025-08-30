@@ -11,7 +11,7 @@ export async function RisingStarsLeaderboard() {
     return (
         // <Card className="max-w-7xl mx-auto bg-accent mb-8">
         //     <CardContent className="px-8 gap">
-        <div className="max-w-7xl mx-auto bg-accent mb-8 rounded-lg border p-6">
+        <div className="max-w-7xl mx-auto mb-8">
             <Header>Rising Stars 🔥</Header>
             <p>Top 5 Students with most order this month</p>
             <div
@@ -70,7 +70,7 @@ export async function RisingStarsLeaderboard() {
 
                                         <div className="flex items-center justify-center flex-col bg-primary rounded-full size-14 gap-0 border">
                                             <div className="text-lg font-bold text-foreground">
-                                                {star.completedOrders}
+                                                {star.completedOrders} 
                                             </div>
                                         </div>
                                     </div>

@@ -153,7 +153,7 @@ export function OrderForm({
                     <Button
                         type="submit"
                         className="w-full font-semibold py-3"
-                        disabled={!form.formState.isValid || isLoading}
+                        disabled={isLoading}
                     >
                         {isLoading ? "Placing Order..." : "Place Order"}
                     </Button>

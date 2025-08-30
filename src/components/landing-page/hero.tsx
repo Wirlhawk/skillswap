@@ -134,7 +134,7 @@ const Hero = ({
                             </span>
                         </div>
                         <p className="text-muted-foreground text-left font-medium">
-                            Lebih dari {reviews.count}+ pelajar telah bergabung
+                            More Than {reviews.count}+ Students Has Joined
                         </p>
                     </div>
                 </div>

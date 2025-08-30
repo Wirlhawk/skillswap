@@ -20,7 +20,6 @@ import {
 import { headers } from "next/headers";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import ClientOrdersTable from "@/components/client-orders/orders-table";
 
 interface ClientOrdersPageProps {
     searchParams: {
@@ -265,12 +264,134 @@ const ClientOrdersPage = async ({ searchParams }: ClientOrdersPageProps) => {
                         </div>
                     </div>
 
-                    {/* Orders Table */}
-                    <ClientOrdersTable 
-                        initialOrders={orders} 
-                        initialTotalPages={totalPages}
-                        initialPage={page}
-                    />
+                    {/* Orders List */}
+                    <div className="space-y-3 sm:space-y-4">
+                        {orders.length === 0 ? (
+                            <Card className="text-center py-12">
+                                <Package className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
+                                <h3 className="text-lg font-semibold mb-2">
+                                    No orders found
+                                </h3>
+                                <p className="text-muted-foreground mb-4">
+                                    {status
+                                        ? `No orders with status "${status}"`
+                                        : "You haven't placed any orders yet."}
+                                </p>
+                                <Button asChild>
+                                    <Link href="/q">
+                                        <Search className="h-4 w-4 mr-2" />
+                                        Browse Services
+                                    </Link>
+                                </Button>
+                            </Card>
+                        ) : (
+                                orders.map((order) => (
+                                    <Link
+                                    href={`/order/${order.id}`}
+                                >
+                                <Card
+                                    key={order.id}
+                                    className="hover:shadow-lg transition-all duration-200 my-5"
+                                >
+                                    <CardContent className="p-4 sm:p-6">
+                                        <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
+                                            <div className="flex-1 space-y-4">
+                                                <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+                                                    <div className="flex items-center gap-3">
+                                                        <h3 className="text-base sm:text-lg font-semibold text-foreground leading-tight">
+                                                            {order.serviceTitle}
+                                                        </h3>
+                                                        <Badge
+                                                            className={`text-xs font-medium px-2 py-1 border ${getStatusColor(order.status)}`}
+                                                        >
+                                                            {order.status}
+                                                        </Badge>
+                                                    </div>
+                                                </div>
+
+                                                <div className="flex flex-wrap gap-4 text-xs sm:text-sm text-muted-foreground">
+                                                    <span className="flex items-center gap-1.5 bg-muted/50 px-2 py-1 rounded-md">
+                                                        <Calendar className="h-3 w-3 sm:h-4 sm:w-4" />
+                                                        {new Date(
+                                                            order.createdAt
+                                                        ).toLocaleDateString()}
+                                                    </span>
+                                                    <span className="flex items-center gap-1.5 bg-muted/50 px-2 py-1 rounded-md">
+                                                        <Users className="h-3 w-3 sm:h-4 sm:w-4" />
+                                                        Order #
+                                                        {order.orderNumber}
+                                                    </span>
+                                                </div>
+
+                                                <div className="flex items-center gap-3">
+                                                    <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-muted flex items-center justify-center">
+                                                        <Users className="h-4 w-4 text-muted-foreground" />
+                                                    </div>
+                                                    <div className="text-left">
+                                                        <p className="text-xs text-muted-foreground">
+                                                            Seller
+                                                        </p>
+                                                        <p className="text-sm font-bold text-foreground">
+                                                            {order.sellerName}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div className="flex flex-row lg:flex-col justify-between lg:justify-start items-center lg:items-end gap-4 lg:gap-3 lg:min-w-[200px]">
+                                                <div className="flex flex-col lg:items-end space-y-2">
+                                                    <div className="bg-primary/5 px-3 py-2 rounded-lg">
+                                                        <p className="text-base sm:text-lg font-bold text-primary">
+                                                            Rp{" "}
+                                                            {order.totalPrice.toLocaleString()}
+                                                        </p>
+                                                    </div>
+                                                </div>
+
+                                                
+                                            </div>
+                                        </div>
+                                    </CardContent>
+                                </Card>
+                                </Link>
+                            ))
+                        )}
+                    </div>
+
+                    {/* Pagination */}
+                    {totalPages > 1 && (
+                        <div className="flex items-center justify-center space-x-2 py-6">
+                            <Button
+                                variant="outline"
+                                size="sm"
+                                disabled={page <= 1}
+                                asChild
+                            >
+                                <Link
+                                    href={`/orders?page=${page - 1}${status ? `&status=${status}` : ""}`}
+                                >
+                                    <ChevronLeft className="h-4 w-4" />
+                                    Previous
+                                </Link>
+                            </Button>
+                            <div className="text-sm">
+                                Page {page} of {totalPages}
+                            </div>
+                            <Button
+                                variant="outline"
+                                size="sm"
+                                disabled={page >= totalPages}
+                                asChild
+                            >
+                                <Link
+                                    href={`/orders?page=${page + 1}${status ? `&status=${status}` : ""}`}
+                                >
+                                    Next
+                                    <ChevronRight className="h-4 w-4" />
+                                </Link>
+                            </Button>
+                        </div>
+                    )}
                 </div>
             </div>
         </PageInset>

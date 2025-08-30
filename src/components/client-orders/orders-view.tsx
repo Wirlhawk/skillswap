@@ -1,9 +1,10 @@
+
 import PageInset from "@/components/shared/page-inset";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { auth } from "@/lib/auth";
-import { getSellerOrders } from "@/server/dashboard";
+import { getClientOrders } from "@/server/dashboard";
 import {
     Calendar,
     ChevronLeft,
@@ -14,21 +15,20 @@ import {
     MoreHorizontal,
     Package,
     Search,
-    TrendingUp,
     Users,
 } from "lucide-react";
 import { headers } from "next/headers";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
-interface SellerOrdersPageProps {
+interface ClientOrdersViewProps {
     searchParams: Promise<{
         page?: string;
         status?: string;
     }>;
 }
 
-const SellerOrdersPage = async ({ searchParams }: SellerOrdersPageProps) => {
+const ClientOrdersView = async ({ searchParams }: ClientOrdersViewProps) => {
     const session = await auth.api.getSession({
         headers: await headers(),
     });
@@ -51,10 +51,10 @@ const SellerOrdersPage = async ({ searchParams }: SellerOrdersPageProps) => {
 
     // Redirect if page is invalid
     if (isNaN(page) || page < 1) {
-        redirect("/seller/orders?page=1" + (status ? `&status=${status}` : ""));
+        redirect("/my-orders?page=1" + (status ? `&status=${status}` : ""));
     }
 
-    const { orders, totalPages } = await getSellerOrders(userId, {
+    const { orders, totalPages } = await getClientOrders(userId, {
         page,
         pageSize: 10,
         status,
@@ -71,11 +71,10 @@ const SellerOrdersPage = async ({ searchParams }: SellerOrdersPageProps) => {
     ).length;
 
     // Calculate additional metrics
-    const totalRevenue = orders.reduce(
+    const totalSpent = orders.reduce(
         (sum, order) => sum + order.totalPrice,
         0
     );
-    const avgOrderValue = orders.length > 0 ? totalRevenue / orders.length : 0;
 
     const getStatusColor = (status: string) => {
         switch (status) {
@@ -100,26 +99,11 @@ const SellerOrdersPage = async ({ searchParams }: SellerOrdersPageProps) => {
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                         <div>
                             <h1 className="text-3xl font-bold text-foreground">
-                                Order Management 📋
+                                My Orders 📦
                             </h1>
                             <p className="text-muted-foreground mt-2">
-                                Track and manage all your customer orders in one
-                                place
+                                View and manage your service orders
                             </p>
-                        </div>
-                        <div className="flex gap-3">
-                            <Button asChild>
-                                <Link href="/seller/dashboard">
-                                    <TrendingUp className="h-4 w-4 mr-2" />
-                                    View Dashboard
-                                </Link>
-                            </Button>
-                            <Button variant="outline" asChild>
-                                <Link href="/seller/services">
-                                    <Package className="h-4 w-4 mr-2" />
-                                    Manage Services
-                                </Link>
-                            </Button>
                         </div>
                     </div>
                 </div>
@@ -131,7 +115,7 @@ const SellerOrdersPage = async ({ searchParams }: SellerOrdersPageProps) => {
                             <div className="flex items-center justify-between">
                                 <div>
                                     <p className="text-sm font-medium text-muted-foreground mb-2">
-                                        Processing
+                                        In Progress
                                     </p>
                                     <p className="text-2xl font-bold text-primary">
                                         {processingOrders}
@@ -149,7 +133,7 @@ const SellerOrdersPage = async ({ searchParams }: SellerOrdersPageProps) => {
                             <div className="flex items-center justify-between">
                                 <div>
                                     <p className="text-sm font-medium text-muted-foreground mb-2">
-                                        Delivered
+                                        Completed
                                     </p>
                                     <p className="text-2xl font-bold text-foreground">
                                         {deliveredOrders}
@@ -203,10 +187,10 @@ const SellerOrdersPage = async ({ searchParams }: SellerOrdersPageProps) => {
                             <div className="flex items-center justify-between">
                                 <div>
                                     <p className="text-sm font-medium text-muted-foreground mb-2">
-                                        Total Revenue
+                                        Total Spent
                                     </p>
                                     <p className="text-2xl font-bold text-primary">
-                                        Rp {totalRevenue.toLocaleString()}
+                                        Rp {totalSpent.toLocaleString()}
                                     </p>
                                 </div>
                                 <div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary/10">
@@ -227,7 +211,7 @@ const SellerOrdersPage = async ({ searchParams }: SellerOrdersPageProps) => {
                     {/* Filter Bar */}
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                         <div className="flex flex-wrap gap-2">
-                            <Link href="/seller/orders?page=1">
+                            <Link href="/my-orders?page=1">
                                 <Button
                                     variant={!status ? "default" : "outline"}
                                     size="sm"
@@ -236,7 +220,7 @@ const SellerOrdersPage = async ({ searchParams }: SellerOrdersPageProps) => {
                                     All
                                 </Button>
                             </Link>
-                            <Link href="/seller/orders?status=Pending&page=1">
+                            <Link href="/my-orders?status=Pending&page=1">
                                 <Button
                                     variant={
                                         status === "Pending"
@@ -249,7 +233,7 @@ const SellerOrdersPage = async ({ searchParams }: SellerOrdersPageProps) => {
                                     Pending
                                 </Button>
                             </Link>
-                            <Link href="/seller/orders?status=In%20Progress&page=1">
+                            <Link href="/my-orders?status=In%20Progress&page=1">
                                 <Button
                                     variant={
                                         status === "In Progress"
@@ -259,10 +243,10 @@ const SellerOrdersPage = async ({ searchParams }: SellerOrdersPageProps) => {
                                     size="sm"
                                     className="text-xs sm:text-sm"
                                 >
-                                    Processing
+                                    In Progress
                                 </Button>
                             </Link>
-                            <Link href="/seller/orders?status=Done&page=1">
+                            <Link href="/my-orders?status=Done&page=1">
                                 <Button
                                     variant={
                                         status === "Done"
@@ -272,10 +256,10 @@ const SellerOrdersPage = async ({ searchParams }: SellerOrdersPageProps) => {
                                     size="sm"
                                     className="text-xs sm:text-sm"
                                 >
-                                    Delivered
+                                    Completed
                                 </Button>
                             </Link>
-                            <Link href="/seller/orders?status=Cancelled&page=1">
+                            <Link href="/my-orders?status=Cancelled&page=1">
                                 <Button
                                     variant={
                                         status === "Cancelled"
@@ -320,85 +304,92 @@ const SellerOrdersPage = async ({ searchParams }: SellerOrdersPageProps) => {
                                 <p className="text-muted-foreground mb-4">
                                     {status
                                         ? `No orders with status "${status}"`
-                                        : "Start by creating services to receive orders"}
+                                        : "You haven't placed any orders yet."}
                                 </p>
                                 <Button asChild>
-                                    <Link href="/seller/services">
-                                        <Package className="h-4 w-4 mr-2" />
-                                        Manage Services
+                                    <Link href="/q">
+                                        <Search className="h-4 w-4 mr-2" />
+                                        Browse Services
                                     </Link>
                                 </Button>
                             </Card>
                         ) : (
                             orders.map((order) => (
-                                <Link href={`/order/${order.id}`}>
-                                    <Card
-                                        key={order.id}
-                                        className="hover:shadow-lg transition-all duration-200 my-5"
-                                    >
-                                        <CardContent className="p-4 sm:p-6">
-                                            <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
-                                                <div className="flex-1 space-y-4">
-                                                    <div className="flex flex-col sm:flex-row sm:items-center gap-3">
-                                                        <div className="flex items-center gap-3">
-                                                            <h3 className="text-base sm:text-lg font-semibold text-foreground leading-tight">
-                                                                {
-                                                                    order.serviceTitle
-                                                                }
-                                                            </h3>
-                                                            <Badge
-                                                                className={`text-xs font-medium px-2 py-1 border ${getStatusColor(order.status)}`}
-                                                            >
-                                                                {order.status}
-                                                            </Badge>
-                                                        </div>
-                                                    </div>
-
-                                                    <div className="flex flex-wrap gap-4 text-xs sm:text-sm text-muted-foreground">
-                                                        <span className="flex items-center gap-1.5 bg-muted/50 px-2 py-1 rounded-md">
-                                                            <Calendar className="h-3 w-3 sm:h-4 sm:w-4" />
-                                                            {new Date(
-                                                                order.createdAt
-                                                            ).toLocaleDateString()}
-                                                        </span>
-                                                        <span className="flex items-center gap-1.5 bg-muted/50 px-2 py-1 rounded-md">
-                                                            <Users className="h-3 w-3 sm:h-4 sm:w-4" />
-                                                            Order #
-                                                            {order.orderNumber}
-                                                        </span>
-                                                    </div>
-
+                                <Card
+                                    key={order.id}
+                                    className="hover:shadow-lg transition-all duration-200"
+                                >
+                                    <CardContent className="p-4 sm:p-6">
+                                        <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
+                                            <div className="flex-1 space-y-4">
+                                                <div className="flex flex-col sm:flex-row sm:items-center gap-3">
                                                     <div className="flex items-center gap-3">
-                                                        <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-muted flex items-center justify-center">
-                                                            <Users className="h-4 w-4 text-muted-foreground" />
-                                                        </div>
-                                                        <div className="text-left">
-                                                            <p className="text-xs text-muted-foreground">
-                                                                Customer
-                                                            </p>
-                                                            <p className="text-sm font-bold text-foreground">
-                                                                {
-                                                                    order.clientName
-                                                                }
-                                                            </p>
-                                                        </div>
+                                                        <h3 className="text-base sm:text-lg font-semibold text-foreground leading-tight">
+                                                            {order.serviceTitle}
+                                                        </h3>
+                                                        <Badge
+                                                            className={`text-xs font-medium px-2 py-1 border ${getStatusColor(order.status)}`}
+                                                        >
+                                                            {order.status}
+                                                        </Badge>
                                                     </div>
                                                 </div>
 
-                                                <div className="flex flex-row lg:flex-col justify-between lg:justify-start items-center lg:items-end gap-4 lg:gap-3 lg:min-w-[200px]">
-                                                    <div className="flex flex-col lg:items-end space-y-2">
-                                                        <div className="bg-primary/5 px-3 py-2 rounded-lg">
-                                                            <p className="text-base sm:text-lg font-bold text-primary">
-                                                                Rp{" "}
-                                                                {order.totalPrice.toLocaleString()}
-                                                            </p>
-                                                        </div>
+                                                <div className="flex flex-wrap gap-4 text-xs sm:text-sm text-muted-foreground">
+                                                    <span className="flex items-center gap-1.5 bg-muted/50 px-2 py-1 rounded-md">
+                                                        <Calendar className="h-3 w-3 sm:h-4 sm:w-4" />
+                                                        {new Date(
+                                                            order.createdAt
+                                                        ).toLocaleDateString()}
+                                                    </span>
+                                                    <span className="flex items-center gap-1.5 bg-muted/50 px-2 py-1 rounded-md">
+                                                        <Users className="h-3 w-3 sm:h-4 sm:w-4" />
+                                                        Order #
+                                                        {order.orderNumber}
+                                                    </span>
+                                                </div>
+
+                                                <div className="flex items-center gap-3">
+                                                    <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-muted flex items-center justify-center">
+                                                        <Users className="h-4 w-4 text-muted-foreground" />
+                                                    </div>
+                                                    <div className="text-left">
+                                                        <p className="text-xs text-muted-foreground">
+                                                            Seller
+                                                        </p>
+                                                        <p className="text-sm font-bold text-foreground">
+                                                            {order.sellerName}
+                                                        </p>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </CardContent>
-                                    </Card>
-                                </Link>
+
+                                            <div className="flex flex-row lg:flex-col justify-between lg:justify-start items-center lg:items-end gap-4 lg:gap-3 lg:min-w-[200px]">
+                                                <div className="flex flex-col lg:items-end space-y-2">
+                                                    <div className="bg-primary/5 px-3 py-2 rounded-lg">
+                                                        <p className="text-base sm:text-lg font-bold text-primary">
+                                                            Rp{" "}
+                                                            {order.totalPrice.toLocaleString()}
+                                                        </p>
+                                                    </div>
+                                                </div>
+
+                                                <Button
+                                                    variant="ghost"
+                                                    size="sm"
+                                                    className="hover:bg-primary/10 rounded-full p-2"
+                                                    asChild
+                                                >
+                                                    <Link
+                                                        href={`/order/${order.id}`}
+                                                    >
+                                                        <MoreHorizontal className="h-4 w-4" />
+                                                    </Link>
+                                                </Button>
+                                            </div>
+                                        </div>
+                                    </CardContent>
+                                </Card>
                             ))
                         )}
                     </div>
@@ -413,7 +404,7 @@ const SellerOrdersPage = async ({ searchParams }: SellerOrdersPageProps) => {
                                 asChild
                             >
                                 <Link
-                                    href={`/seller/orders?page=${page - 1}${status ? `&status=${status}` : ""}`}
+                                    href={`/my-orders?page=${page - 1}${status ? `&status=${status}` : ""}`}
                                 >
                                     <ChevronLeft className="h-4 w-4" />
                                     Previous
@@ -429,7 +420,7 @@ const SellerOrdersPage = async ({ searchParams }: SellerOrdersPageProps) => {
                                 asChild
                             >
                                 <Link
-                                    href={`/seller/orders?page=${page + 1}${status ? `&status=${status}` : ""}`}
+                                    href={`/my-orders?page=${page + 1}${status ? `&status=${status}` : ""}`}
                                 >
                                     Next
                                     <ChevronRight className="h-4 w-4" />
@@ -443,4 +434,4 @@ const SellerOrdersPage = async ({ searchParams }: SellerOrdersPageProps) => {
     );
 };
 
-export default SellerOrdersPage;
+export default ClientOrdersView;
