@@ -409,6 +409,13 @@ export interface UpdateMilestoneRequest {
     position?: number;
 }
 
+export interface UpdateMilestoneData {
+    title?: string;
+    description?: string;
+    status?: MilestoneStatus;
+    estimatedDate?: Date;
+}
+
 // Milestone data for display
 export interface MilestoneDisplayData {
     id: string;
@@ -482,7 +489,7 @@ export interface MilestoneActionHandlers {
 }
 
 // Complete milestone view data
-export interface MilestoneViewData {
+export type MilestoneViewData = {
     orderData: {
         orderId: string;
         orderNumber: string;
@@ -494,4 +501,10 @@ export interface MilestoneViewData {
         completedMilestones: number;
         progress: number;
     };
+};
+
+export interface ActionResult<T = undefined> {
+    success: boolean;
+    error?: string;
+    data?: T;
 }

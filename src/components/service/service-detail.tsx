@@ -20,9 +20,10 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { OrderForm } from "./order-form";
+import Image from "next/image";
 
 interface Review {
-    id: number;
+    id: string;
     client: string;
     avatar: string;
     rating: number;
@@ -102,9 +103,10 @@ function ImageGallery({
         <Card className="pt-0">
             <div className="relative">
                 <div className="aspect-video bg-muted rounded-t-lg overflow-hidden border-b">
-                    <img
+                    <Image
                         src={images[selectedIndex] || "/placeholder.svg"}
                         alt="Service preview"
+                        fill
                         className="w-full h-full object-cover"
                     />
                 </div>
@@ -121,9 +123,11 @@ function ImageGallery({
                                     : "border-border hover:border-primary/50"
                             }`}
                         >
-                            <img
+                            <Image
                                 src={image || "/placeholder.svg"}
                                 alt={`Preview ${index + 1}`}
+                                width={80}
+                                height={64}
                                 className="w-full h-full object-cover"
                             />
                         </button>
@@ -494,8 +498,10 @@ function ServicePackage({
                                     Continue ({servicePackage.price})
                                 </Button>
                                 <p className="text-xs text-muted-foreground text-center mt-2">
-                                    You won't be charged until you review and
+                                    <p className="text-xs text-muted-foreground text-center mt-2">
+                                    You won&#39;t be charged until you review and
                                     confirm your order
+                                </p>
                                 </p>
                             </>
                         )}

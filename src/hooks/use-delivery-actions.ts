@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { submitDelivery, saveDeliveryDraft, uploadDeliveryFile } from "@/server/order";
-import { DeliveryActionHandlers, DeliveryFormData, DeliveryFile } from "@/types/order";
+import { DeliveryActionHandlers, DeliveryFormData, DeliveryFile, ActionResult } from "@/types/order";
 
 interface UseDeliveryActionsProps {
     orderId: string;
@@ -17,7 +17,7 @@ export function useDeliveryActions({ orderId, onSuccess, onError }: UseDeliveryA
     const [isLoading, setIsLoading] = useState(false);
 
     const handleAction = async <T>(
-        action: () => Promise<{ success: boolean; error?: string; [key: string]: any }>,
+        action: () => Promise<ActionResult<T>>,
         successMessage: string,
         errorMessage: string
     ): Promise<T | null> => {
@@ -28,7 +28,7 @@ export function useDeliveryActions({ orderId, onSuccess, onError }: UseDeliveryA
             if (result.success) {
                 toast.success(successMessage);
                 onSuccess?.();
-                return result as T;
+                return result.data || null;
             } else {
                 const errorMsg = result.error || errorMessage;
                 toast.error(errorMsg);

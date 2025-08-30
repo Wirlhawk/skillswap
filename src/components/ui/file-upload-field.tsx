@@ -4,6 +4,7 @@ import { AlertCircleIcon, ImageIcon, UploadIcon, XIcon } from "lucide-react";
 
 import { useFileUpload, type FileWithPreview } from "@/hooks/use-file-upload";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 interface FileUploadFieldProps {
     value?: FileWithPreview[];
@@ -87,9 +88,10 @@ export function FileUploadField({
                                     key={file.id}
                                     className="bg-accent relative aspect-square rounded-md"
                                 >
-                                    <img
+                                    <Image
                                         src={file.preview || "/placeholder.svg"}
                                         alt={file.file.name}
+                                        fill
                                         className="size-full rounded-[inherit] object-cover"
                                     />
                                     <Button

@@ -63,7 +63,6 @@ export function OrderForm({
     });
 
     async function onSubmit(values: OrderFormData) {
-        2;
         setIsLoading(true);
         setMessage(null);
 
@@ -88,6 +87,7 @@ export function OrderForm({
         if (res.order) {
             router.push(`/order/${res.order.id}`);
         }
+        onSuccess?.(); // Call onSuccess after successful order creation
         setIsLoading(false);
     }
 

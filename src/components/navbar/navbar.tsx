@@ -23,7 +23,9 @@ export default async function Navbar() {
                 {/* Left side */}
                 <div className="flex flex-1 items-center gap-2">
                     {/* Mobile menu trigger */}
-                    <MobileNavLinks />
+                    <MobileNavLinks
+                        userRole={session?.user?.role || undefined}
+                    />
                     {/* Logo */}
                     <div className="items-center flex">
                         <a
@@ -60,7 +62,7 @@ export default async function Navbar() {
                 </div>
             </div>
             {/* Bottom navigation */}
-            <BottomNavLinks />
+            <BottomNavLinks userRole={session?.user?.role || undefined} />
         </header>
     );
 }

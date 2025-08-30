@@ -8,7 +8,7 @@ import {
     updateOrderStatus
 } from "@/server/order";
 import { useRouter } from "next/navigation";
-import { OrderActionHandlers, OrderAttachmentDisplay } from "@/types/order";
+import { OrderActionHandlers, OrderAttachmentDisplay, ActionResult } from "@/types/order";
 import { useState } from "react";
 
 interface UseOrderActionsProps {
@@ -22,7 +22,7 @@ export function useOrderActions({ orderId, onSuccess, onError }: UseOrderActions
     const router = useRouter();
 
     const handleAction = async <T>(
-        action: () => Promise<{ success: boolean; error?: string;[key: string]: any }>,
+        action: () => Promise<ActionResult<T>>,
         successMessage: string,
         errorMessage: string
     ): Promise<T | null> => {
@@ -33,7 +33,7 @@ export function useOrderActions({ orderId, onSuccess, onError }: UseOrderActions
             if (result.success) {
                 toast.success(successMessage);
                 onSuccess?.();
-                return result as T;
+                return result.data || null;
             } else {
                 const errorMsg = result.error || errorMessage;
                 toast.error(errorMsg);

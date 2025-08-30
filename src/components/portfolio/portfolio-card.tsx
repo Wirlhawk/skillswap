@@ -1,5 +1,6 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { default as Image } from "next/image";
 
 interface Portfolio {
     id: string;
@@ -19,9 +20,11 @@ export function PortfolioCard({ portfolio, children }: PortfolioCardProps) {
     return (
         <Card className="cursor-pointer hover:bg-muted transition-all p-4 pb-6 gap-2">
             <CardHeader className="p-0">
-                <img
+                <Image
                     src={portfolio.images?.[0] || "/placeholder.svg"}
                     alt={portfolio.title}
+                    width={600}
+                    height={300}
                     className="w-full h-48 object-cover rounded-md mb-4 border"
                 />
             </CardHeader>

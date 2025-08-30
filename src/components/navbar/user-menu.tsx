@@ -7,6 +7,7 @@ import {
     PinIcon,
     User,
     UserPenIcon,
+    StarIcon,
 } from "lucide-react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -82,6 +83,18 @@ export default function UserMenu({
                             <span>Profile</span>
                         </DropdownMenuItem>
                     </Link>
+                    {role !== "STUDENT" && role !== "TEACHER" ? (
+                        <Link href="/become-seller">
+                            <DropdownMenuItem>
+                                <BookOpenIcon
+                                    size={16}
+                                    className="opacity-60"
+                                    aria-hidden="true"
+                                />
+                                <span>Become a Seller</span>
+                            </DropdownMenuItem>
+                        </Link>
+                    ) : null}
                     <Link href="/portfolio-showcase">
                         <DropdownMenuItem>
                             <Layers2Icon
@@ -93,7 +106,7 @@ export default function UserMenu({
                         </DropdownMenuItem>
                     </Link>
                     <DropdownMenuItem>
-                        <BookOpenIcon
+                        <StarIcon
                             size={16}
                             className="opacity-60"
                             aria-hidden="true"

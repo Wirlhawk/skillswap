@@ -7,9 +7,9 @@ export default function Contact() {
     <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 bg-background">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-serif font-bold text-gray-900 mb-4">Let's Start Your Project</h2>
+          <h2 className="text-3xl sm:text-4xl font-serif font-bold text-gray-900 mb-4">Let&#39;s Start Your Project</h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Ready to transform your brand? Get in touch and let's discuss how we can bring your vision to life
+            Ready to transform your brand? Get in touch and let&apos;s discuss how we can bring your vision to life
           </p>
         </div>
 

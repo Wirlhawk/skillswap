@@ -21,7 +21,7 @@ const formatFileSize = (bytes: number) => {
 
 const getFileIcon = (fileType: string) => {
     if (fileType.startsWith("image/")) return <ImageIcon className="h-5 w-5" />;
-    if (fileType.includes("pdf")) return <FileText className="h-5 w-5" />;
+    if (fileType.includes("pdf")) return <FileText className="h-5 w-5" />;  
     if (fileType.includes("zip") || fileType.includes("rar"))
         return <Archive className="h-5 w-5" />;
     return <FileText className="h-5 w-5" />;

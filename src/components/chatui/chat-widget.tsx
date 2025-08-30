@@ -181,7 +181,7 @@ export default function ChatWidget({
           {messages.length === 0 ? (
             <div className="text-center text-muted-foreground py-8">
               <MessageCircle className="h-12 w-12 mx-auto mb-3 opacity-50" />
-              <p>Say hi — I'm here to help!</p>
+              <p>Say hi — I&#39;m here to help!</p>
             </div>
           ) : (
             messages.map((message) => (

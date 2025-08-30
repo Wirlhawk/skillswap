@@ -3,8 +3,8 @@ import { major } from "./major";
 
 // Enums
 export const userRole = pgEnum("user_role", [
-    "STUDENT",
     "BUYER",
+    "STUDENT",
     "TEACHER"
 ]);
 
